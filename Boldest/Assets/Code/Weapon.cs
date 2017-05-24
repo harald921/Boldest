@@ -6,18 +6,13 @@ public class Weapon : MonoBehaviour
 {
     public void OnAttackDone()
     {
-        GetComponent<Animator>().SetBool("attack", false);   
+        GetComponent<Animator>().SetBool("IsAttacking", false);   
         Debug.Log("Attack done");
     }
 
     public void TryAttack()
     {
-        GetComponent<Animator>().SetBool("attack", true);
+        GetComponent<Animator>().SetBool("IsAttacking", true);
         Debug.Log("Attack start");
-    }
-
-    private void Start()
-    {
-
     }
 }
