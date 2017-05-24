@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] float _turnSpeed   = 1.0f;
 
     Vector3 _movementVector = Vector3.zero;
+    Vector3 _lastMovementVector = Vector3.zero;
 
     private void Update()
     {
@@ -26,29 +27,40 @@ public class Player : MonoBehaviour
     }
 
     void HandleMovement()
-    {
-        _movementVector = Vector3.zero;
+    {     
+        _movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
-        if      (Input.GetKey(KeyCode.W)) _movementVector += Vector3.forward;
-        else if (Input.GetKey(KeyCode.S)) _movementVector += Vector3.back;
-        if      (Input.GetKey(KeyCode.A)) _movementVector += Vector3.left;
-        else if (Input.GetKey(KeyCode.D)) _movementVector += Vector3.right;
+        if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
+            _lastMovementVector = _movementVector;
+        
     }
 
     void HandleAiming()
     {
-        Vector3 aimTarget;
+        if (Input.GetButton("Aiming"))
+        {
+            Vector3 rightStick = new Vector3(Input.GetAxisRaw("RightStickHorizontal"), 0, Input.GetAxisRaw("RightStickVertical"));
+          
+            if (Mathf.Abs(rightStick.x) == 0 && Mathf.Abs(rightStick.z) == 0)
+            {
+                Vector3 aimTarget;
+                aimTarget = Input.mousePosition;
+                aimTarget.z = Mathf.Abs(Camera.main.transform.position.y - transform.position.y);
+                aimTarget = Camera.main.ScreenToWorldPoint(aimTarget);
+                aimTarget = new Vector3(aimTarget.x, transform.position.y, aimTarget.z);
 
-        aimTarget = Input.mousePosition;
-        aimTarget.z = Mathf.Abs(Camera.main.transform.position.y - transform.position.y);
-        aimTarget = Camera.main.ScreenToWorldPoint(aimTarget);
-        aimTarget = new Vector3(aimTarget.x, transform.position.y, aimTarget.z);
-
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(aimTarget - transform.position), _turnSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(aimTarget - transform.position), _turnSpeed * Time.deltaTime);
+            }
+            else
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rightStick), _turnSpeed * Time.deltaTime);
+        }
+        else        
+            transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(_lastMovementVector),_turnSpeed * Time.deltaTime);
+        
+       
 
             
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("RightHand"))
         {
             transform.GetChild(1).GetComponent<Weapon>().TryAttack();
         }
