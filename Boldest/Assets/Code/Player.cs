@@ -50,16 +50,10 @@ public class Player : MonoBehaviour
 
         if (_useController)
         {
-                                 
-            if (Input.GetAxisRaw("RightHandTrigger") == 0)
-                _rightTriggerRelased = true;
-
-            if (Input.GetAxisRaw("RightHandTrigger") > 0 && _rightTriggerRelased)
+            if (Input.GetButtonDown("RightHandButton"))
             {
                 transform.GetChild(1).GetComponent<Weapon>().TryAttack();
-                _rightTriggerRelased = false;
             }
-                
         }
 
        
