@@ -46,5 +46,11 @@ public class Player : MonoBehaviour
 
 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(aimTarget - transform.position), _turnSpeed * Time.deltaTime);
+
+            
+        if (Input.GetMouseButtonDown(0))
+        {
+            transform.GetChild(1).GetComponent<Weapon>().TryAttack();
+        }
     }
 }
