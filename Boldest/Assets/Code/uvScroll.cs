@@ -21,7 +21,7 @@ public class uvScroll : MonoBehaviour
 
     void Update()
     {
-    
+    //tr
         if(_scrollX)
         {
             _xScroll += _scrollSpeedOnX * Time.deltaTime;
