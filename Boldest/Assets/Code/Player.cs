@@ -18,13 +18,12 @@ public class Player : MonoBehaviour
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         HandleMovement();
-        HandleAiming();
+        HandleAttackInput();
     }
 
     private void FixedUpdate()
     {
         GetComponent<Rigidbody>().AddForce(_movementVector.normalized * _moveSpeed);
-
         _movementVector = Vector3.zero;
     }
 
@@ -34,26 +33,15 @@ public class Player : MonoBehaviour
 
         if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
             _lastMovementVector = _movementVector;
-        
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
+
     }
 
-    void HandleAiming()
+    void HandleAttackInput()
     {
         if (!_useController)
-        {
-            if (Input.GetButton("Aiming"))
-            {
-                Vector3 aimTarget;
-                aimTarget = Input.mousePosition;
-                aimTarget.z = Mathf.Abs(Camera.main.transform.position.y - transform.position.y);
-                aimTarget = Camera.main.ScreenToWorldPoint(aimTarget);
-                aimTarget = new Vector3(aimTarget.x, transform.position.y, aimTarget.z);
-
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(aimTarget - transform.position), _turnSpeed * Time.deltaTime);              
-            }
-            else
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
-
+        {         
             if (Input.GetButtonDown("RightHandButton"))
             {
                 transform.GetChild(1).GetComponent<Weapon>().TryAttack();
@@ -62,19 +50,7 @@ public class Player : MonoBehaviour
 
         if (_useController)
         {
-            Vector3 rightStick = new Vector3(Input.GetAxisRaw("RightStickHorizontal"), 0, Input.GetAxisRaw("RightStickVertical"));
-
-            if (Input.GetButton("Aiming"))
-            {
-                if(Mathf.Abs(rightStick.x) >0 || Mathf.Abs(rightStick.z) > 0)               
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rightStick.normalized), _turnSpeed * Time.deltaTime);
-                else
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
-
-            }
-            else
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
-
+                                 
             if (Input.GetAxisRaw("RightHandTrigger") == 0)
                 _rightTriggerRelased = true;
 
