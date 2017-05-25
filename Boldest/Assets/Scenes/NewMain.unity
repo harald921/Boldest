@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -108,6 +108,30 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 23800000, guid: c4d3e4cb0de83a84d8d2988dc2703000, type: 2}
+--- !u!1 &322085829 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+  m_PrefabInternal: {fileID: 676000342}
+--- !u!4 &322085830 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+  m_PrefabInternal: {fileID: 676000342}
+--- !u!114 &322085834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 322085829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855aa09e7acf66143963484a8918c5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectile: {fileID: 1363879566625450, guid: 877ef391944b5ed4d913d75a6b0cbe14,
+    type: 2}
+  _maxDraw: 500
+  _drawSpeed: 10
+  _drawToVelocityMultiplier: 100
 --- !u!1 &336547409
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +470,64 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &676000342
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1049183444}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.161
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7e6fa0f798d54864abafa57660c269d0, type: 3}
+  m_IsPrefabParent: 0
 --- !u!1 &699816519
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,7 +899,7 @@ MonoBehaviour:
   _health: 100
   _moveSpeed: 150
   _turnSpeed: 15
-  _useController: 1
+  _useController: 0
   _dashDuration: 0.25
   _dashSpeed: 1000
   _dashCoolDown: 0.5
@@ -888,6 +970,7 @@ Transform:
   m_Children:
   - {fileID: 1414189828}
   - {fileID: 839296735}
+  - {fileID: 322085830}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
