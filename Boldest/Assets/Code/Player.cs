@@ -75,6 +75,13 @@ public class Player : MonoBehaviour
             {
                 transform.GetChild(1).GetComponent<Weapon>().TryAttack();
             }
+
+            if (Input.GetButtonDown("BowButton"))
+            {
+                transform.GetChild(2).GetComponent<Bow>().DrawBow();
+            }
+
+
         }
 
         if (!_useController)
