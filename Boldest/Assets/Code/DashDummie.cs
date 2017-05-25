@@ -7,7 +7,7 @@ public class DashDummie : MonoBehaviour
 
 
 
-
+	
 
 
 
@@ -20,9 +20,12 @@ public class DashDummie : MonoBehaviour
         if(other.tag == "Player")
         {
             Player player = other.GetComponent<Player>();
-
-            if(player._isDashing)
-                player.visceralAttackWindow();
+			
+			if (player._isDashing)
+			{
+				player.visceralAttackWindow(GetComponent<Collider>());
+			}
+               
 
         }
 

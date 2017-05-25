@@ -36,7 +36,19 @@ public class EnemyRusher : MonoBehaviour
 
             ModifyHealth(-34.0f);
         }
-    }
+
+		
+			if (other.tag == "Player")
+			{
+				Player player = other.GetComponent<Player>();
+				if (player._isDashing)
+				{
+					player.visceralAttackWindow(GetComponent<Collider>());
+				}
+			}
+
+		
+	}
 
     public void TryKnockBack(Vector3 inVelocity)
     {
@@ -91,4 +103,7 @@ public class EnemyRusher : MonoBehaviour
             yield return null;
         }
     }
+
+
+	
 }

@@ -21,8 +21,10 @@ public class Player : MonoBehaviour
     //settings for visceral attack
     [SerializeField] float _timeWindowToAttack;
     [SerializeField] float _timePreformingAttack; // will later be controlled by animation I guess
-    bool _inVisceralAttack = false;
+	[SerializeField] GameObject _visceralAttackParticle;
+	bool _inVisceralAttack = false;
     Coroutine _visceralCo;
+	
 
 
 
@@ -123,9 +125,9 @@ public class Player : MonoBehaviour
 
             if(Mathf.Abs(dashDir.x) ==0 && Mathf.Abs(dashDir.z) == 0)
             {
-                _dashingTimer = 0 - _dashCoolDown;
+				_dashingTimer = 0;
+				return;
             }
-
             transform.forward = dashDir;
             GetComponent<Rigidbody>().AddForce(dashDir * _dashSpeed);           
         }       
@@ -134,21 +136,21 @@ public class Player : MonoBehaviour
 
     }
 
-    public void visceralAttackWindow()
+    public void visceralAttackWindow(Collider enemyCollider)
     {
         GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         _inVisceralAttack = true;
         _dashingTimer = 0;
-        _visceralCo = StartCoroutine(HandleVisceralAttackWindow());
+        _visceralCo = StartCoroutine(HandleVisceralAttackWindow(enemyCollider));
     }
   
     void FailedVisceralAttack()
     {
-        // here naybe we want knockback on player       
+        // here maybe we want knockback on player and deal damage to player osv     
         _inVisceralAttack = false;
     }
 
-    IEnumerator HandleVisceralAttackWindow()
+    IEnumerator HandleVisceralAttackWindow(Collider enemyCollider)
     {
         float timeToAttack = _timeWindowToAttack;
         while (timeToAttack > 0)
@@ -156,7 +158,8 @@ public class Player : MonoBehaviour
             timeToAttack -= Time.deltaTime;
             if (Input.GetButtonDown("RightHandButton"))
             {
-                StartCoroutine(PreformVisceralAttack());
+                StartCoroutine(PreformVisceralAttack(enemyCollider));
+				
                 StopCoroutine(_visceralCo);              
             }
             yield return null;
@@ -164,15 +167,17 @@ public class Player : MonoBehaviour
         FailedVisceralAttack();  // will be called if failed to press attack during timewindow  
     }
 
-    IEnumerator PreformVisceralAttack()
+    IEnumerator PreformVisceralAttack(Collider enemyCollider)
     {
        //preform attack
         transform.GetChild(1).GetComponent<Weapon>().TryAttack();// use standard sword for debuging
 
-        yield return new WaitForSeconds(_timePreformingAttack); // wait to finish attack, will be timed to attack animation
-
-        //automaticly set up new dash after finishing attack
-        _dashingTimer = _dashDuration;
+        yield return new WaitForSeconds(_timePreformingAttack); // wait to finish attack, will be timed on attack animation	later on maybe	
+		
+		Destroy(enemyCollider.gameObject); //destroy enemy you attacked (maybe can do different things depending on the type of enemy and tag later on)			
+		Instantiate(_visceralAttackParticle, enemyCollider.transform.position, _visceralAttackParticle.transform.rotation);
+		//automaticly set up new dash after finishing attack									   									   
+		_dashingTimer = _dashDuration;
         _isDashing = true;
         _inVisceralAttack = false;
 
