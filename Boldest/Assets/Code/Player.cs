@@ -47,26 +47,18 @@ public class Player : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        
+    {       
             GetComponent<Rigidbody>().AddForce(_movementVector.normalized * _moveSpeed);
-            _movementVector = Vector3.zero;
-        
-       
+            _movementVector = Vector3.zero;             
     }
 
     void HandleMovement()
-    {
-        
-        
+    {              
             _movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
             if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
                 _lastMovementVector = _movementVector;
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
-        
-        
-
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);             
     }
 
     void HandleAttackInput()
@@ -107,7 +99,7 @@ public class Player : MonoBehaviour
     {
         _dashingTimer -= Time.deltaTime;
         
-        //
+        
         if(Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased )
         {
             _dashingTimer = _dashDuration;
@@ -158,8 +150,7 @@ public class Player : MonoBehaviour
             timeToAttack -= Time.deltaTime;
             if (Input.GetButtonDown("RightHandButton"))
             {
-                StartCoroutine(PreformVisceralAttack(enemyCollider));
-				
+                StartCoroutine(PreformVisceralAttack(enemyCollider));				
                 StopCoroutine(_visceralCo);              
             }
             yield return null;
