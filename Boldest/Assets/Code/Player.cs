@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
 
     void HandleAttackInput()
     {
-        if (!_useController)
+        if (_useController)
         {         
             if (Input.GetButtonDown("RightHandButton"))
             {
@@ -69,12 +69,17 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (_useController)
+        if (!_useController)
         {
             if (Input.GetButtonDown("RightHandButton"))
             {
-                transform.GetChild(1).GetComponent<Weapon>().TryAttack();
+                //transform.GetChild(1).GetComponent<Weapon>().TryAttack();
+
+                transform.GetChild(2).GetComponent<Bow>().DrawBow();
             }
+
+            else if (Input.GetButtonUp("RightHandButton"))
+                transform.GetChild(2).GetComponent<Bow>().ReleaseString();
         }           
     }
 

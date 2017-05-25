@@ -38,23 +38,22 @@ public class EnemyRusher : MonoBehaviour
         }
     }
 
-    void TryKnockBack(Vector3 inVelocity)
+    public void TryKnockBack(Vector3 inVelocity)
     {
         if (!_isInvurnerable)
         {
             StartCoroutine(KnockBack(inVelocity));
-            StartCoroutine(DamageFlash());
-
-            Debug.Log("Smack");
         }
     }
 
-    void ModifyHealth(float inHealthModifier)
+    public void ModifyHealth(float inHealthModifier)
     {
         _health += inHealthModifier;
 
         if (_health < 0)
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+
+        StartCoroutine(DamageFlash());
     }
 
     IEnumerator KnockBack(Vector3 inVelocity)
