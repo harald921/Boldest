@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
 	[SerializeField] GameObject _visceralAttackParticle;
 	bool _inVisceralAttack = false;
     Coroutine _visceralCo;
+	public ParticleSystem _dashParticle;
 
 	Animator _animator;
 
@@ -110,7 +111,11 @@ public class Player : MonoBehaviour
         if(Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased && !_inVisceralAttack )
         {
             _dashingTimer = _dashDuration;
-            _rightTriggerReleased = false;           			
+            _rightTriggerReleased = false;
+
+			// start dashparticle
+			_dashParticle.gameObject.SetActive(true);			
+			_dashParticle.Play();
         }
 		else if (Input.GetAxisRaw("RightHandTrigger") == 0)
             _rightTriggerReleased = true;
@@ -185,13 +190,18 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(_timePreformingAttack); // wait to finish attack, will be timed on attack animation	later on maybe	
 		
 		Destroy(enemyCollider.gameObject); //destroy enemy you attacked (maybe can do different things depending on the type of enemy and tag later on)			
-		Instantiate(_visceralAttackParticle, enemyCollider.transform.position, _visceralAttackParticle.transform.rotation);
+		GameObject deathParticle = Instantiate(_visceralAttackParticle, enemyCollider.transform.position, _visceralAttackParticle.transform.rotation);
+		Destroy(deathParticle.gameObject, 3);
+
 		//automaticly set up new dash after finishing attack									   									   
 		_dashingTimer = _dashDuration;
         _isDashing = true;
         _inVisceralAttack = false;
 
-    }
+		// start dashparticle	
+		_dashParticle.Play();
+
+	}
 
 
     public void CancelDash()
