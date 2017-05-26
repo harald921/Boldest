@@ -106,21 +106,18 @@ public class Player : MonoBehaviour
     void HandleDash()
     {
         _dashingTimer -= Time.deltaTime;
-        
-        
-        if(Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased )
+               
+        if(Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased && !_inVisceralAttack )
         {
             _dashingTimer = _dashDuration;
-            _rightTriggerReleased = false;
-            _isDashing = true;
-			
-
+            _rightTriggerReleased = false;           			
         }
-        if (Input.GetAxisRaw("RightHandTrigger") == 0)
+		else if (Input.GetAxisRaw("RightHandTrigger") == 0)
             _rightTriggerReleased = true;
 
 		if (_dashingTimer > 0 && !_inVisceralAttack)
 		{
+			_isDashing = true;
 			Vector3 dashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 			dashDir.Normalize();
 
@@ -131,7 +128,7 @@ public class Player : MonoBehaviour
 			}
 			transform.forward = dashDir;
 			GetComponent<Rigidbody>().AddForce(dashDir * _dashSpeed);
-			GetComponent<MeshRenderer>().enabled = false;
+			GetComponent<MeshRenderer>().enabled = false; // don't render player model while dashing
 		}
 		else
 		{
@@ -144,13 +141,21 @@ public class Player : MonoBehaviour
 
     public void visceralAttackWindow(Collider enemyCollider)
     {
-        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+		
+        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); //stop player for attack window
+
+		//make player face enemy														   
+		Vector3 playerToEnemy = enemyCollider.transform.position - transform.position;
+		playerToEnemy.Normalize();
+		transform.forward = playerToEnemy;
+
+		//start coRoutine that handle the attck window
         _inVisceralAttack = true;
         _dashingTimer = 0;
         _visceralCo = StartCoroutine(HandleVisceralAttackWindow(enemyCollider));
     }
   
-    void FailedVisceralAttack()
+    void FailedVisceralAttack(Collider enemyCollider)
     {
         // here maybe we want knockback on player and deal damage to player osv     
         _inVisceralAttack = false;
@@ -169,7 +174,7 @@ public class Player : MonoBehaviour
             }
             yield return null;
         }
-        FailedVisceralAttack();  // will be called if failed to press attack during timewindow  
+        FailedVisceralAttack(enemyCollider);  // will be called if failed to press attack during timewindow  
     }
 
     IEnumerator PreformVisceralAttack(Collider enemyCollider)
