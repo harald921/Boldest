@@ -24,12 +24,18 @@ public class Player : MonoBehaviour
 	[SerializeField] GameObject _visceralAttackParticle;
 	bool _inVisceralAttack = false;
     Coroutine _visceralCo;
-	
 
+	Animator _animator;
 
 
     Vector3 _movementVector = Vector3.zero;
-    Vector3 _lastMovementVector = Vector3.zero;  
+    Vector3 _lastMovementVector = Vector3.zero;
+
+	void Start()
+	{
+		_animator = transform.GetChild(3).GetComponent<Animator>();
+
+	}
 
     private void Update()
     {
@@ -42,7 +48,9 @@ public class Player : MonoBehaviour
         }
        
         HandleDash();
-      
+
+		_animator.SetBool("dashing", _isDashing);
+
        
     }
 
@@ -105,26 +113,32 @@ public class Player : MonoBehaviour
             _dashingTimer = _dashDuration;
             _rightTriggerReleased = false;
             _isDashing = true;
+			
 
         }
         if (Input.GetAxisRaw("RightHandTrigger") == 0)
             _rightTriggerReleased = true;
 
-        if(_dashingTimer > 0 && !_inVisceralAttack)
-        {
-            Vector3 dashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-            dashDir.Normalize();
+		if (_dashingTimer > 0 && !_inVisceralAttack)
+		{
+			Vector3 dashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+			dashDir.Normalize();
 
-            if(Mathf.Abs(dashDir.x) ==0 && Mathf.Abs(dashDir.z) == 0)
-            {
+			if (Mathf.Abs(dashDir.x) == 0 && Mathf.Abs(dashDir.z) == 0)
+			{
 				_dashingTimer = 0;
 				return;
-            }
-            transform.forward = dashDir;
-            GetComponent<Rigidbody>().AddForce(dashDir * _dashSpeed);           
-        }       
-        else
-            _isDashing = false;
+			}
+			transform.forward = dashDir;
+			GetComponent<Rigidbody>().AddForce(dashDir * _dashSpeed);
+			GetComponent<MeshRenderer>().enabled = false;
+		}
+		else
+		{
+			_isDashing = false;
+			GetComponent<MeshRenderer>().enabled = true;
+		}
+            
 
     }
 
