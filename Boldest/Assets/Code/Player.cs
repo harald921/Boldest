@@ -9,14 +9,16 @@ public class Player : MonoBehaviour
     [SerializeField] float _moveSpeed   = 16.0f;
     [SerializeField] float _turnSpeed   = 1.0f;
     [SerializeField] bool _useController = false;
+	[SerializeField] float _gravityPower = 0;
 
-    //settings for dash
-    [SerializeField] float _dashDuration;
+	//settings for dash
+	[SerializeField] float _dashDuration;
     [SerializeField] float _dashSpeed;
     [SerializeField] float _dashCoolDown;
     float _dashingTimer = 0;
     public bool _isDashing = false;
     bool _rightTriggerReleased = true;
+	bool _inKnockBack = false;
 
     //settings for visceral attack
     [SerializeField] float _timeWindowToAttack;
@@ -27,22 +29,21 @@ public class Player : MonoBehaviour
 	public ParticleSystem _dashParticle;
 
 	Animator _animator;
+	[SerializeField] float _knockBackForce;
 
-
-    Vector3 _movementVector = Vector3.zero;
+	Vector3 _movementVector = Vector3.zero;
     Vector3 _lastMovementVector = Vector3.zero;
 
 	void Start()
 	{
-		_animator = transform.GetChild(3).GetComponent<Animator>();
-
+		_animator = transform.GetChild(3).GetComponent<Animator>();		
 	}
 
     private void Update()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //can only controll player if not in dash or in the middle of chain attacks
-        if (!_isDashing && !_inVisceralAttack)
+        if (!_isDashing && !_inVisceralAttack && !_inKnockBack)
         {
             HandleMovement();
             HandleAttackInput();
@@ -56,9 +57,12 @@ public class Player : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {       
-            GetComponent<Rigidbody>().AddForce(_movementVector.normalized * _moveSpeed);
-            _movementVector = Vector3.zero;             
+    {
+		if (!_isDashing && !_inVisceralAttack)
+		{
+			GetComponent<Rigidbody>().AddForce(new Vector3(_movementVector.normalized.x * _moveSpeed, -_gravityPower, _movementVector.normalized.z * _moveSpeed));
+			_movementVector = Vector3.zero;
+		}
     }
 
     void HandleMovement()
@@ -121,8 +125,7 @@ public class Player : MonoBehaviour
             _rightTriggerReleased = true;
 
 		if (_dashingTimer > 0 && !_inVisceralAttack)
-		{
-			_isDashing = true;
+		{			
 			Vector3 dashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 			dashDir.Normalize();
 
@@ -131,6 +134,7 @@ public class Player : MonoBehaviour
 				_dashingTimer = 0;
 				return;
 			}
+			_isDashing = true;
 			transform.forward = dashDir;
 			GetComponent<Rigidbody>().AddForce(dashDir * _dashSpeed);
 			GetComponent<MeshRenderer>().enabled = false; // don't render player model while dashing
@@ -162,8 +166,8 @@ public class Player : MonoBehaviour
   
     void FailedVisceralAttack(Collider enemyCollider)
     {
-        // here maybe we want knockback on player and deal damage to player osv     
-        _inVisceralAttack = false;
+		StartCoroutine(KnockBack());
+		_inVisceralAttack = false;
     }
 
     IEnumerator HandleVisceralAttackWindow(Collider enemyCollider)
@@ -211,9 +215,16 @@ public class Player : MonoBehaviour
     }
 
 
+	
 
-
-
+	IEnumerator KnockBack()
+	{
+		_inKnockBack = true;
+		GetComponent<Rigidbody>().AddForce(-transform.forward * _knockBackForce);
+		GetComponent<Rigidbody>().AddTorque(-transform.right * 200);
+		yield return new WaitForSeconds(0.5f);
+		_inKnockBack = false;
+	}
 
 
 }
