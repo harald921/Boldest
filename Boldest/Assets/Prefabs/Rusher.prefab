@@ -26,7 +26,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1886879388118530
 GameObject:
@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114439775867181364}
   - component: {fileID: 54644336589617244}
   - component: {fileID: 136181711730387612}
+  - component: {fileID: 114735079265255550}
   m_Layer: 0
   m_Name: Rusher
   m_TagString: Untagged
@@ -57,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1886879388118530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.83105564, y: 1.55, z: 26.110844}
+  m_LocalPosition: {x: 17.7, y: 0, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4398917152146312}
@@ -182,6 +183,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
+--- !u!114 &114735079265255550
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1886879388118530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1cd9c9c6eb5738458b0c3d91400c330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hardCollider: {fileID: 136379918812622892}
 --- !u!136 &136181711730387612
 CapsuleCollider:
   m_ObjectHideFlags: 1

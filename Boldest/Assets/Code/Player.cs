@@ -10,33 +10,32 @@ public class Player : MonoBehaviour
     [SerializeField] float _turnSpeed   = 1.0f;
     [SerializeField] bool _useController = false;
 	[SerializeField] float _gravityPower = 0;
+	Vector3 _movementVector = Vector3.zero;
+	Vector3 _lastMovementVector = Vector3.zero;
 
 	//settings for dash
 	[SerializeField] float _dashDuration;
     [SerializeField] float _dashSpeed;
-    [SerializeField] float _dashCoolDown;
-    float _dashingTimer = 0;
-    public bool _isDashing = false;
-    bool _rightTriggerReleased = true;
+    [SerializeField] float _dashCoolDown;   
+    [HideInInspector] public bool _isDashing = false;
+	float _dashingTimer = 0;
+	bool _rightTriggerReleased = true;
 	bool _inKnockBack = false;
+	Animator _dashAnimator;
 
-    //settings for visceral attack
-    [SerializeField] float _timeWindowToAttack;
+	//settings for visceral attack
+	[SerializeField] float _timeWindowToAttack;
     [SerializeField] float _timePreformingAttack; // will later be controlled by animation I guess
 	[SerializeField] GameObject _visceralAttackParticle;
-	bool _inVisceralAttack = false;
-    Coroutine _visceralCo;
-	public ParticleSystem _dashParticle;
-
-	Animator _animator;
+	[SerializeField] ParticleSystem _dashParticle;
 	[SerializeField] float _knockBackForce;
-
-	Vector3 _movementVector = Vector3.zero;
-    Vector3 _lastMovementVector = Vector3.zero;
+	bool _inVisceralAttack = false;
+	Coroutine _visceralCo;
+				
 
 	void Start()
 	{
-		_animator = transform.GetChild(3).GetComponent<Animator>();		
+		_dashAnimator = transform.GetChild(3).GetComponent<Animator>();		
 	}
 
     private void Update()
@@ -51,7 +50,7 @@ public class Player : MonoBehaviour
        
         HandleDash();
 
-		_animator.SetBool("dashing", _isDashing);
+		
 
        
     }
@@ -111,8 +110,9 @@ public class Player : MonoBehaviour
     void HandleDash()
     {
         _dashingTimer -= Time.deltaTime;
-               
-        if(Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased && !_inVisceralAttack )
+		_dashAnimator.SetBool("dashing", _isDashing);
+
+		if (Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased && !_inVisceralAttack )
         {
             _dashingTimer = _dashDuration;
             _rightTriggerReleased = false;
@@ -143,8 +143,7 @@ public class Player : MonoBehaviour
 		{
 			_isDashing = false;
 			GetComponent<MeshRenderer>().enabled = true;
-		}
-            
+		}            
 
     }
 
@@ -166,6 +165,8 @@ public class Player : MonoBehaviour
   
     void FailedVisceralAttack(Collider enemyCollider)
     {
+		//if visceral attack failed, re-enable collision between enemy and player
+		Physics.IgnoreCollision(enemyCollider, GetComponent<Collider>(), false);
 		StartCoroutine(KnockBack());
 		_inVisceralAttack = false;
     }
@@ -173,25 +174,28 @@ public class Player : MonoBehaviour
     IEnumerator HandleVisceralAttackWindow(Collider enemyCollider)
     {
         float timeToAttack = _timeWindowToAttack;
+		bool failedAttack = true;
         while (timeToAttack > 0)
         {
             timeToAttack -= Time.deltaTime;
             if (Input.GetButtonDown("RightHandButton"))
             {
-                StartCoroutine(PreformVisceralAttack(enemyCollider));				
-                StopCoroutine(_visceralCo);              
+				failedAttack = false;
+                StartCoroutine(PreformVisceralAttack(enemyCollider));					
+                StopCoroutine(_visceralCo);            
             }
             yield return null;
         }
-        FailedVisceralAttack(enemyCollider);  // will be called if failed to press attack during timewindow  
+		if(failedAttack) // for some reason StopCoroutine seems to not be 100% reliable, added bool if this line gets read even on succsesful attack
+			FailedVisceralAttack(enemyCollider);  // will be called if failed to press attack during timewindow  
     }
 
     IEnumerator PreformVisceralAttack(Collider enemyCollider)
     {
-       //preform attack
-        transform.GetChild(1).GetComponent<Weapon>().TryAttack();// use standard sword for debuging
+		// play attack animation
+		transform.GetChild(5).GetComponent<VisceralAttack>().SetAttackActive();
 
-        yield return new WaitForSeconds(_timePreformingAttack); // wait to finish attack, will be timed on attack animation	later on maybe	
+        yield return new WaitForSeconds(_timePreformingAttack); // wait to finish attack, will be timed on attack animation	
 		
 		Destroy(enemyCollider.gameObject); //destroy enemy you attacked (maybe can do different things depending on the type of enemy and tag later on)			
 		GameObject deathParticle = Instantiate(_visceralAttackParticle, enemyCollider.transform.position, _visceralAttackParticle.transform.rotation);
@@ -207,24 +211,23 @@ public class Player : MonoBehaviour
 
 	}
 
+	IEnumerator KnockBack()
+	{
+		_inKnockBack = true;
+		GetComponent<Rigidbody>().AddForce(-transform.forward * _knockBackForce);
+		yield return new WaitForSeconds(0.5f);
+		_inKnockBack = false;
+	}
 
-    public void CancelDash()
+	public void CancelDash()
     {
-
         _dashingTimer = 0;
     }
 
 
 	
 
-	IEnumerator KnockBack()
-	{
-		_inKnockBack = true;
-		GetComponent<Rigidbody>().AddForce(-transform.forward * _knockBackForce);
-		GetComponent<Rigidbody>().AddTorque(-transform.right * 200);
-		yield return new WaitForSeconds(0.5f);
-		_inKnockBack = false;
-	}
+	
 
 
 }

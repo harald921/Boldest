@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashDummie : MonoBehaviour
+public class DashAttackCheck : MonoBehaviour
 {
 
-
+	public Collider _hardCollider;
 
 	
 
@@ -23,6 +23,7 @@ public class DashDummie : MonoBehaviour
 			
 			if (player._isDashing)
 			{
+				Physics.IgnoreCollision(other, _hardCollider, true);
 				player.visceralAttackWindow(GetComponent<Collider>());
 			}
                
