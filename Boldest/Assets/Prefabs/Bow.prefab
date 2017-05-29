@@ -115,3 +115,4 @@ MonoBehaviour:
   _maxDraw: 1
   _drawSpeed: 1
   _drawToVelocityMultiplier: 1
+  _aimSpeed: 25

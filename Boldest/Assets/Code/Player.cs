@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] bool _useController = false;
 	[SerializeField] float _gravityPower = 0;
 	Vector3 _movementVector = Vector3.zero;
-	Vector3 _lastMovementVector = Vector3.zero;
+	[HideInInspector] public Vector3 _lastMovementVector = Vector3.zero;
 
 	//settings for dash
 	[SerializeField] float _dashDuration;
@@ -35,6 +35,9 @@ public class Player : MonoBehaviour
     //different dashes for testing
     public bool _dash1;
     public bool _dash2;
+
+    //bow stuff
+    [HideInInspector] public bool _isBowing = false;
 				
 
 	void Start()
@@ -46,7 +49,7 @@ public class Player : MonoBehaviour
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //can only controll player if not in dash or in the middle of chain attacks
-        if (!_isDashing && !_inVisceralAttack && !_inKnockBack)
+        if (!_isDashing && !_inVisceralAttack && !_inKnockBack && !_isBowing)
         {
             HandleMovement();
             HandleAttackInput();
@@ -85,8 +88,7 @@ public class Player : MonoBehaviour
 
     void HandleAttackInput()
     {
-        if (_useController)
-        {         
+             
             if (Input.GetButtonDown("RightHandButton"))
             {
                 transform.GetChild(1).GetComponent<Weapon>().TryAttack();
@@ -94,26 +96,8 @@ public class Player : MonoBehaviour
             if (Input.GetButtonDown("BowButton"))
             {
                 transform.GetChild(2).GetComponent<Bow>().DrawBow();
-            }
-			else if (Input.GetButtonUp("BowButton"))
-				transform.GetChild(2).GetComponent<Bow>().ReleaseString();
+            }				
 
-
-		}
-
-        if (!_useController)
-        {
-            if (Input.GetButtonDown("RightHandButton"))
-            {
-                transform.GetChild(1).GetComponent<Weapon>().TryAttack();              
-            }
-			if (Input.GetButtonDown("BowButton"))
-			{
-				transform.GetChild(2).GetComponent<Bow>().DrawBow();
-			}
-			else if (Input.GetButtonUp("BowButton"))
-				transform.GetChild(2).GetComponent<Bow>().ReleaseString();
-		}           
     }
 
 

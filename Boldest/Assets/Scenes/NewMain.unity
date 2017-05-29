@@ -3879,6 +3879,7 @@ MonoBehaviour:
   _maxDraw: 500
   _drawSpeed: 10
   _drawToVelocityMultiplier: 100
+  _aimSpeed: 1
 --- !u!1 &336547409
 GameObject:
   m_ObjectHideFlags: 0
@@ -4856,6 +4857,67 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 807776014}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &835504684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 835504685}
+  - component: {fileID: 835504688}
+  - component: {fileID: 835504687}
+  - component: {fileID: 835504686}
+  m_Layer: 0
+  m_Name: deathZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &835504685
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 835504684}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -20, z: 22.1}
+  m_LocalScale: {x: 722.6182, y: 1, z: 722.6183}
+  m_Children: []
+  m_Father: {fileID: 1090354489}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &835504686
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 835504684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &835504687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 835504684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0330e3f0868ae5040a01be40d244b3ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!33 &835504688
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 835504684}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &839296730 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 7d2f6e2e7e1b945498832c88d9079f80, type: 3}
@@ -5286,6 +5348,7 @@ GameObject:
   - component: {fileID: 1021032274}
   - component: {fileID: 1021032276}
   - component: {fileID: 1021032275}
+  - component: {fileID: 1021032277}
   m_Layer: 0
   m_Name: hole
   m_TagString: Untagged
@@ -5345,6 +5408,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1021032273}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1021032277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1021032273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0330e3f0868ae5040a01be40d244b3ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1049183439
 GameObject:
   m_ObjectHideFlags: 0
@@ -5381,6 +5455,7 @@ MonoBehaviour:
   _turnSpeed: 15
   _useController: 1
   _gravityPower: 200
+  _lastMovementVector: {x: 0, y: 0, z: 0}
   _dashDuration: 0.3
   _dashSpeed: 600
   _dashCoolDown: 0.5
@@ -5393,6 +5468,7 @@ MonoBehaviour:
   _knockBackForce: 3000
   _dash1: 0
   _dash2: 1
+  _isBowing: 0
 --- !u!23 &1049183441
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5793,6 +5869,7 @@ Transform:
   - {fileID: 274326034}
   - {fileID: 1021032274}
   - {fileID: 880796827}
+  - {fileID: 835504685}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
