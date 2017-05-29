@@ -5391,6 +5391,8 @@ MonoBehaviour:
     type: 2}
   _dashParticle: {fileID: 128508678}
   _knockBackForce: 3000
+  _dash1: 0
+  _dash2: 1
 --- !u!23 &1049183441
 MeshRenderer:
   m_ObjectHideFlags: 0

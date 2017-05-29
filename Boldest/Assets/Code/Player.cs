@@ -31,6 +31,10 @@ public class Player : MonoBehaviour
 	[SerializeField] float _knockBackForce;
 	bool _inVisceralAttack = false;
 	Coroutine _visceralCo;
+
+    //different dashes for testing
+    public bool _dash1;
+    public bool _dash2;
 				
 
 	void Start()
@@ -63,7 +67,11 @@ public class Player : MonoBehaviour
 			_movementVector = Vector3.zero;
 
 		}
+        if(_dash1)
         HandleDash();
+
+        if(_dash2)
+        HandleDash2();
     }
 
     void HandleMovement()
@@ -149,6 +157,37 @@ public class Player : MonoBehaviour
 
     }
 
+    void HandleDash2()
+    {
+        _dashingTimer -= Time.deltaTime;
+        _dashAnimator.SetBool("dashing", _isDashing);
+        Vector3 dashDir = transform.forward;
+
+        if (Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased && !_inVisceralAttack)
+        {                              
+            _dashingTimer = _dashDuration;
+            _rightTriggerReleased = false;
+          
+            // start dashparticle
+            _dashParticle.gameObject.SetActive(true);
+            _dashParticle.Play();
+        }
+        else if (Input.GetAxisRaw("RightHandTrigger") == 0)
+            _rightTriggerReleased = true;
+
+        if (_dashingTimer > 0 && !_inVisceralAttack)
+        {                   
+            _isDashing = true;
+            GetComponent<Rigidbody>().AddForce(dashDir * _dashSpeed);
+            GetComponent<MeshRenderer>().enabled = false; // don't render player model while dashing
+        }
+        else
+        {
+            _isDashing = false;
+            GetComponent<MeshRenderer>().enabled = true;
+        }
+    }
+
     public void visceralAttackWindow(Collider enemyCollider)
     {
 		
@@ -203,13 +242,35 @@ public class Player : MonoBehaviour
 		GameObject deathParticle = Instantiate(_visceralAttackParticle, enemyCollider.transform.position, _visceralAttackParticle.transform.rotation);
 		Destroy(deathParticle.gameObject, 3);
 
-		//automaticly set up new dash after finishing attack									   									   
-		_dashingTimer = _dashDuration;
-        _isDashing = true;
-        _inVisceralAttack = false;
+        //automaticly set up new dash after finishing attack	
+        if (_dash2)
+        {
+            bool haveDashDirection = true;
+            Vector3 newDashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            newDashDir.Normalize();
 
-		// start dashparticle	
-		_dashParticle.Play();
+            if (newDashDir.x == 0 && newDashDir.z == 0)
+                haveDashDirection = false;
+
+            if (haveDashDirection)
+            {
+                transform.forward = newDashDir;
+                _dashingTimer = _dashDuration;
+                _isDashing = true;                             	
+                _dashParticle.Play();
+            }
+            _inVisceralAttack = false;
+
+        }
+
+        if (_dash1)
+        {
+            _dashingTimer = _dashDuration;
+            _isDashing = true;
+            _inVisceralAttack = false;         
+            _dashParticle.Play();           
+        }
+        
 
 	}
 
