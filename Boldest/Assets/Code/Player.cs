@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
             HandleAttackInput();
         }
        
-        HandleDash();
+     
 
 		
 
@@ -61,7 +61,9 @@ public class Player : MonoBehaviour
 		{
 			GetComponent<Rigidbody>().AddForce(new Vector3(_movementVector.normalized.x * _moveSpeed, -_gravityPower, _movementVector.normalized.z * _moveSpeed));
 			_movementVector = Vector3.zero;
+
 		}
+        HandleDash();
     }
 
     void HandleMovement()
