@@ -617,6 +617,7 @@ MonoBehaviour:
   _drawSpeed: 10
   _drawToVelocityMultiplier: 100
   _aimSpeed: 1
+  _camera2: 0
 --- !u!114 &114863167614742144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -646,6 +647,7 @@ MonoBehaviour:
   _knockBackForce: 3000
   _dash1: 0
   _dash2: 1
+  _camera2: 0
   _isBowing: 0
 --- !u!136 &136702434078108446
 CapsuleCollider:
