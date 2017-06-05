@@ -5,13 +5,13 @@ using UnityEngine;
 public class DeathZone : MonoBehaviour
 {
 
-
+    public Vector3 _respawnPos;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            other.transform.position = new Vector3(0, 1.5f, 0);
+            other.transform.position = _respawnPos;
 
         }
     }
