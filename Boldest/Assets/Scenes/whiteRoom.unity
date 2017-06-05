@@ -668,6 +668,7 @@ GameObject:
   - component: {fileID: 174250921}
   - component: {fileID: 174250920}
   - component: {fileID: 174250919}
+  - component: {fileID: 174250923}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -739,6 +740,21 @@ Transform:
   m_Father: {fileID: 510389665}
   m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &174250923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 174250918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9d93297ef23f9f449e93a815f043f9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scrollSpeedOnX: 0.001
+  _scrollSpeedOnY: 0.005
+  _scrollX: 1
+  _scrollY: 1
 --- !u!1 &250445740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1816,6 +1832,8 @@ MonoBehaviour:
     type: 2}
   _dashParticle: {fileID: 960698477}
   _knockBackForce: 3000
+  _attackMomentum: 2000
+  _attackCoolDown: 0.2
   _dash1: 0
   _dash2: 1
   _camera2: 1
