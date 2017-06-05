@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 95205438480450364}
   - component: {fileID: 114440834523449766}
   m_Layer: 0
-  m_Name: bow
+  m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,3 +117,4 @@ MonoBehaviour:
   _drawSpeed: 10
   _drawToVelocityMultiplier: 100
   _aimSpeed: 1
+  _camera2: 0
