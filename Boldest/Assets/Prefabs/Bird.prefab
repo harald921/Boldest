@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 54530193068496640}
   m_Layer: 0
   m_Name: body
-  m_TagString: Untagged
+  m_TagString: Bird
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -412,6 +412,8 @@ MonoBehaviour:
   - {fileID: 1954786041766958}
   - {fileID: 1282393943722240}
   speed: 4.15
+  _startPos: 1
+  _move: 1
 --- !u!114 &114940104506658654
 MonoBehaviour:
   m_ObjectHideFlags: 1
