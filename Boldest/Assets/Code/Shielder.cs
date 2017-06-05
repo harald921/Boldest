@@ -9,6 +9,8 @@ public class Shielder : MonoBehaviour
     Player _player;
     Animator _shieldAnim;
     Animator _swordAnim;
+    
+    
 
     float _stateChange = 0;
     
@@ -36,6 +38,19 @@ public class Shielder : MonoBehaviour
             _swordAnim.SetBool("Attack", true);
             _stateChange = 0;
         }
+
+        
         
     }
+
+
+   public void GettingDashed()
+    {
+        _shieldAnim.SetBool("Dashed", true);
+        _swordAnim.SetBool("Dashed", true);
+
+    }
+
+
+
 }

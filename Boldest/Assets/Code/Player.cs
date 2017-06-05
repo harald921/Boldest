@@ -224,6 +224,12 @@ public class Player : MonoBehaviour
             timeToAttack -= Time.deltaTime;
             if (Input.GetButtonDown("RightHandButton"))
             {
+                if(enemyCollider.tag == "Shielder")
+                {
+                    enemyCollider.GetComponent<Shielder>().GettingDashed();
+
+                }
+
 				failedAttack = false;
                 StartCoroutine(PreformVisceralAttack(enemyCollider));					
                 StopCoroutine(_visceralCo);            
