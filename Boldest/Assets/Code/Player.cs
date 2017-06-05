@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
     public float _attackCoolDown;
     float _attackTimer = 0;
 
+    float _acceleration = 0;
+    public float _accelerationSpeed = 1;
+
     //different dashes for testing
     public bool _dash1;
     public bool _dash2;
@@ -63,6 +66,9 @@ public class Player : MonoBehaviour
 
 
         _attackTimer += Time.deltaTime;
+        _acceleration += Time.deltaTime * _accelerationSpeed;
+        _acceleration = Mathf.Clamp(_acceleration, 0, 1);
+
 
        
     }
@@ -71,8 +77,8 @@ public class Player : MonoBehaviour
     {
 		if (!_isDashing && !_inVisceralAttack)
 		{
-			GetComponent<Rigidbody>().AddForce(new Vector3(_movementVector.normalized.x * _moveSpeed, -_gravityPower, _movementVector.normalized.z * _moveSpeed));
-			_movementVector = Vector3.zero;
+			GetComponent<Rigidbody>().AddForce(new Vector3((_movementVector.normalized.x * _moveSpeed) * _acceleration, -_gravityPower, (_movementVector.normalized.z * _moveSpeed) * _acceleration));        
+            _movementVector = Vector3.zero;
 
 		}
         if(_dash1)
@@ -89,8 +95,10 @@ public class Player : MonoBehaviour
 			_movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 			if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
 				_lastMovementVector = _movementVector;
+            else
+                _acceleration = 0;
 
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
 		}
 
 		if (_camera2)
@@ -100,8 +108,10 @@ public class Player : MonoBehaviour
 
 			_movementVector = (input.x * cam2.transform.right) + (input.z * cam2._orientationVector);
 
-			if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
-				_lastMovementVector = _movementVector;
+            if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
+                _lastMovementVector = _movementVector;
+            else
+                _acceleration = 0;
 
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
 
