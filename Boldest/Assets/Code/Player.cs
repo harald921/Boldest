@@ -229,8 +229,13 @@ public class Player : MonoBehaviour
                     enemyCollider.GetComponent<Shielder>().GettingDashed();
 
                 }
+                if (enemyCollider.tag == "Bird")
+                {
+                    enemyCollider.GetComponentInParent<Bird>()._move = false;
 
-				failedAttack = false;
+                }
+
+                failedAttack = false;
                 StartCoroutine(PreformVisceralAttack(enemyCollider));					
                 StopCoroutine(_visceralCo);            
             }

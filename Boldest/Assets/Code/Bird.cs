@@ -6,19 +6,29 @@ public class Bird : MonoBehaviour
 {
     public GameObject[] _positions;
     public float speed =1.0f;
+    public int _startPos;
     int _currentPosition = 0;
+    [HideInInspector] public bool _move = true;
+    
 
 
+    void Start()
+    {
+        _currentPosition = _startPos - 1;
+    }
 
     void Update()
     {
+        if (_move)
+        {
+            transform.GetChild(0).position = Vector3.MoveTowards(transform.GetChild(0).position, _positions[_currentPosition].transform.position, speed * Time.deltaTime);
 
-        transform.GetChild(0).position = Vector3.MoveTowards(transform.GetChild(0).position, _positions[_currentPosition].transform.position, speed * Time.deltaTime);
+            Vector3 forward = _positions[_currentPosition].transform.position - transform.GetChild(0).position;
+            forward.Normalize();
 
-        Vector3 forward = _positions[_currentPosition].transform.position - transform.GetChild(0).position;
-        forward.Normalize();
+            transform.GetChild(0).up = forward;
 
-        transform.GetChild(0).up = forward;
+        }
 
         if (transform.GetChild(0).position == _positions[_currentPosition].transform.position)
         {
