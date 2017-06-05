@@ -32,6 +32,10 @@ public class Player : MonoBehaviour
 	bool _inVisceralAttack = false;
 	Coroutine _visceralCo;
 
+    public float _attackMomentum;
+    public float _attackCoolDown;
+    float _attackTimer = 0;
+
     //different dashes for testing
     public bool _dash1;
     public bool _dash2;
@@ -55,10 +59,10 @@ public class Player : MonoBehaviour
             HandleMovement();
             HandleAttackInput();
         }
-       
-     
 
-		
+
+
+        _attackTimer += Time.deltaTime;
 
        
     }
@@ -110,7 +114,14 @@ public class Player : MonoBehaviour
              
             if (Input.GetButtonDown("RightHandButton"))
             {
-                transform.GetChild(1).GetComponent<Weapon>().TryAttack();
+                if(_attackTimer >= _attackCoolDown)
+                {
+                    _attackTimer = 0;
+                    transform.GetChild(1).GetComponent<Weapon>().TryAttack();
+                    AttackForce();
+                }
+               
+
             }
             if (Input.GetButtonDown("BowButton"))
             {
@@ -332,7 +343,10 @@ public class Player : MonoBehaviour
     }
 
 
-	
+	void AttackForce()
+    {
+        GetComponent<Rigidbody>().AddForce(transform.forward * _attackMomentum);
+    }
 
 	
 
