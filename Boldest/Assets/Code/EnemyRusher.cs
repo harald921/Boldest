@@ -86,8 +86,6 @@ public class EnemyRusher : MonoBehaviour
 
             GetComponent<MeshRenderer>().material.color = Color.Lerp(_defaultColor, Color.red, flashLerpValue);
 
-            Debug.Log(GetComponent<MeshRenderer>().material.color);
-
             yield return null;
         }
     }

@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     //different dashes for testing
     public bool _dash1;
     public bool _dash2;
+	public bool _camera2 = false;
 
     //bow stuff
     [HideInInspector] public bool _isBowing = false;
@@ -78,12 +79,30 @@ public class Player : MonoBehaviour
     }
 
     void HandleMovement()
-    {              
-            _movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-            if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
-                _lastMovementVector = _movementVector;
+    {
+		if (!_camera2)
+		{
+			_movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+			if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
+				_lastMovementVector = _movementVector;
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);             
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
+		}
+
+		if (_camera2)
+		{
+			DynamicAngleCamera cam2 = FindObjectOfType<DynamicAngleCamera>();
+			Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal") , 0, Input.GetAxisRaw("Vertical"));
+
+			_movementVector = (input.x * cam2.transform.right) + (input.z * cam2._orientationVector);
+
+			if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
+				_lastMovementVector = _movementVector;
+
+			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
+
+		}
+                     
     }
 
     void HandleAttackInput()
@@ -205,6 +224,12 @@ public class Player : MonoBehaviour
             timeToAttack -= Time.deltaTime;
             if (Input.GetButtonDown("RightHandButton"))
             {
+                if(enemyCollider.tag == "Shielder")
+                {
+                    enemyCollider.GetComponent<Shielder>().GettingDashed();
+
+                }
+
 				failedAttack = false;
                 StartCoroutine(PreformVisceralAttack(enemyCollider));					
                 StopCoroutine(_visceralCo);            
@@ -229,23 +254,53 @@ public class Player : MonoBehaviour
         //automaticly set up new dash after finishing attack	
         if (_dash2)
         {
-            bool haveDashDirection = true;
-            Vector3 newDashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-            newDashDir.Normalize();
+			if (!_camera2)
+			{
+				bool haveDashDirection = true;
+				Vector3 newDashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+				newDashDir.Normalize();
 
-            if (newDashDir.x == 0 && newDashDir.z == 0)
-                haveDashDirection = false;
+				if (newDashDir.x == 0 && newDashDir.z == 0)
+					haveDashDirection = false;
 
-            if (haveDashDirection)
-            {
-                transform.forward = newDashDir;
-                _dashingTimer = _dashDuration;
-                _isDashing = true;                             	
-                _dashParticle.Play();
-            }
-            _inVisceralAttack = false;
+				if (haveDashDirection)
+				{
+					transform.forward = newDashDir;
+					_dashingTimer = _dashDuration;
+					_isDashing = true;
+					_dashParticle.Play();
+				}
+				_inVisceralAttack = false;
 
-        }
+			}
+
+			if (_camera2)
+			{
+				bool haveDashDirection = true;
+				Vector3 newDashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+				newDashDir.Normalize();
+
+				if (newDashDir.x == 0 && newDashDir.z == 0)
+					haveDashDirection = false;
+
+				if (haveDashDirection)
+				{
+
+					DynamicAngleCamera cam2 = FindObjectOfType<DynamicAngleCamera>();
+					Vector3 dashWithCamOrientation = (newDashDir.x * cam2.transform.right) + ( newDashDir.z * cam2._orientationVector);
+					dashWithCamOrientation.Normalize();
+
+					transform.forward = dashWithCamOrientation;
+					_dashingTimer = _dashDuration;
+					_isDashing = true;
+					_dashParticle.Play();
+				}
+				_inVisceralAttack = false;
+
+			}
+
+
+		}
 
         if (_dash1)
         {
