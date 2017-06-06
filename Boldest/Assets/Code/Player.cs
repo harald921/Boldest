@@ -51,10 +51,10 @@ public class Player : MonoBehaviour
 
     //lock On stuff
     public List<Collider> _lockables;
-    int _currentLockOnID = 0;
-    bool _isLockedOn = false;
+    [HideInInspector] public int _currentLockOnID = 0;
+    [HideInInspector] public bool _isLockedOn = false;
     float _changeTargetTimer = 0;
-    [SerializeField]float _changeTargetDelay = 0.3f;  
+    [SerializeField] float _changeTargetDelay = 0.3f;  
     public Image _bull;
     
     
@@ -426,15 +426,14 @@ public class Player : MonoBehaviour
                 _currentLockOnID++;
                 _changeTargetTimer = 0;
 
-            }                           
-            if (Input.GetAxisRaw("RightStickHorizontal") < 0 && _currentLockOnID > 0 && _changeTargetTimer > _changeTargetDelay)
+            }			
+			if (Input.GetAxisRaw("RightStickHorizontal") < 0 && _currentLockOnID > 0 && _changeTargetTimer > _changeTargetDelay)
             {
-                _currentLockOnID--;
+				float kk = Input.GetAxisRaw("RightStickHorizontal");
+				_currentLockOnID--;
                 _changeTargetTimer = 0;
             }
               
-
-
             if (_lockables.Count > 0)
             {
                 for (int i = 0; i < _lockables.Count; i++)
