@@ -22,22 +22,31 @@ public class LockOnChecker : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 8)
+        if (!other.isTrigger)
         {
-            other.GetComponent<Renderer>().material.color = Color.black;
-            _player._lockables.Add(other);
+            if (other.gameObject.layer == 8)
+            {
+
+                _player._lockables.Add(other);
+            }
+
         }
+        
            
     }
 
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 8)
+        if (!other.isTrigger)
         {
-            other.GetComponent<Renderer>().material.color = Color.white;
-            _player._lockables.Remove(other);
+            if (other.gameObject.layer == 8)
+            {
+
+                _player._lockables.Remove(other);
+            }
         }
+        
            
     }
 

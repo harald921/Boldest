@@ -12,11 +12,13 @@ public class EnemyRusher : MonoBehaviour
     bool _isInvurnerable = false;
 
     NavMeshAgent _navMeshAgent;
+    Player _player;
 
     private void Start()
     {
         _defaultColor = GetComponent<MeshRenderer>().material.color;
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _player = FindObjectOfType<Player>();
     }
 
 
@@ -51,7 +53,11 @@ public class EnemyRusher : MonoBehaviour
         _health += inHealthModifier;
 
         if (_health < 0)
+        {
+            _player._lockables.Remove(GetComponent<Collider>());
             Destroy(gameObject);
+        }
+           
 
         StartCoroutine(DamageFlash());
     }

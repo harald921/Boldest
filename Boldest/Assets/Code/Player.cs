@@ -12,9 +12,11 @@ public class Player : MonoBehaviour
 	[SerializeField] float _gravityPower = 0;
 	Vector3 _movementVector = Vector3.zero;
 	[HideInInspector] public Vector3 _lastMovementVector = Vector3.zero;
+    float _acceleration = 0;
+    public float _accelerationSpeed = 1;
 
-	//settings for dash
-	[SerializeField] float _dashDuration;
+    //settings for dash
+    [SerializeField] float _dashDuration;
     [SerializeField] float _dashSpeed;
     [SerializeField] float _dashCoolDown;   
     [HideInInspector] public bool _isDashing = false;
@@ -32,12 +34,11 @@ public class Player : MonoBehaviour
 	bool _inVisceralAttack = false;
 	Coroutine _visceralCo;
 
+    //sword attack stuff
     public float _attackMomentum;
     public float _attackCoolDown;
     float _attackTimer = 0;
-
-    float _acceleration = 0;
-    public float _accelerationSpeed = 1;
+   
 
     //different dashes for testing
     public bool _dash1;
@@ -47,7 +48,12 @@ public class Player : MonoBehaviour
     //bow stuff
     [HideInInspector] public bool _isBowing = false;
 
+    //lock On stuff
     public List<Collider> _lockables;
+    int _currentLockOnID = 0;
+    bool _isLockedOn = false;
+    float _changeTargetTimer = 0;
+    [SerializeField]float _changeTargetDelay = 0.3f;
 				
 
 	void Start()
@@ -58,6 +64,9 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        LockOnEnemy();
+
         //can only controll player if not in dash or in the middle of chain attacks
         if (!_isDashing && !_inVisceralAttack && !_inKnockBack && !_isBowing)
         {
@@ -65,7 +74,7 @@ public class Player : MonoBehaviour
             HandleAttackInput();
         }
 
-
+       
 
         _attackTimer += Time.deltaTime;
         _acceleration += Time.deltaTime * _accelerationSpeed;
@@ -100,6 +109,13 @@ public class Player : MonoBehaviour
             else
                 _acceleration = 0;
 
+            if (_isLockedOn && _lockables.Count >0)
+            {
+                Vector3 lookVector = _lockables[_currentLockOnID].transform.position - transform.position;
+                lookVector.Normalize();
+                _lastMovementVector = lookVector;
+            }
+            
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
 		}
 
@@ -115,7 +131,15 @@ public class Player : MonoBehaviour
             else
                 _acceleration = 0;
 
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
+
+            if (_isLockedOn && _lockables.Count > 0)
+            {
+                Vector3 lookVector =  new Vector3( _lockables[_currentLockOnID].transform.position.x,transform.position.y, _lockables[_currentLockOnID].transform.position.z) - transform.position;
+                lookVector.Normalize();
+                _lastMovementVector = lookVector;
+            }
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
 
 		}
                      
@@ -257,7 +281,7 @@ public class Player : MonoBehaviour
                     enemyCollider.GetComponentInParent<Bird>()._move = false;
 
                 }
-
+                              
                 failedAttack = false;
                 StartCoroutine(PreformVisceralAttack(enemyCollider));					
                 StopCoroutine(_visceralCo);            
@@ -274,8 +298,15 @@ public class Player : MonoBehaviour
 		transform.GetChild(5).GetComponent<VisceralAttack>().SetAttackActive();
 
         yield return new WaitForSeconds(_timePreformingAttack); // wait to finish attack, will be timed on attack animation	
-		
-		Destroy(enemyCollider.gameObject); //destroy enemy you attacked (maybe can do different things depending on the type of enemy and tag later on)			
+
+        if (_isLockedOn)
+        {
+            _lockables.Remove(enemyCollider);
+            _currentLockOnID = 0;
+            _isLockedOn = false;
+        }
+
+        Destroy(enemyCollider.gameObject); //destroy enemy you attacked (maybe can do different things depending on the type of enemy and tag later on)			
 		GameObject deathParticle = Instantiate(_visceralAttackParticle, enemyCollider.transform.position, _visceralAttackParticle.transform.rotation);
 		Destroy(deathParticle.gameObject, 3);
 
@@ -360,7 +391,68 @@ public class Player : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(transform.forward * _attackMomentum);
     }
 
-	
+	void LockOnEnemy()
+    {
+
+        if (_lockables.Count == 0)
+            _isLockedOn = false;
+
+
+        if (Input.GetButtonDown("R3") && !_inVisceralAttack)
+        {
+             if (_lockables.Count > 0)
+                _isLockedOn = !_isLockedOn;
+             else
+                _isLockedOn = false;       
+             
+             if(_isLockedOn)
+                _currentLockOnID = 0;
+        }
+
+        _changeTargetTimer += Time.deltaTime;
+
+
+        if (_isLockedOn)
+        {
+            if(Input.GetAxisRaw("RightStickHorizontal") > 0 && _currentLockOnID < _lockables.Count - 1 && _changeTargetTimer > _changeTargetDelay)
+            {
+                _currentLockOnID++;
+                _changeTargetTimer = 0;
+
+            }                           
+            if (Input.GetAxisRaw("RightStickHorizontal") < 0 && _currentLockOnID > 0 && _changeTargetTimer > _changeTargetDelay)
+            {
+                _currentLockOnID--;
+                _changeTargetTimer = 0;
+            }
+              
+
+
+            if (_lockables.Count > 0)
+            {
+                for (int i = 0; i < _lockables.Count; i++)
+                {
+                    if(i == _currentLockOnID)
+                    {
+                        _lockables[i].GetComponent<Renderer>().material.color = Color.white;
+                    }
+                    else
+                        _lockables[i].GetComponent<Renderer>().material.color = Color.black;
+                }              
+            }
+        }
+        else
+        {
+            for (int i = 0; i < _lockables.Count; i++)
+                _lockables[i].GetComponent<Renderer>().material.color = Color.black;
+        }      
+            
+
+
+            
+              
+
+    }
 
 
 }

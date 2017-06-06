@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 114656138197327930}
   - component: {fileID: 54146441073323510}
   - component: {fileID: 114873037437035018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shielder
   m_TagString: Shielder
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1291697665190284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.41, y: 1.5, z: -7.8}
+  m_LocalPosition: {x: 2.3750587, y: 2.07, z: 39.480675}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4206234534961232}
@@ -235,7 +235,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1393746998791326}
-  m_Mesh: {fileID: 4300000, guid: 7d2f6e2e7e1b945498832c88d9079f80, type: 3}
+  m_Mesh: {fileID: 4300000, guid: cd0a3ed1ad558d349a0b66a6508ca6d4, type: 3}
 --- !u!54 &54146441073323510
 Rigidbody:
   m_ObjectHideFlags: 1
