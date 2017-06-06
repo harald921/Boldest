@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -53,18 +54,23 @@ public class Player : MonoBehaviour
     int _currentLockOnID = 0;
     bool _isLockedOn = false;
     float _changeTargetTimer = 0;
-    [SerializeField]float _changeTargetDelay = 0.3f;
+    [SerializeField]float _changeTargetDelay = 0.3f;  
+    public Image _bull;
+    
+    
+    
 				
 
 	void Start()
 	{
-		_dashAnimator = transform.GetChild(3).GetComponent<Animator>();		
+		_dashAnimator = transform.GetChild(3).GetComponent<Animator>();
+        _bull.gameObject.SetActive(false);
 	}
 
     private void Update()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+                     
         LockOnEnemy();
 
         //can only controll player if not in dash or in the middle of chain attacks
@@ -299,12 +305,11 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(_timePreformingAttack); // wait to finish attack, will be timed on attack animation	
 
-        if (_isLockedOn)
-        {
+       
             _lockables.Remove(enemyCollider);
             _currentLockOnID = 0;
             _isLockedOn = false;
-        }
+        
 
         Destroy(enemyCollider.gameObject); //destroy enemy you attacked (maybe can do different things depending on the type of enemy and tag later on)			
 		GameObject deathParticle = Instantiate(_visceralAttackParticle, enemyCollider.transform.position, _visceralAttackParticle.transform.rotation);
@@ -414,7 +419,9 @@ public class Player : MonoBehaviour
 
         if (_isLockedOn)
         {
-            if(Input.GetAxisRaw("RightStickHorizontal") > 0 && _currentLockOnID < _lockables.Count - 1 && _changeTargetTimer > _changeTargetDelay)
+            _bull.gameObject.SetActive(true);
+
+            if (Input.GetAxisRaw("RightStickHorizontal") > 0 && _currentLockOnID < _lockables.Count - 1 && _changeTargetTimer > _changeTargetDelay)
             {
                 _currentLockOnID++;
                 _changeTargetTimer = 0;
@@ -434,23 +441,20 @@ public class Player : MonoBehaviour
                 {
                     if(i == _currentLockOnID)
                     {
-                        _lockables[i].GetComponent<Renderer>().material.color = Color.white;
+                        _bull.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, _lockables[i].transform.position);
                     }
-                    else
-                        _lockables[i].GetComponent<Renderer>().material.color = Color.black;
+                   
                 }              
             }
         }
         else
-        {
-            for (int i = 0; i < _lockables.Count; i++)
-                _lockables[i].GetComponent<Renderer>().material.color = Color.black;
-        }      
-            
+            _bull.gameObject.SetActive(false);
 
 
-            
-              
+
+
+
+
 
     }
 
