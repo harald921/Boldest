@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
 
     //bow stuff
     [HideInInspector] public bool _isBowing = false;
+
+    public List<Collider> _lockables;
 				
 
 	void Start()
