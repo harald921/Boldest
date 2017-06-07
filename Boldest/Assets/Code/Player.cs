@@ -311,12 +311,8 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(_timePreformingAttack); // wait to finish attack, will be timed on attack animation	
 
-       
-            _lockables.Remove(enemyCollider);
-            _currentLockOnID = 0;
-            _isLockedOn = false;
-        
-
+        RemoveEnemyFromList(enemyCollider);
+                             
         Destroy(enemyCollider.gameObject); //destroy enemy you attacked (maybe can do different things depending on the type of enemy and tag later on)			
 		GameObject deathParticle = Instantiate(_visceralAttackParticle, enemyCollider.transform.position, _visceralAttackParticle.transform.rotation);
 		Destroy(deathParticle.gameObject, 3);
