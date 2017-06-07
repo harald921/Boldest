@@ -11,16 +11,23 @@ public class FollowCamera : MonoBehaviour
 
     Vector3 _velocity = Vector3.zero;
 
+	
+
     void Start()
     {
         _playerGO = GameObject.Find("Player");
-        _posOffset = transform.position;
+		_posOffset = transform.position;
+        
     }
 
     void Update()
     {
         Vector3 targetPosition = new Vector3((_playerGO.transform.position + _posOffset).x, transform.position.y, (_playerGO.transform.position + _posOffset).z);
-
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity, _interpolationSpeed);
+
+
+		
     }
+
+	
 }

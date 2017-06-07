@@ -12,11 +12,13 @@ public class EnemyRusher : MonoBehaviour
     bool _isInvurnerable = false;
 
     NavMeshAgent _navMeshAgent;
+    Player _player;
 
     private void Start()
     {
         _defaultColor = GetComponent<MeshRenderer>().material.color;
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _player = FindObjectOfType<Player>();
     }
 
 
@@ -28,7 +30,7 @@ public class EnemyRusher : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Weapon>())
+        if (other.tag == "Sword" )
         {
             Vector3 attackerToMeDirection = transform.position - other.transform.parent.position;
 
@@ -51,7 +53,11 @@ public class EnemyRusher : MonoBehaviour
         _health += inHealthModifier;
 
         if (_health < 0)
+        {           
+            _player.RemoveEnemyFromList(GetComponent<Collider>());
             Destroy(gameObject);
+        }
+           
 
         StartCoroutine(DamageFlash());
     }
@@ -85,8 +91,6 @@ public class EnemyRusher : MonoBehaviour
             float flashLerpValue = Mathf.InverseLerp(0, flashDuration, timer);
 
             GetComponent<MeshRenderer>().material.color = Color.Lerp(_defaultColor, Color.red, flashLerpValue);
-
-            Debug.Log(GetComponent<MeshRenderer>().material.color);
 
             yield return null;
         }

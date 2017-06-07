@@ -10,8 +10,11 @@ public class Bow : MonoBehaviour
     [SerializeField] float _drawSpeed                = 1.0f;
                      float _currentDraw              = 0.0f;
     [SerializeField] float _drawToVelocityMultiplier = 1.0f;
+    [SerializeField] float _aimSpeed                 = 1.0f;
 
     bool _isDrawingBow = false;
+
+	public bool _camera2 = false;
 
     public void DrawBow()
     {
@@ -24,6 +27,8 @@ public class Bow : MonoBehaviour
     {
         _isDrawingBow = false;
         SetBowVisibility(false);
+        GetComponentInParent<Player>()._isBowing = false;
+
     }
 
     void FireProjectile()
@@ -41,16 +46,57 @@ public class Bow : MonoBehaviour
     {
         SetBowVisibility(true);
         _isDrawingBow = true;
+        GetComponentInParent<Player>()._isBowing = true;
 
         while (_isDrawingBow)
         {
-            _currentDraw += _drawSpeed * Time.deltaTime;
+			if (!_camera2)
+			{
+				_currentDraw += _drawSpeed * Time.deltaTime;
 
-            if (_currentDraw > _maxDraw)
-                _currentDraw = _maxDraw;
+				if (_currentDraw > _maxDraw)
+					_currentDraw = _maxDraw;
 
-            yield return null;
-        }
+				//aim bow, if stick input set _lastMovementVector in player to the stick input(avoids snapping back to last known direction after fire) and move the player rotation accordingly
+				Vector3 leftStick = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+				if (Mathf.Abs(leftStick.x) > 0 || Mathf.Abs(leftStick.z) > 0)
+					GetComponentInParent<Player>()._lastMovementVector = leftStick;
+
+				transform.parent.forward = GetComponentInParent<Player>()._lastMovementVector;
+
+				if (Input.GetButtonUp("BowButton"))
+					ReleaseString();
+
+
+				yield return null;
+			}
+
+			if (_camera2)
+			{
+				_currentDraw += _drawSpeed * Time.deltaTime;
+
+				if (_currentDraw > _maxDraw)
+					_currentDraw = _maxDraw;
+
+				//aim bow, if stick input set _lastMovementVector in player to the stick input(avoids snapping back to last known direction after fire) and move the player rotation accordingly
+				Vector3 leftStick = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+				DynamicAngleCamera cam2 = FindObjectOfType<DynamicAngleCamera>();
+				leftStick = (leftStick.x * cam2.transform.right) + (leftStick.z * cam2._orientationVector);
+				leftStick.Normalize();
+
+				if (Mathf.Abs(leftStick.x) > 0 || Mathf.Abs(leftStick.z) > 0)
+					GetComponentInParent<Player>()._lastMovementVector = leftStick;
+
+				transform.parent.forward = GetComponentInParent<Player>()._lastMovementVector;
+
+				if (Input.GetButtonUp("BowButton"))
+					ReleaseString();
+
+
+				yield return null;
+			}
+
+		}
 
         FireProjectile();
     }
