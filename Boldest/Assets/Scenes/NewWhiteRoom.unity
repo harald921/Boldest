@@ -1967,7 +1967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _moveSpeed: 320
-  _turnSpeed: 20
+  _turnSpeed: 40
   _useController: 1
   _gravityPower: 200
   _lastMovementVector: {x: 0, y: 0, z: 0}

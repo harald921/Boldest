@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
         LockOnEnemy();
 
         //can only controll player if not in dash or in the middle of chain attacks
-        if (!_isDashing && !_inVisceralAttack && !_inKnockBack && !_isBowing)
+        if (!_isDashing && !_inVisceralAttack && !_inKnockBack && !_isBowing && _attackTimer > _attackCoolDown)
         {
             HandleMovement();
             HandleAttackInput();
