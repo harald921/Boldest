@@ -53,8 +53,8 @@ public class EnemyRusher : MonoBehaviour
         _health += inHealthModifier;
 
         if (_health < 0)
-        {
-            _player._lockables.Remove(GetComponent<Collider>());
+        {           
+            _player.RemoveEnemyFromList(GetComponent<Collider>());
             Destroy(gameObject);
         }
            

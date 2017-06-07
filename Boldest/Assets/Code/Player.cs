@@ -448,12 +448,30 @@ public class Player : MonoBehaviour
         }
         else
             _bull.gameObject.SetActive(false);
+   }
 
+    public void RemoveEnemyFromList(Collider other)
+    {
+        //if exiting collider is the target then exit target mode and set target to index 0 to avoid out of range indexing
+        if (other == _lockables[_currentLockOnID])
+        {
+            _isLockedOn = false;
+            _currentLockOnID = 0;
+            _lockables.Remove(other);
+            return;
+        }
 
+        // find if the exiting collider is before or after the target in the list(if before, decrement the current locked on id by 1 )
+        for (int i = 0; i < _lockables.Count; i++)
+        {
+            if (other == _lockables[i])
+            {
+                if (i < _currentLockOnID)
+                    _currentLockOnID--;
 
-
-
-
+            }
+        }
+        _lockables.Remove(other);
 
     }
 
