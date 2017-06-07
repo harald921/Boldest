@@ -46,6 +46,7 @@ public class EnemyRusher : MonoBehaviour
             TryKnockBack(attackerToMeDirection.normalized * 500);
 
             ModifyHealth(-34.0f);
+            Destroy(other.gameObject);
         }
         
 

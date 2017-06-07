@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
        
     //bow stuff
     [HideInInspector] public bool _isBowing = false;
+    [SerializeField] float _speedMultiOnBowing = 1.0f;
 
     //lock On stuff
     public List<Collider> _lockables;
@@ -70,7 +71,7 @@ public class Player : MonoBehaviour
         LockOnEnemy();
 
         //can only controll player if not in dash or in the middle of chain attacks
-        if (!_isDashing && !_inVisceralAttack && !_inKnockBack && !_isBowing && _attackTimer > _attackCoolDown)
+        if (!_isDashing && !_inVisceralAttack && !_inKnockBack && _attackTimer > _attackCoolDown)
         {
             HandleMovement();
             HandleAttackInput();
@@ -90,7 +91,11 @@ public class Player : MonoBehaviour
     {
 		if (!_isDashing && !_inVisceralAttack)
 		{
-			GetComponent<Rigidbody>().AddForce(new Vector3((_movementVector.normalized.x * _moveSpeed) * _acceleration, -_gravityPower, (_movementVector.normalized.z * _moveSpeed) * _acceleration));        
+            float speedMulti = 1.0f;
+            if (_isBowing)
+                speedMulti = _speedMultiOnBowing;
+
+			GetComponent<Rigidbody>().AddForce(new Vector3(((_movementVector.normalized.x * _moveSpeed) * _acceleration) * speedMulti, -_gravityPower, ((_movementVector.normalized.z * _moveSpeed) * _acceleration) * speedMulti));        
             _movementVector = Vector3.zero;
 
 		}

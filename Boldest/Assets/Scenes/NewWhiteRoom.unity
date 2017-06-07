@@ -1988,6 +1988,7 @@ MonoBehaviour:
     type: 2}
   _swipeLenght: 0.15
   _isBowing: 0
+  _speedMultiOnBowing: 0.5
   _lockables: []
   _currentLockOnID: 0
   _isLockedOn: 0
