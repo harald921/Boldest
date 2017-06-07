@@ -1989,7 +1989,7 @@ MonoBehaviour:
   _swipeLenght: 0.15
   _dash1: 0
   _dash2: 1
-  _camera2: 1
+  _camera2: 0
   _isBowing: 0
   _lockables: []
   _currentLockOnID: 0
@@ -2974,15 +2974,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4422436235229706, guid: 057a25137b2c4334eba5ff3f968dff75, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.668824
+      value: 0.69
       objectReference: {fileID: 0}
     - target: {fileID: 4422436235229706, guid: 057a25137b2c4334eba5ff3f968dff75, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 11.34
+      value: 21.76
       objectReference: {fileID: 0}
     - target: {fileID: 4422436235229706, guid: 057a25137b2c4334eba5ff3f968dff75, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 9.934569
+      value: -7.26
       objectReference: {fileID: 0}
     - target: {fileID: 4422436235229706, guid: 057a25137b2c4334eba5ff3f968dff75, type: 2}
       propertyPath: m_LocalRotation.x
@@ -8277,7 +8277,7 @@ Prefab:
     - target: {fileID: 114440834523449766, guid: 110ad7a0b5a03294aae15828986c9647,
         type: 2}
       propertyPath: _camera2
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 110ad7a0b5a03294aae15828986c9647, type: 2}
