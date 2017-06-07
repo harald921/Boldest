@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     public float _attackMomentum;
     public float _attackCoolDown;
     float _attackTimer = 0;
+    public GameObject _swordSwipe;
+    public float _swipeLenght = 0.2f;
    
 
     //different dashes for testing
@@ -159,7 +161,11 @@ public class Player : MonoBehaviour
                 if(_attackTimer >= _attackCoolDown)
                 {
                     _attackTimer = 0;
-                    transform.GetChild(1).GetComponent<Weapon>().TryAttack();
+                //transform.GetChild(1).GetComponent<Weapon>().TryAttack();
+                GameObject swipe = Instantiate(_swordSwipe, transform.position + (transform.forward * 1.5f), transform.rotation * _swordSwipe.transform.rotation);
+                swipe.transform.parent = transform;
+                
+                Destroy(swipe.gameObject, _swipeLenght);
                     AttackForce();
                 }
                

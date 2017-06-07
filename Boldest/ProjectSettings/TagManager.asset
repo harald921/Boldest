@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shielder
   - Bird
+  - Sword
   layers:
   - Default
   - TransparentFX

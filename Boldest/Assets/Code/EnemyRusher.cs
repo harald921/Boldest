@@ -30,7 +30,7 @@ public class EnemyRusher : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Weapon>())
+        if (other.tag == "Sword" )
         {
             Vector3 attackerToMeDirection = transform.position - other.transform.parent.position;
 
