@@ -1987,9 +1987,6 @@ MonoBehaviour:
   _swordSwipe: {fileID: 1624181626547754, guid: 03d5e5af344552b45b7fe2c55d6299a3,
     type: 2}
   _swipeLenght: 0.15
-  _dash1: 0
-  _dash2: 1
-  _camera2: 0
   _isBowing: 0
   _lockables: []
   _currentLockOnID: 0
