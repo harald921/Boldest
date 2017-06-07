@@ -107,7 +107,7 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-  m_NavMeshData: {fileID: 23800000, guid: 1789ccbc7dec0794a91a6dd4d4a76c0e, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 3321ad45623ddee4c9b3980b7a5466dc, type: 2}
 --- !u!1 &39982314
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +278,14 @@ Prefab:
     - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526210796810746, guid: b15a382c461bba1489d41acee6c51775, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b15a382c461bba1489d41acee6c51775, type: 2}
@@ -1978,7 +1986,7 @@ MonoBehaviour:
   _attackCoolDown: 0.2
   _swordSwipe: {fileID: 1624181626547754, guid: 03d5e5af344552b45b7fe2c55d6299a3,
     type: 2}
-  _swipeLenght: 0.1
+  _swipeLenght: 0.15
   _dash1: 0
   _dash2: 1
   _camera2: 1
@@ -2220,6 +2228,14 @@ Prefab:
     - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526210796810746, guid: b15a382c461bba1489d41acee6c51775, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b15a382c461bba1489d41acee6c51775, type: 2}
