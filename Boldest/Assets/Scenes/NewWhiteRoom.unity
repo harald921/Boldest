@@ -1967,11 +1967,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _moveSpeed: 320
-  _turnSpeed: 40
+  _turnSpeed: 25
   _useController: 1
   _gravityPower: 200
   _lastMovementVector: {x: 0, y: 0, z: 0}
-  _accelerationSpeed: 1
+  _accelerationSpeed: 5
   _dashDuration: 0.27
   _dashSpeed: 800
   _dashCoolDown: 0.5
@@ -1982,7 +1982,7 @@ MonoBehaviour:
     type: 2}
   _dashParticle: {fileID: 960698477}
   _knockBackForce: 3000
-  _attackMomentum: 2000
+  _attackMomentum: 2500
   _attackCoolDown: 0.2
   _swordSwipe: {fileID: 1624181626547754, guid: 03d5e5af344552b45b7fe2c55d6299a3,
     type: 2}
