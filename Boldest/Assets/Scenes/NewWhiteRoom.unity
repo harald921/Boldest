@@ -1981,7 +1981,7 @@ MonoBehaviour:
     type: 2}
   _swipeLenght: 0.15
   _isBowing: 0
-  _speedMultiOnBowing: 0.5
+  _speedMultiOnBowing: 0.65
   _lockables: []
   _currentLockOnID: 0
   _isLockedOn: 0
@@ -2994,6 +2994,11 @@ Prefab:
     - target: {fileID: 4422436235229706, guid: 057a25137b2c4334eba5ff3f968dff75, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114447069912804130, guid: 057a25137b2c4334eba5ff3f968dff75,
+        type: 2}
+      propertyPath: _interpolationSpeed
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 057a25137b2c4334eba5ff3f968dff75, type: 2}
