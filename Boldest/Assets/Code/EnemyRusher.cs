@@ -30,15 +30,29 @@ public class EnemyRusher : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Sword" )
+        if (other.tag == "Sword")
         {
             Vector3 attackerToMeDirection = transform.position - other.transform.parent.position;
 
-            TryKnockBack(attackerToMeDirection.normalized * 500);
+            //TryKnockBack(attackerToMeDirection.normalized * 500);
 
             ModifyHealth(-34.0f);
-        }							
-	}
+        }
+
+        if (other.tag == "Arrow")
+        {
+            Vector3 attackerToMeDirection = transform.position - other.transform.position;
+
+            //TryKnockBack(attackerToMeDirection.normalized * 500);
+
+            ModifyHealth(-34.0f);
+            Destroy(other.gameObject);
+        }
+        
+
+
+
+    }
 
     public void TryKnockBack(Vector3 inVelocity)
     {

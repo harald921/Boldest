@@ -41,15 +41,10 @@ public class Player : MonoBehaviour
     float _attackTimer = 0;
     public GameObject _swordSwipe;
     public float _swipeLenght = 0.2f;
-   
-
-    //different dashes for testing
-    public bool _dash1;
-    public bool _dash2;
-	public bool _camera2 = false;
-
+       
     //bow stuff
     [HideInInspector] public bool _isBowing = false;
+    [SerializeField] float _speedMultiOnBowing = 1.0f;
 
     //lock On stuff
     public List<Collider> _lockables;
@@ -76,7 +71,7 @@ public class Player : MonoBehaviour
         LockOnEnemy();
 
         //can only controll player if not in dash or in the middle of chain attacks
-        if (!_isDashing && !_inVisceralAttack && !_inKnockBack && !_isBowing && _attackTimer > _attackCoolDown)
+        if (!_isDashing && !_inVisceralAttack && !_inKnockBack && _attackTimer > _attackCoolDown)
         {
             HandleMovement();
             HandleAttackInput();
@@ -96,21 +91,21 @@ public class Player : MonoBehaviour
     {
 		if (!_isDashing && !_inVisceralAttack)
 		{
-			GetComponent<Rigidbody>().AddForce(new Vector3((_movementVector.normalized.x * _moveSpeed) * _acceleration, -_gravityPower, (_movementVector.normalized.z * _moveSpeed) * _acceleration));        
+            float speedMulti = 1.0f;
+            if (_isBowing)
+                speedMulti = _speedMultiOnBowing;
+
+			GetComponent<Rigidbody>().AddForce(new Vector3(((_movementVector.normalized.x * _moveSpeed) * _acceleration) * speedMulti, -_gravityPower, ((_movementVector.normalized.z * _moveSpeed) * _acceleration) * speedMulti));        
             _movementVector = Vector3.zero;
 
 		}
-        if(_dash1)
-        HandleDash();
-
-        if(_dash2)
+            
         HandleDash2();
     }
 
     void HandleMovement()
     {
-		if (!_camera2)
-		{
+		
 			_movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 			if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
 				_lastMovementVector = _movementVector;
@@ -124,33 +119,7 @@ public class Player : MonoBehaviour
                 _lastMovementVector = lookVector;
             }
             
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
-		}
-
-		if (_camera2)
-		{
-			DynamicAngleCamera cam2 = FindObjectOfType<DynamicAngleCamera>();
-			Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal") , 0, Input.GetAxisRaw("Vertical"));
-
-			_movementVector = (input.x * cam2.transform.right) + (input.z * cam2._orientationVector);
-
-            if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
-                _lastMovementVector = _movementVector;
-            else
-                _acceleration = 0;
-
-
-            if (_isLockedOn && _lockables.Count > 0)
-            {
-                Vector3 lookVector =  new Vector3( _lockables[_currentLockOnID].transform.position.x,transform.position.y, _lockables[_currentLockOnID].transform.position.z) - transform.position;
-                lookVector.Normalize();
-                _lastMovementVector = lookVector;
-            }
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
-
-		}
-                     
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);				                    
     }
 
     void HandleAttackInput()
@@ -160,16 +129,13 @@ public class Player : MonoBehaviour
             {
                 if(_attackTimer >= _attackCoolDown)
                 {
-                    _attackTimer = 0;
-                //transform.GetChild(1).GetComponent<Weapon>().TryAttack();
+                    _attackTimer = 0;              
                 GameObject swipe = Instantiate(_swordSwipe, transform.position + (transform.forward * 1.5f), transform.rotation * _swordSwipe.transform.rotation);
                 swipe.transform.parent = transform;
                 
                 Destroy(swipe.gameObject, _swipeLenght);
                     AttackForce();
-                }
-               
-
+                }              
             }
             if (Input.GetButtonDown("BowButton"))
             {
@@ -177,48 +143,7 @@ public class Player : MonoBehaviour
             }				
 
     }
-
-
-    void HandleDash()
-    {
-        _dashingTimer -= Time.deltaTime;
-		_dashAnimator.SetBool("dashing", _isDashing);
-
-		if (Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased && !_inVisceralAttack )
-        {
-            _dashingTimer = _dashDuration;
-            _rightTriggerReleased = false;
-
-			// start dashparticle
-			_dashParticle.gameObject.SetActive(true);			
-			_dashParticle.Play();
-        }
-		else if (Input.GetAxisRaw("RightHandTrigger") == 0)
-            _rightTriggerReleased = true;
-
-		if (_dashingTimer > 0 && !_inVisceralAttack)
-		{			
-			Vector3 dashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-			dashDir.Normalize();
-
-			if (Mathf.Abs(dashDir.x) == 0 && Mathf.Abs(dashDir.z) == 0)
-			{
-				_dashingTimer = 0;
-				return;
-			}
-			_isDashing = true;
-			transform.forward = dashDir;
-			GetComponent<Rigidbody>().AddForce(dashDir * _dashSpeed);
-			GetComponent<MeshRenderer>().enabled = false; // don't render player model while dashing
-		}
-		else
-		{
-			_isDashing = false;
-			GetComponent<MeshRenderer>().enabled = true;
-		}            
-
-    }
-
+ 
     void HandleDash2()
     {
         _dashingTimer -= Time.deltaTime;
@@ -317,65 +242,22 @@ public class Player : MonoBehaviour
 		GameObject deathParticle = Instantiate(_visceralAttackParticle, enemyCollider.transform.position, _visceralAttackParticle.transform.rotation);
 		Destroy(deathParticle.gameObject, 3);
 
-        //automaticly set up new dash after finishing attack	
-        if (_dash2)
-        {
-			if (!_camera2)
-			{
-				bool haveDashDirection = true;
-				Vector3 newDashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-				newDashDir.Normalize();
+        //automaticly set up new dash after finishing attack	       		
+		bool haveDashDirection = true;
+		Vector3 newDashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+		newDashDir.Normalize();
 
-				if (newDashDir.x == 0 && newDashDir.z == 0)
-					haveDashDirection = false;
+		if (newDashDir.x == 0 && newDashDir.z == 0)
+			haveDashDirection = false;
 
-				if (haveDashDirection)
-				{
-					transform.forward = newDashDir;
-					_dashingTimer = _dashDuration;
-					_isDashing = true;
-					_dashParticle.Play();
-				}
-				_inVisceralAttack = false;
-
-			}
-
-			if (_camera2)
-			{
-				bool haveDashDirection = true;
-				Vector3 newDashDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-				newDashDir.Normalize();
-
-				if (newDashDir.x == 0 && newDashDir.z == 0)
-					haveDashDirection = false;
-
-				if (haveDashDirection)
-				{
-
-					DynamicAngleCamera cam2 = FindObjectOfType<DynamicAngleCamera>();
-					Vector3 dashWithCamOrientation = (newDashDir.x * cam2.transform.right) + ( newDashDir.z * cam2._orientationVector);
-					dashWithCamOrientation.Normalize();
-
-					transform.forward = dashWithCamOrientation;
-					_dashingTimer = _dashDuration;
-					_isDashing = true;
-					_dashParticle.Play();
-				}
-				_inVisceralAttack = false;
-
-			}
-
-
+		if (haveDashDirection)
+		{
+			transform.forward = newDashDir;
+			_dashingTimer = _dashDuration;
+			_isDashing = true;
+			_dashParticle.Play();
 		}
-
-        if (_dash1)
-        {
-            _dashingTimer = _dashDuration;
-            _isDashing = true;
-            _inVisceralAttack = false;         
-            _dashParticle.Play();           
-        }
-        
+		_inVisceralAttack = false;				             
 
 	}
 
@@ -431,7 +313,7 @@ public class Player : MonoBehaviour
             }			
 			if (Input.GetAxisRaw("RightStickHorizontal") < 0 && _currentLockOnID > 0 && _changeTargetTimer > _changeTargetDelay)
             {
-				float kk = Input.GetAxisRaw("RightStickHorizontal");
+				
 				_currentLockOnID--;
                 _changeTargetTimer = 0;
             }

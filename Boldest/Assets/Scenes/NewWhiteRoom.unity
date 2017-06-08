@@ -277,14 +277,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526210796810746, guid: b15a382c461bba1489d41acee6c51775, type: 2}
-      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -335,7 +327,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b15a382c461bba1489d41acee6c51775, type: 2}
@@ -1967,11 +1959,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _moveSpeed: 320
-  _turnSpeed: 40
+  _turnSpeed: 25
   _useController: 1
   _gravityPower: 200
   _lastMovementVector: {x: 0, y: 0, z: 0}
-  _accelerationSpeed: 1
+  _accelerationSpeed: 5
   _dashDuration: 0.27
   _dashSpeed: 800
   _dashCoolDown: 0.5
@@ -1982,15 +1974,13 @@ MonoBehaviour:
     type: 2}
   _dashParticle: {fileID: 960698477}
   _knockBackForce: 3000
-  _attackMomentum: 2000
+  _attackMomentum: 2500
   _attackCoolDown: 0.2
   _swordSwipe: {fileID: 1624181626547754, guid: 03d5e5af344552b45b7fe2c55d6299a3,
     type: 2}
   _swipeLenght: 0.15
-  _dash1: 0
-  _dash2: 1
-  _camera2: 1
   _isBowing: 0
+  _speedMultiOnBowing: 0.5
   _lockables: []
   _currentLockOnID: 0
   _isLockedOn: 0
@@ -2227,7 +2217,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1526210796810746, guid: b15a382c461bba1489d41acee6c51775, type: 2}
       propertyPath: m_StaticEditorFlags
@@ -2525,7 +2515,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4370e86f5b6d815438df7e6769078394, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8bf48ccc391338c4d8061d2950ad5c41, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2974,15 +2964,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4422436235229706, guid: 057a25137b2c4334eba5ff3f968dff75, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.668824
+      value: 0.69
       objectReference: {fileID: 0}
     - target: {fileID: 4422436235229706, guid: 057a25137b2c4334eba5ff3f968dff75, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 11.34
+      value: 21.76
       objectReference: {fileID: 0}
     - target: {fileID: 4422436235229706, guid: 057a25137b2c4334eba5ff3f968dff75, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 9.934569
+      value: -7.26
       objectReference: {fileID: 0}
     - target: {fileID: 4422436235229706, guid: 057a25137b2c4334eba5ff3f968dff75, type: 2}
       propertyPath: m_LocalRotation.x
@@ -8277,7 +8267,7 @@ Prefab:
     - target: {fileID: 114440834523449766, guid: 110ad7a0b5a03294aae15828986c9647,
         type: 2}
       propertyPath: _camera2
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 110ad7a0b5a03294aae15828986c9647, type: 2}
