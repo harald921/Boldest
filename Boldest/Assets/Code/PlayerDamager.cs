@@ -16,6 +16,11 @@ public class PlayerDamager : MonoBehaviour
         if(other.tag == "Player")
         {
             other.GetComponent<Player>().ModifyHealth(-_damageToGive);
+            Vector3 dir = other.transform.position - transform.position;
+            dir.Normalize();
+
+            other.GetComponent<Player>().StartCoroutine(other.GetComponent<Player>().KnockBack(dir));
+
         }
     }
 

@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 33012789262632534}
   - component: {fileID: 65793256747955992}
   - component: {fileID: 23502916128497198}
+  - component: {fileID: 114757310203700732}
   m_Layer: 0
   m_Name: DamageArea
   m_TagString: Untagged
@@ -129,8 +130,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1908475231024440}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7632942, y: -0.5799999, z: 2.4528835}
-  m_LocalScale: {x: 1.525826, y: 0.5078105, z: 3.6440659}
+  m_LocalPosition: {x: 0.56, y: -0.5799999, z: 2}
+  m_LocalScale: {x: 1.1100217, y: 0.5078105, z: 2.7296727}
   m_Children: []
   m_Father: {fileID: 4558819797584172}
   m_RootOrder: 3
@@ -221,7 +222,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1908475231024440}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -470,6 +471,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hardCollider: {fileID: 136199793594270540}
+--- !u!114 &114757310203700732
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1908475231024440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2678b9f17a9aadd48ba196668e28f411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageToGive: 15
 --- !u!114 &114795459887783190
 MonoBehaviour:
   m_ObjectHideFlags: 1

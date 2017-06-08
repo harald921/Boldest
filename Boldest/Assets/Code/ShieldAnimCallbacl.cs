@@ -29,6 +29,11 @@ public class ShieldAnimCallbacl : MonoBehaviour
         _parent.AttackMomentum();
     }
 
+    void OnSwordDamage()
+    {
+
+        _parent._damager.gameObject.SetActive(true);
+    }
 
    
 

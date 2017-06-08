@@ -106,8 +106,7 @@ public class Shielder : MonoBehaviour
     {
         _inSwordSwing = true;
         _rigidBody.AddForce(transform.forward * _attackForce);
-        _damager.gameObject.SetActive(true);
-
+        
     }
 
 

@@ -255,7 +255,7 @@ public class Player : MonoBehaviour
 
 	}
 
-	IEnumerator KnockBack(Vector3 inDirection)
+	public IEnumerator KnockBack(Vector3 inDirection)
 	{
 		_inKnockBack = true;
 		GetComponent<Rigidbody>().AddForce(inDirection * _knockBackForce);
@@ -377,9 +377,7 @@ public class Player : MonoBehaviour
             
             //Vector3 dirFromEnemy = transform.position - collision.transform.position;
             //dirFromEnemy.Normalize();
-
             //StartCoroutine(KnockBack(new Vector3(dirFromEnemy.x, 0, dirFromEnemy.z)));
-
             //ModifyHealth(-25.0f);
         }
     }
