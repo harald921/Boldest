@@ -8,6 +8,7 @@ TagManager:
   - Bird
   - Sword
   - Arrow
+  - Shield
   layers:
   - Default
   - TransparentFX

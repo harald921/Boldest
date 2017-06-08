@@ -16,8 +16,20 @@ public class ShieldAnimCallbacl : MonoBehaviour
     void AnimationDone()
     {
         GetComponent<Animator>().SetBool("Attack", false);
+        _parent._recuperateTimer = 0;
+        _parent._isAttacking = false;
+        _parent._inSwordSwing = false;
+        _parent._damager.gameObject.SetActive(false);
 
     }
 
-    
+    void SwordSwing()
+    {
+
+        _parent.AttackMomentum();
+    }
+
+
+   
+
 }

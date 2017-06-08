@@ -30,12 +30,14 @@ public class Player : MonoBehaviour
 
 	//settings for visceral attack
 	[SerializeField] float _timeWindowToAttack;
-    [SerializeField] float _timePreformingAttack; // will later be controlled by animation I guess
+    [SerializeField] float _timePreformingAttack; 
 	[SerializeField] GameObject _visceralAttackParticle;
 	[SerializeField] ParticleSystem _dashParticle;
 	[SerializeField] float _knockBackForce;
 	bool _inVisceralAttack = false;
 	Coroutine _visceralCo;
+    public GameObject _attackEffect;
+    
 
     //sword attack stuff
     public float _attackMomentum;
@@ -209,7 +211,9 @@ public class Player : MonoBehaviour
                     enemyCollider.GetComponentInParent<Bird>()._move = false;
 
                 }
-                              
+
+                GameObject effect = Instantiate(_attackEffect, enemyCollider.transform.position + new Vector3(0,3,0), Quaternion.identity);
+                Destroy(effect, _timePreformingAttack);
                 failedAttack = false;
                 StartCoroutine(PreformVisceralAttack(enemyCollider));					
                 StopCoroutine(_visceralCo);            
@@ -222,8 +226,7 @@ public class Player : MonoBehaviour
 
     IEnumerator PreformVisceralAttack(Collider enemyCollider)
     {
-		// play attack animation
-		transform.GetChild(5).GetComponent<VisceralAttack>().SetAttackActive();
+		
 
         yield return new WaitForSeconds(_timePreformingAttack); // wait to finish attack, will be timed on attack animation	
 
@@ -355,8 +358,11 @@ public class Player : MonoBehaviour
         _health += inHealthModifier;
 
         if (_health <= 0)
+        {
             transform.position = new Vector3(0, 0, 0);
-
+            _health = 100;
+        }
+      
         if (inHealthModifier < 0)
             StartCoroutine(DamageFlash());
     }
@@ -368,12 +374,13 @@ public class Player : MonoBehaviour
             if (_isDashing || _inKnockBack)
                 return;
 
-            Vector3 dirFromEnemy = transform.position - collision.transform.position;
-            dirFromEnemy.Normalize();
+            
+            //Vector3 dirFromEnemy = transform.position - collision.transform.position;
+            //dirFromEnemy.Normalize();
 
-            StartCoroutine(KnockBack(new Vector3(dirFromEnemy.x, 0, dirFromEnemy.z)));
+            //StartCoroutine(KnockBack(new Vector3(dirFromEnemy.x, 0, dirFromEnemy.z)));
 
-            ModifyHealth(-25.0f);
+            //ModifyHealth(-25.0f);
         }
     }
 
