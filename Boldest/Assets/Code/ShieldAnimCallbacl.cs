@@ -16,6 +16,7 @@ public class ShieldAnimCallbacl : MonoBehaviour
     void AnimationDone()
     {
         GetComponent<Animator>().SetBool("Attack", false);
+        _parent._isAttacking = false;
 
     }
 

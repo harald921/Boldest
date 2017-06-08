@@ -13,20 +13,21 @@ public class Shielder : MonoBehaviour
     float _playerDistance;
     public float _awakeDistance;
     public float _attackDistance;
-    bool _isAttacking = false;
+    public bool _isAttacking = false;
        
     float _stateChange = 0;
     NavMeshAgent _agent;
+    Rigidbody _rigidBody;
     
     
 
     void Start()
     {
         _player = FindObjectOfType<Player>();
+        _rigidBody = GetComponent<Rigidbody>();
         _shieldAnim = transform.GetChild(0).GetComponent<Animator>();
         _swordAnim = transform.GetChild(1).GetComponent<Animator>();
-        _agent = GetComponent<NavMeshAgent>();
-        _agent.SetDestination(_player.transform.position);
+        _agent = GetComponent<NavMeshAgent>();      
         _agent.enabled = false;
     }
 
@@ -40,15 +41,18 @@ public class Shielder : MonoBehaviour
 
         _stateChange += Time.deltaTime;
        
-        if(_playerDistance < _awakeDistance)
+        if(_playerDistance < _awakeDistance && !_isAttacking)
         {
             _agent.enabled = true;
+            _rigidBody.isKinematic = true;
             _agent.SetDestination(_player.transform.position);
 
         }
         else
         {
             _agent.enabled = false;
+            _rigidBody.isKinematic = false;
+
         }
         
         
@@ -72,6 +76,7 @@ public class Shielder : MonoBehaviour
             _shieldAnim.SetBool("Attack", true);
             _swordAnim.SetBool("Attack", true);
             _stateChange = 0;
+            _isAttacking = true;
         }
 
     }
