@@ -355,7 +355,7 @@ public class Player : MonoBehaviour
         _health += inHealthModifier;
 
         if (_health <= 0)
-            Destroy(gameObject);
+            transform.position = new Vector3(0, 0, 0);
 
         if (inHealthModifier < 0)
             StartCoroutine(DamageFlash());
