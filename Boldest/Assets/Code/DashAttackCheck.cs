@@ -24,7 +24,7 @@ public class DashAttackCheck : MonoBehaviour
 			if (player._isDashing)
 			{
 				Physics.IgnoreCollision(other, _hardCollider, true);
-				player.visceralAttackWindow(GetComponent<Collider>());
+				player.VisceralAttackWindow(GetComponent<Collider>());
 			}
                
 
