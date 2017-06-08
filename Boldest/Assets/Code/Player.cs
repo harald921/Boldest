@@ -252,7 +252,7 @@ public class Player : MonoBehaviour
 
 	}
 
-	IEnumerator KnockBack(Vector3 inDirection)
+	public IEnumerator KnockBack(Vector3 inDirection)
 	{
 		_inKnockBack = true;
 		GetComponent<Rigidbody>().AddForce(inDirection * _knockBackForce);
@@ -350,7 +350,7 @@ public class Player : MonoBehaviour
 
     }
 
-    void ModifyHealth(float inHealthModifier)
+    public void ModifyHealth(float inHealthModifier)
     {
         _health += inHealthModifier;
 

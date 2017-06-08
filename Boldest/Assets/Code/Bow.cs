@@ -6,15 +6,15 @@ public class Bow : MonoBehaviour
 {
     [SerializeField] GameObject _projectile;
 
-    [SerializeField] float _maxDraw                  = 1.0f;
-    [SerializeField] float _drawSpeed                = 1.0f;
-                     float _currentDraw              = 0.0f;
+    [SerializeField] float _maxDraw = 1.0f;
+    [SerializeField] float _drawSpeed = 1.0f;
+    float _currentDraw = 0.0f;
     [SerializeField] float _drawToVelocityMultiplier = 1.0f;
-    [SerializeField] float _aimSpeed                 = 1.0f;
+    [SerializeField] float _aimSpeed = 1.0f;
 
     bool _isDrawingBow = false;
 
-	
+
 
     public void DrawBow()
     {
@@ -27,8 +27,9 @@ public class Bow : MonoBehaviour
     {
         _isDrawingBow = false;
         SetBowVisibility(false);
-        GetComponentInParent<Player>()._isBowing = false;
 
+        if (transform.parent.GetComponent<Player>())
+            GetComponentInParent<Player>()._isBowing = false;
     }
 
     void FireProjectile()
@@ -46,33 +47,35 @@ public class Bow : MonoBehaviour
     {
         SetBowVisibility(true);
         _isDrawingBow = true;
-        GetComponentInParent<Player>()._isBowing = true;
+        if (transform.parent.gameObject.GetComponent<Player>())
+            GetComponentInParent<Player>()._isBowing = true;
 
         while (_isDrawingBow)
         {
-			
-				_currentDraw += _drawSpeed * Time.deltaTime;
 
-				if (_currentDraw > _maxDraw)
-					_currentDraw = _maxDraw;
+            _currentDraw += _drawSpeed * Time.deltaTime;
 
-            if (!GetComponentInParent<Player>()._isLockedOn)
-            {
-                //aim bow, if stick input set _lastMovementVector in player to the stick input(avoids snapping back to last known direction after fire) and move the player rotation accordingly
-                Vector3 leftStick = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-                if (Mathf.Abs(leftStick.x) > 0 || Mathf.Abs(leftStick.z) > 0)
-                    GetComponentInParent<Player>()._lastMovementVector = leftStick;
+            if (_currentDraw > _maxDraw)
+                _currentDraw = _maxDraw;
 
-                transform.parent.forward = GetComponentInParent<Player>()._lastMovementVector;
-            }
-				
+            if (transform.parent.GetComponent<Player>())
+                if (!GetComponentInParent<Player>()._isLockedOn)
+                {
+                    //aim bow, if stick input set _lastMovementVector in player to the stick input(avoids snapping back to last known direction after fire) and move the player rotation accordingly
+                    Vector3 leftStick = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+                    if (Mathf.Abs(leftStick.x) > 0 || Mathf.Abs(leftStick.z) > 0)
+                        GetComponentInParent<Player>()._lastMovementVector = leftStick;
 
-				if (Input.GetButtonUp("BowButton"))
-					ReleaseString();
+                    transform.parent.forward = GetComponentInParent<Player>()._lastMovementVector;
+                }
 
-				yield return null;						
 
-		}
+            if (Input.GetButtonUp("BowButton"))
+                ReleaseString();
+
+            yield return null;
+
+        }
 
         FireProjectile();
     }
