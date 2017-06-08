@@ -19,6 +19,7 @@ public class ShieldAnimCallbacl : MonoBehaviour
         _parent._recuperateTimer = 0;
         _parent._isAttacking = false;
         _parent._inSwordSwing = false;
+        _parent._damager.gameObject.SetActive(false);
 
     }
 

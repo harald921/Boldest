@@ -353,7 +353,7 @@ public class Player : MonoBehaviour
 
     }
 
-    void ModifyHealth(float inHealthModifier)
+    public void ModifyHealth(float inHealthModifier)
     {
         _health += inHealthModifier;
 
@@ -362,8 +362,7 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(0, 0, 0);
             _health = 100;
         }
-            
-
+      
         if (inHealthModifier < 0)
             StartCoroutine(DamageFlash());
     }
@@ -375,12 +374,13 @@ public class Player : MonoBehaviour
             if (_isDashing || _inKnockBack)
                 return;
 
-            Vector3 dirFromEnemy = transform.position - collision.transform.position;
-            dirFromEnemy.Normalize();
+            
+            //Vector3 dirFromEnemy = transform.position - collision.transform.position;
+            //dirFromEnemy.Normalize();
 
-            StartCoroutine(KnockBack(new Vector3(dirFromEnemy.x, 0, dirFromEnemy.z)));
+            //StartCoroutine(KnockBack(new Vector3(dirFromEnemy.x, 0, dirFromEnemy.z)));
 
-            ModifyHealth(-25.0f);
+            //ModifyHealth(-25.0f);
         }
     }
 

@@ -29,6 +29,10 @@ public class Shielder : MonoBehaviour
 
     Color _defaultColor;
 
+    public GameObject _death;
+
+    public GameObject _damager;
+
 
 
     void Start()
@@ -40,6 +44,7 @@ public class Shielder : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();      
         _agent.enabled = false;
         _defaultColor = GetComponent<MeshRenderer>().material.color;
+        _damager.gameObject.SetActive(false);
     }
 
 
@@ -101,6 +106,7 @@ public class Shielder : MonoBehaviour
     {
         _inSwordSwing = true;
         _rigidBody.AddForce(transform.forward * _attackForce);
+        _damager.gameObject.SetActive(true);
 
     }
 
@@ -112,6 +118,8 @@ public class Shielder : MonoBehaviour
         if (_health < 0)
         {
             _player.RemoveEnemyFromList(GetComponent<Collider>());
+            GameObject blood = Instantiate(_death, transform.position, Quaternion.identity);
+            Destroy(blood, 10);
             Destroy(gameObject);
         }
 
