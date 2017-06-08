@@ -3,29 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyRusher : MonoBehaviour
+public class EnemyArcher : MonoBehaviour
 {
-    [SerializeField] float _health = 100.0f;
+    [SerializeField] float _maxHealth = 100.0f;
+    float _currentHealth;
 
-    Color _defaultColor;
-
-    bool _isInvurnerable = false;
+    [SerializeField] float _drawTime = 5;
+    [SerializeField] float _shootLength = 10.0f;
 
     NavMeshAgent _navMeshAgent;
     Player _player;
 
-    private void Start()
+    [SerializeField] GameObject _fireBolt;
+
+    Color _defaultColor;
+
+
+    bool _isFiringAtPlayer = false;
+
+    private void Awake()
     {
         _defaultColor = GetComponent<MeshRenderer>().material.color;
+        _currentHealth = _maxHealth;
+    }
+
+    private void Start()
+    {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _player = FindObjectOfType<Player>();
     }
 
-
     private void Update()
     {
+        Vector3 dirToPlayer = transform.position - _player.transform.position;
         if (_navMeshAgent.enabled)
-            _navMeshAgent.destination = GameObject.Find("Player").transform.position;
+            _navMeshAgent.destination = _player.gameObject.transform.position;
+
+        if (dirToPlayer.magnitude <= _shootLength)
+            MagicAIStuff();
+    }
+
+    private void MagicAIStuff()
+    {
+        if (!_isFiringAtPlayer)
+            StartCoroutine(FireAtPlayer());
+
+        transform.LookAt(new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z));
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,39 +61,27 @@ public class EnemyRusher : MonoBehaviour
 
             ModifyHealth(-15.0f);
         }
-
-        if (other.tag == "Arrow")
-        {
-            Vector3 attackerToMeDirection = transform.position - other.transform.position;
-
-            TryKnockBack(attackerToMeDirection.normalized * 500);
-
-            ModifyHealth(-34.0f);
-            Destroy(other.gameObject);
-        }
     }
 
     public void TryKnockBack(Vector3 inVelocity)
     {
-        if (!_isInvurnerable)
-        {
-            StartCoroutine(KnockBack(inVelocity));
-        }
+        StartCoroutine(KnockBack(inVelocity));
     }
 
     public void ModifyHealth(float inHealthModifier)
     {
-        _health += inHealthModifier;
+        _currentHealth += inHealthModifier;
 
-        if (_health < 0)
-        {           
+        if (_currentHealth < 0)
+        {
             _player.RemoveEnemyFromList(GetComponent<Collider>());
             Destroy(gameObject);
         }
-           
+
 
         StartCoroutine(DamageFlash());
     }
+
 
     IEnumerator KnockBack(Vector3 inVelocity)
     {
@@ -96,5 +107,21 @@ public class EnemyRusher : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    IEnumerator FireAtPlayer()
+    {
+        _isFiringAtPlayer = true;
+        _navMeshAgent.enabled = false;
+
+        yield return new WaitForSeconds(_drawTime);
+
+        _navMeshAgent.enabled = true;
+        _isFiringAtPlayer = false;
+
+        GameObject fireBolt = Instantiate(_fireBolt, transform.GetChild(0).position, Quaternion.identity);
+        fireBolt.GetComponent<Rigidbody>().AddForce(transform.forward * 1200);
+
+        yield return null;
     }
 }
