@@ -48,10 +48,6 @@ public class EnemyRusher : MonoBehaviour
             ModifyHealth(-34.0f);
             Destroy(other.gameObject);
         }
-        
-
-
-
     }
 
     public void TryKnockBack(Vector3 inVelocity)

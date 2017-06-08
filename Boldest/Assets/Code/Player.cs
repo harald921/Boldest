@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     float _acceleration = 0;
     public float _accelerationSpeed = 1;
 
+    Color _defaultColor;
+
     //settings for dash
     [SerializeField] float _dashDuration;
     [SerializeField] float _dashSpeed;
@@ -53,14 +55,11 @@ public class Player : MonoBehaviour
     float _changeTargetTimer = 0;
     [SerializeField] float _changeTargetDelay = 0.3f;  
     public Image _bull;
-    
-    
-    
-				
 
-	void Start()
+    void Start()
 	{
-		_dashAnimator = transform.GetChild(3).GetComponent<Animator>();
+        _defaultColor = GetComponent<MeshRenderer>().material.color;
+        _dashAnimator = transform.GetChild(3).GetComponent<Animator>();
         _bull.gameObject.SetActive(false);
 	}
 
@@ -77,14 +76,9 @@ public class Player : MonoBehaviour
             HandleAttackInput();
         }
 
-       
-
         _attackTimer += Time.deltaTime;
         _acceleration += Time.deltaTime * _accelerationSpeed;
         _acceleration = Mathf.Clamp(_acceleration, 0, 1);
-
-
-       
     }
 
     private void FixedUpdate()
@@ -105,7 +99,6 @@ public class Player : MonoBehaviour
 
     void HandleMovement()
     {
-		
 			_movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 			if (Mathf.Abs(_movementVector.x) > 0 || Mathf.Abs(_movementVector.z) > 0)
 				_lastMovementVector = _movementVector;
@@ -124,7 +117,6 @@ public class Player : MonoBehaviour
 
     void HandleAttackInput()
     {
-             
             if (Input.GetButtonDown("RightHandButton"))
             {
                 if(_attackTimer >= _attackCoolDown)
@@ -141,7 +133,6 @@ public class Player : MonoBehaviour
             {
                 transform.GetChild(2).GetComponent<Bow>().DrawBow();
             }				
-
     }
  
     void HandleDash2()
@@ -175,7 +166,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void visceralAttackWindow(Collider enemyCollider)
+    public void VisceralAttackWindow(Collider enemyCollider)
     {
 		
         GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); //stop player for attack window
@@ -195,7 +186,7 @@ public class Player : MonoBehaviour
     {
 		//if visceral attack failed, re-enable collision between enemy and player
 		Physics.IgnoreCollision(enemyCollider, GetComponent<Collider>(), false);
-		StartCoroutine(KnockBack());
+		StartCoroutine(KnockBack(-transform.forward));
 		_inVisceralAttack = false;
     }
 
@@ -261,10 +252,10 @@ public class Player : MonoBehaviour
 
 	}
 
-	IEnumerator KnockBack()
+	IEnumerator KnockBack(Vector3 inDirection)
 	{
 		_inKnockBack = true;
-		GetComponent<Rigidbody>().AddForce(-transform.forward * _knockBackForce);
+		GetComponent<Rigidbody>().AddForce(inDirection * _knockBackForce);
 		yield return new WaitForSeconds(0.5f);
 		_inKnockBack = false;
 	}
@@ -359,5 +350,44 @@ public class Player : MonoBehaviour
 
     }
 
+    void ModifyHealth(float inHealthModifier)
+    {
+        _health += inHealthModifier;
 
+        if (_health <= 0)
+            Destroy(gameObject);
+
+        if (inHealthModifier < 0)
+            StartCoroutine(DamageFlash());
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+            Vector3 dirFromEnemy = transform.position - collision.transform.position;
+            dirFromEnemy.Normalize();
+
+            StartCoroutine(KnockBack(new Vector3(dirFromEnemy.x, 0, dirFromEnemy.z)));
+
+            ModifyHealth(-25.0f);
+        }
+    }
+
+    IEnumerator DamageFlash()
+    {
+        float flashDuration = 0.13f;
+        float timer = flashDuration;
+
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+
+            float flashLerpValue = Mathf.InverseLerp(0, flashDuration, timer);
+
+            GetComponent<MeshRenderer>().material.color = Color.Lerp(_defaultColor, Color.red, flashLerpValue);
+
+            yield return null;
+        }
+    }
 }
