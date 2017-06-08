@@ -34,16 +34,16 @@ public class EnemyRusher : MonoBehaviour
         {
             Vector3 attackerToMeDirection = transform.position - other.transform.parent.position;
 
-            //TryKnockBack(attackerToMeDirection.normalized * 500);
+            TryKnockBack(attackerToMeDirection.normalized * 500);
 
-            ModifyHealth(-34.0f);
+            ModifyHealth(-15.0f);
         }
 
         if (other.tag == "Arrow")
         {
             Vector3 attackerToMeDirection = transform.position - other.transform.position;
 
-            //TryKnockBack(attackerToMeDirection.normalized * 500);
+            TryKnockBack(attackerToMeDirection.normalized * 500);
 
             ModifyHealth(-34.0f);
             Destroy(other.gameObject);
@@ -74,19 +74,11 @@ public class EnemyRusher : MonoBehaviour
 
     IEnumerator KnockBack(Vector3 inVelocity)
     {
-        _isInvurnerable = true;
         GetComponent<NavMeshAgent>().enabled = false;
-
-
-        GetComponent<Rigidbody>().isKinematic = false;
-        GetComponent<Rigidbody>().AddForce(inVelocity);
 
         yield return new WaitForSeconds(0.6f);
 
-        GetComponent<Rigidbody>().isKinematic = true;
-
         GetComponent<NavMeshAgent>().enabled = true;
-        _isInvurnerable = false;
     }
 
     IEnumerator DamageFlash()
