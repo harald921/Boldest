@@ -34,7 +34,7 @@ public class EnemyRusher : MonoBehaviour
         {
             Vector3 attackerToMeDirection = transform.position - other.transform.parent.position;
 
-            TryKnockBack(attackerToMeDirection.normalized * 500);
+            //TryKnockBack(attackerToMeDirection.normalized * 500);
 
             ModifyHealth(-34.0f);
         }
@@ -43,7 +43,7 @@ public class EnemyRusher : MonoBehaviour
         {
             Vector3 attackerToMeDirection = transform.position - other.transform.position;
 
-            TryKnockBack(attackerToMeDirection.normalized * 500);
+            //TryKnockBack(attackerToMeDirection.normalized * 500);
 
             ModifyHealth(-34.0f);
             Destroy(other.gameObject);

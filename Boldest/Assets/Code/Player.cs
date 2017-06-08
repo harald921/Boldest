@@ -313,7 +313,7 @@ public class Player : MonoBehaviour
             }			
 			if (Input.GetAxisRaw("RightStickHorizontal") < 0 && _currentLockOnID > 0 && _changeTargetTimer > _changeTargetDelay)
             {
-				float kk = Input.GetAxisRaw("RightStickHorizontal");
+				
 				_currentLockOnID--;
                 _changeTargetTimer = 0;
             }

@@ -277,14 +277,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526210796810746, guid: b15a382c461bba1489d41acee6c51775, type: 2}
-      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -335,7 +327,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b15a382c461bba1489d41acee6c51775, type: 2}
@@ -2225,7 +2217,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1886879388118530, guid: b15a382c461bba1489d41acee6c51775, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1526210796810746, guid: b15a382c461bba1489d41acee6c51775, type: 2}
       propertyPath: m_StaticEditorFlags
@@ -2523,7 +2515,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4370e86f5b6d815438df7e6769078394, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8bf48ccc391338c4d8061d2950ad5c41, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
