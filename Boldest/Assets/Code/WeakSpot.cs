@@ -25,5 +25,16 @@ public class WeakSpot : MonoBehaviour
             GetComponentInParent<Shielder>().ModifyHealth(-15.0f);
             Destroy(other.gameObject);
         }
+        if (other.tag == "RevertedFire")
+        {
+            Vector3 attackerToMeDirection = transform.position - other.transform.position;
+
+
+
+            GetComponentInParent<Shielder>().ModifyHealth(-15.0f);
+            Destroy(other.gameObject);
+        }
+
+
     }
 }

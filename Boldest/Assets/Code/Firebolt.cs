@@ -11,6 +11,7 @@ public class Firebolt : MonoBehaviour
         if (collision.tag == "Sword")
         {
             GetComponent<Rigidbody>().velocity = collision.transform.parent.forward * GetComponent<Rigidbody>().velocity.magnitude;
+            transform.GetComponent<Collider>().tag = "RevertedFire";
         }
     }
 
