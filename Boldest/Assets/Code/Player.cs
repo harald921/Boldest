@@ -227,12 +227,10 @@ public class Player : MonoBehaviour
                 if(enemyCollider.tag == "Shielder")
                 {
                     enemyCollider.GetComponent<Shielder>().GettingDashed();
-
                 }
                 if (enemyCollider.tag == "Bird")
                 {
                     enemyCollider.GetComponentInParent<Bird>()._move = false;
-
                 }
 
                 GameObject effect = Instantiate(_attackEffect, enemyCollider.transform.position + new Vector3(0,3,0), Quaternion.identity);

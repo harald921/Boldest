@@ -73,7 +73,6 @@ public class Shielder : MonoBehaviour
         {
             _agent.enabled = false;
             _rigidBody.isKinematic = false;
-
         }
         
         
