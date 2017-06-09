@@ -145,9 +145,7 @@ public class Player : MonoBehaviour
     void HandleDash2()
     {
         _dashingTimer -= Time.deltaTime;
-        
-        
-
+                
         if (Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased && !_inVisceralAttack)
         {                              
             _dashingTimer = _dashDuration;
@@ -171,26 +169,21 @@ public class Player : MonoBehaviour
                      _dashDir = leftStickVector;
                      transform.forward = leftStickVector;
                      _dashingTimer = _dashOffsetDuration;
-                     _dashingSpeed = _dashOffsetSpeed;
-
-                        
+                     _dashingSpeed = _dashOffsetSpeed;                       
                 }
                 else
                 {
                     _dashDir = transform.forward;
                     _dashingTimer = _dashDuration;
                     _dashingSpeed = _dashSpeed;
-                }
-                                                 
+                }                                                
             }
             else
             {
                 _dashDir = transform.forward;
                 _dashingTimer = _dashDuration;
                 _dashingSpeed = _dashSpeed;
-            }
-                
-
+            }               
         }
         else if (Input.GetAxisRaw("RightHandTrigger") == 0)
             _rightTriggerReleased = true;
@@ -200,20 +193,15 @@ public class Player : MonoBehaviour
             _isDashing = true;
             GetComponent<Rigidbody>().AddForce(_dashDir * _dashingSpeed);            
         }
-        else
-        {
-            _isDashing = false;
+        else       
+        _isDashing = false;
            
-        }
+        
     }
 
     public void VisceralAttackWindow(Collider enemyCollider)
-    {
-
-        
-
+    {      
         Time.timeScale = 0.1f;
-
         _visceralCo = StartCoroutine(HandleVisceralAttackWindow(enemyCollider));
     }
   
@@ -405,22 +393,7 @@ public class Player : MonoBehaviour
         if (inHealthModifier < 0)
             StartCoroutine(DamageFlash());
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == 8)
-        {
-            if (_isDashing || _inKnockBack)
-                return;
-
-            
-            //Vector3 dirFromEnemy = transform.position - collision.transform.position;
-            //dirFromEnemy.Normalize();
-            //StartCoroutine(KnockBack(new Vector3(dirFromEnemy.x, 0, dirFromEnemy.z)));
-            //ModifyHealth(-25.0f);
-        }
-    }
-
+   
     IEnumerator DamageFlash()
     {
         float flashDuration = 0.13f;
