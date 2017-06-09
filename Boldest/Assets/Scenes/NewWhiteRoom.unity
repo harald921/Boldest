@@ -1092,6 +1092,19 @@ Transform:
   m_Father: {fileID: 510389665}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: -0.29500002, y: 90.226006, z: -10.724001}
+--- !u!1 &332958629 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1714999810759138, guid: 057a25137b2c4334eba5ff3f968dff75,
+    type: 2}
+  m_PrefabInternal: {fileID: 897770109}
+--- !u!45 &332958636
+Skybox:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 332958629}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: e222162ddb8d34547a133b673221b195, type: 2}
 --- !u!1 &341839239
 GameObject:
   m_ObjectHideFlags: 0
