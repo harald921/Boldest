@@ -20,7 +20,11 @@ public class Player : MonoBehaviour
 
     //settings for dash
     [SerializeField] float _dashDuration;
+    [SerializeField] float _dashOffsetDuration;
     [SerializeField] float _dashSpeed;
+    [SerializeField] float _dashOffsetSpeed;
+    float _dashingSpeed;
+
     [SerializeField] float _dashCoolDown;   
     [HideInInspector] public bool _isDashing = false;
 	float _dashingTimer = 0;
@@ -165,14 +169,28 @@ public class Player : MonoBehaviour
                 float dot = Vector3.Dot(playerToTarget, leftStickVector);
                 if (dot < 0.8f && dot != 0)
                 {                   
-                        _dashDir = leftStickVector;
-                        transform.forward = leftStickVector;                  
+                     _dashDir = leftStickVector;
+                     transform.forward = leftStickVector;
+                     _dashingTimer = _dashOffsetDuration;
+                     _dashingSpeed = _dashOffsetSpeed;
+
+                        
                 }
                 else
-                    _dashDir = transform.forward;                                
+                {
+                    _dashDir = transform.forward;
+                    _dashingTimer = _dashDuration;
+                    _dashingSpeed = _dashSpeed;
+                }
+                                                 
             }
             else
+            {
                 _dashDir = transform.forward;
+                _dashingTimer = _dashDuration;
+                _dashingSpeed = _dashSpeed;
+            }
+                
 
         }
         else if (Input.GetAxisRaw("RightHandTrigger") == 0)
@@ -181,7 +199,7 @@ public class Player : MonoBehaviour
         if (_dashingTimer > 0 && !_inVisceralAttack)
         {                   
             _isDashing = true;
-            GetComponent<Rigidbody>().AddForce(_dashDir * _dashSpeed);
+            GetComponent<Rigidbody>().AddForce(_dashDir * _dashingSpeed);
             GetComponent<MeshRenderer>().enabled = false; // don't render player model while dashing
         }
         else

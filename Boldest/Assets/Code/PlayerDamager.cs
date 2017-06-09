@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerDamager : MonoBehaviour
 {
     public float _damageToGive = 15;
+    public bool _destroyOnImpact = true;
 
 
 
@@ -20,6 +21,9 @@ public class PlayerDamager : MonoBehaviour
             dir.Normalize();
 
             other.GetComponent<Player>().StartCoroutine(other.GetComponent<Player>().KnockBack(dir));
+
+            if (_destroyOnImpact)
+                Destroy(gameObject);
 
         }
     }
