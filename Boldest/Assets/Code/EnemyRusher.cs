@@ -48,6 +48,15 @@ public class EnemyRusher : MonoBehaviour
             ModifyHealth(-34.0f);
             Destroy(other.gameObject);
         }
+        if (other.tag == "RevertedFire")
+        {
+            Vector3 attackerToMeDirection = transform.position - other.transform.position;
+
+            TryKnockBack(attackerToMeDirection.normalized * 500);
+
+            ModifyHealth(-34.0f);
+            Destroy(other.gameObject);
+        }
     }
 
     public void TryKnockBack(Vector3 inVelocity)
