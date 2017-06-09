@@ -65,8 +65,7 @@ public class Player : MonoBehaviour
 
     void Start()
 	{
-        _defaultColor = GetComponent<MeshRenderer>().material.color;
-        _dashAnimator = transform.GetChild(3).GetComponent<Animator>();
+        _defaultColor = GetComponent<MeshRenderer>().material.color;       
         _dashDir = transform.forward;
         _bull.gameObject.SetActive(false);
 	}
@@ -139,14 +138,14 @@ public class Player : MonoBehaviour
             }
             if (Input.GetButtonDown("BowButton"))
             {
-                transform.GetChild(2).GetComponent<Bow>().DrawBow();
+                transform.GetComponentInChildren<Bow>().DrawBow();
             }				
     }
  
     void HandleDash2()
     {
         _dashingTimer -= Time.deltaTime;
-        _dashAnimator.SetBool("dashing", _isDashing);
+        
         
 
         if (Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased && !_inVisceralAttack)
@@ -199,13 +198,12 @@ public class Player : MonoBehaviour
         if (_dashingTimer > 0 && !_inVisceralAttack)
         {                   
             _isDashing = true;
-            GetComponent<Rigidbody>().AddForce(_dashDir * _dashingSpeed);
-            GetComponent<MeshRenderer>().enabled = false; // don't render player model while dashing
+            GetComponent<Rigidbody>().AddForce(_dashDir * _dashingSpeed);            
         }
         else
         {
             _isDashing = false;
-            GetComponent<MeshRenderer>().enabled = true;
+           
         }
     }
 
