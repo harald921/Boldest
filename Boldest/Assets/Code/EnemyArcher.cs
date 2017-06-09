@@ -61,6 +61,16 @@ public class EnemyArcher : MonoBehaviour
 
             ModifyHealth(-15.0f);
         }
+        if (other.tag == "Arrow")
+        {
+            Vector3 attackerToMeDirection = transform.position - other.transform.position;
+
+            TryKnockBack(attackerToMeDirection.normalized * 500);
+
+            ModifyHealth(-15.0f);
+
+            Destroy(other.gameObject);
+        }
     }
 
     public void TryKnockBack(Vector3 inVelocity)
