@@ -209,17 +209,11 @@ public class Player : MonoBehaviour
 
     public void VisceralAttackWindow(Collider enemyCollider)
     {
-		
-        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0); //stop player for attack window
 
-		//make player face enemy														   
-		Vector3 playerToEnemy = enemyCollider.transform.position - transform.position;
-		playerToEnemy.Normalize();
-		transform.forward = playerToEnemy;
+        
 
-		//start coRoutine that handle the attck window
-        _inVisceralAttack = true;
-        _dashingTimer = 0;
+        Time.timeScale = 0.1f;
+
         _visceralCo = StartCoroutine(HandleVisceralAttackWindow(enemyCollider));
     }
   
@@ -227,7 +221,7 @@ public class Player : MonoBehaviour
     {
 		//if visceral attack failed, re-enable collision between enemy and player
 		Physics.IgnoreCollision(enemyCollider, GetComponent<Collider>(), false);
-		StartCoroutine(KnockBack(-transform.forward));
+		//StartCoroutine(KnockBack(-transform.forward));
 		_inVisceralAttack = false;
     }
 
@@ -252,13 +246,20 @@ public class Player : MonoBehaviour
                 GameObject effect = Instantiate(_attackEffect, enemyCollider.transform.position + new Vector3(0,3,0), Quaternion.identity);
                 Destroy(effect, _timePreformingAttack);
                 failedAttack = false;
-                StartCoroutine(PreformVisceralAttack(enemyCollider));					
+                _inVisceralAttack = true;
+                transform.LookAt(enemyCollider.transform);
+                GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                StartCoroutine(PreformVisceralAttack(enemyCollider));
+                Time.timeScale = 1.0f;
                 StopCoroutine(_visceralCo);            
             }
             yield return null;
         }
-		if(failedAttack) // for some reason StopCoroutine seems to not be 100% reliable, added bool if this line gets read even on succsesful attack
-			FailedVisceralAttack(enemyCollider);  // will be called if failed to press attack during timewindow  
+        if (failedAttack)// for some reason StopCoroutine seems to not be 100% reliable, added bool if this line gets read even on succsesful attack                        
+        {
+            FailedVisceralAttack(enemyCollider);
+            Time.timeScale = 1.0f;
+        } 
     }
 
     IEnumerator PreformVisceralAttack(Collider enemyCollider)

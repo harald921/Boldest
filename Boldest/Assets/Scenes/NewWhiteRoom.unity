@@ -401,7 +401,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1291697665190284, guid: f7e95437e7b10b8419a3f4654236ac22, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7e95437e7b10b8419a3f4654236ac22, type: 2}
@@ -1735,7 +1735,7 @@ MonoBehaviour:
   _dashOffsetSpeed: 1300
   _dashCoolDown: 0.5
   _isDashing: 1
-  _timeWindowToAttack: 0.2
+  _timeWindowToAttack: 0.08
   _timePreformingAttack: 1
   _visceralAttackParticle: {fileID: 1759689883234460, guid: 05260cbf4b5f581429bdb26c8216b0f6,
     type: 2}
