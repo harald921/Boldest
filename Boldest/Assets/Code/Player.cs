@@ -151,6 +151,29 @@ public class Player : MonoBehaviour
             // start dashparticle
             _dashParticle.gameObject.SetActive(true);
             _dashParticle.Play();
+
+            if (_isLockedOn)
+            {
+                Vector3 playerToTarget = _lockables[_currentLockOnID].transform.position - transform.position;
+                playerToTarget.Normalize();
+
+                Vector3 leftStickVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+
+                float dot = Vector3.Dot(playerToTarget, leftStickVector);
+
+                if(dot < 0.5f)
+                {
+                    if (leftStickVector.x < 0)
+                        dashDir = -transform.right;
+
+                    if (leftStickVector.x > 0)
+                        dashDir = transform.right;
+
+
+                }
+
+
+            }
         }
         else if (Input.GetAxisRaw("RightHandTrigger") == 0)
             _rightTriggerReleased = true;
