@@ -2032,7 +2032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
-  _moveSpeed: 320
+  _moveSpeed: 220
   _turnSpeed: 25
   _useController: 1
   _gravityPower: 200
