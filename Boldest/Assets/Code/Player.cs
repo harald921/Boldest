@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 	bool _rightTriggerReleased = true;
 	bool _inKnockBack = false;
 	Animator _dashAnimator;
+    Vector3 _dashDir;
 
 	//settings for visceral attack
 	[SerializeField] float _timeWindowToAttack;
@@ -62,6 +63,7 @@ public class Player : MonoBehaviour
 	{
         _defaultColor = GetComponent<MeshRenderer>().material.color;
         _dashAnimator = transform.GetChild(3).GetComponent<Animator>();
+        _dashDir = transform.forward;
         _bull.gameObject.SetActive(false);
 	}
 
@@ -141,7 +143,7 @@ public class Player : MonoBehaviour
     {
         _dashingTimer -= Time.deltaTime;
         _dashAnimator.SetBool("dashing", _isDashing);
-        Vector3 dashDir = transform.forward;
+        
 
         if (Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased && !_inVisceralAttack)
         {                              
@@ -158,22 +160,20 @@ public class Player : MonoBehaviour
                 playerToTarget.Normalize();
 
                 Vector3 leftStickVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-
+                leftStickVector.Normalize();
+               
                 float dot = Vector3.Dot(playerToTarget, leftStickVector);
-
-                if(dot < 0.5f)
-                {
-                    if (leftStickVector.x < 0)
-                        dashDir = -transform.right;
-
-                    if (leftStickVector.x > 0)
-                        dashDir = transform.right;
-
-
+                if (dot < 0.8f && dot != 0)
+                {                   
+                        _dashDir = leftStickVector;
+                        transform.forward = leftStickVector;                  
                 }
-
-
+                else
+                    _dashDir = transform.forward;                                
             }
+            else
+                _dashDir = transform.forward;
+
         }
         else if (Input.GetAxisRaw("RightHandTrigger") == 0)
             _rightTriggerReleased = true;
@@ -181,7 +181,7 @@ public class Player : MonoBehaviour
         if (_dashingTimer > 0 && !_inVisceralAttack)
         {                   
             _isDashing = true;
-            GetComponent<Rigidbody>().AddForce(dashDir * _dashSpeed);
+            GetComponent<Rigidbody>().AddForce(_dashDir * _dashSpeed);
             GetComponent<MeshRenderer>().enabled = false; // don't render player model while dashing
         }
         else
@@ -270,6 +270,7 @@ public class Player : MonoBehaviour
 		if (haveDashDirection)
 		{
 			transform.forward = newDashDir;
+            _dashDir = newDashDir;
 			_dashingTimer = _dashDuration;
 			_isDashing = true;
 			_dashParticle.Play();
