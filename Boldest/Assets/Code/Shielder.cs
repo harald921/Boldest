@@ -20,7 +20,7 @@ public class Shielder : MonoBehaviour
     public float _recuperateTime = 1;
     
        
-    float _stateChange = 0;
+   
     NavMeshAgent _agent;
     Rigidbody _rigidBody;
 
@@ -58,8 +58,7 @@ public class Shielder : MonoBehaviour
             look.Normalize();
             transform.forward = look;
         }
-        
-        _stateChange += Time.deltaTime;
+               
         _recuperateTimer += Time.deltaTime;
        
         if(_playerDistance < _awakeDistance && !_isAttacking && _recuperateTimer > _recuperateTime)
@@ -91,11 +90,10 @@ public class Shielder : MonoBehaviour
         Vector3 vec = transform.position - _player.transform.position;
         _playerDistance = vec.magnitude;
 
-        if(_playerDistance < _attackDistance && !_isAttacking && _stateChange > 5.5f + _recuperateTime)
+        if(_playerDistance < _attackDistance && !_isAttacking && _recuperateTimer > _recuperateTime)
         {
             _shieldAnim.SetBool("Attack", true);
-            _swordAnim.SetBool("Attack", true);
-            _stateChange = 0;
+            _swordAnim.SetBool("Attack", true);          
             _isAttacking = true;
         }
 
