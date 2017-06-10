@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyBase : MonoBehaviour
 {
-
+	[HideInInspector] public bool _isVunurable = true;
 	public float _currentHealth;
 	protected Color _defaultColor;
 	protected NavMeshAgent _navMeshAgent;
@@ -31,6 +32,10 @@ public class EnemyBase : MonoBehaviour
 	protected virtual void Update()
 	{
 		_invulnerableTimer += Time.deltaTime;
+		if (_invulnerableTimer > _invulnerableTime)
+			_isVunurable = true;
+		else
+			_isVunurable = false;
 	}
 
 

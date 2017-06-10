@@ -217,10 +217,11 @@ public class Player : MonoBehaviour
     {
         float timeToAttack = _timeWindowToAttack;
 		bool failedAttack = true;
+		EnemyBase enemy = enemyCollider.GetComponent<EnemyBase>();
         while (timeToAttack > 0)
         {
             timeToAttack -= Time.deltaTime;
-            if (Input.GetButtonDown("RightHandButton"))
+            if (Input.GetButtonDown("RightHandButton") && enemy._isVunurable)
             {
                 if(enemyCollider.tag == "Shielder")
                 {

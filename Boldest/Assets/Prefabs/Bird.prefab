@@ -40,6 +40,8 @@ GameObject:
   - component: {fileID: 136323074287793312}
   - component: {fileID: 114491515880027912}
   - component: {fileID: 54505748889018126}
+  - component: {fileID: 195977364769904930}
+  - component: {fileID: 114300998815781378}
   m_Layer: 8
   m_Name: body
   m_TagString: Bird
@@ -174,8 +176,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1306048094141834}
-  m_LocalRotation: {x: -0, y: 0.7195895, z: -0, w: 0.69439983}
-  m_LocalPosition: {x: -7.22, y: 1.4, z: 82.02}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.375392, y: -10.020283, z: 40.38714}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4703613255559874}
@@ -183,7 +185,7 @@ Transform:
   - {fileID: 4956033719162120}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 92.04101, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4703613255559874
 Transform:
   m_ObjectHideFlags: 1
@@ -191,7 +193,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1082944274154748}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.27, y: 0, z: 0}
   m_LocalScale: {x: 0.39824247, y: 0.64843726, z: 0.41347092}
   m_Children:
   - {fileID: 4134660702363296}
@@ -397,6 +399,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &114300998815781378
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1082944274154748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78b47d47cb199d488f2f3e5c97945a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isVunurable: 1
+  _currentHealth: 0
+  _health: 100
+  _invulnerableTime: 0.1
+  _bowDamage: 10
+  _swordDamage: 10
+  _fireDamage: 10
+  _knockBackForce: 3000
+  _useKnockback: 0
 --- !u!114 &114320343858698042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -452,3 +474,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &195977364769904930
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1082944274154748}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1.0000002
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

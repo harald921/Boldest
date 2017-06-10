@@ -47,6 +47,17 @@ public class Shielder : EnemyBase
 		base.Update();
         GetPlayerDistance();
 
+		//while not in recuperate state, enemy is invulnerable
+		if (_recuperateTimer > _recuperateTime)
+		{
+			_invulnerableTimer = 0;
+			GetComponent<MeshRenderer>().material.color = _defaultColor;
+		}			
+		else
+		{
+			GetComponent<MeshRenderer>().material.color = Color.black;
+		}
+
         if (!_inSwordSwing && _recuperateTimer > _recuperateTime)
         {
             Vector3 look = new Vector3(_player.transform.position.x, transform.position.y, _player.transform.position.z) - transform.position;
