@@ -62,18 +62,22 @@ public class Player : MonoBehaviour
     float _changeTargetTimer = 0;
     [SerializeField] float _changeTargetDelay = 0.3f;  
     public Image _bull;
+    public Image _aim;
+    Vector2 _playerUiPos;
 
     void Start()
 	{
         _defaultColor = GetComponent<MeshRenderer>().material.color;       
         _dashDir = transform.forward;
         _bull.gameObject.SetActive(false);
+        _aim.gameObject.SetActive(false);
 	}
 
     private void Update()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                     
+        
+        _aim.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
+
         LockOnEnemy();
 
         //can only controll player if not in dash or in the middle of chain attacks
@@ -82,6 +86,8 @@ public class Player : MonoBehaviour
             HandleMovement();
             HandleAttackInput();
         }
+
+        HandleAimingOnVisceralAttack();
 
         _attackTimer += Time.deltaTime;
         _acceleration += Time.deltaTime * _accelerationSpeed;
@@ -96,10 +102,11 @@ public class Player : MonoBehaviour
             if (_isBowing)
                 speedMulti = _speedMultiOnBowing;
 
-			GetComponent<Rigidbody>().AddForce(new Vector3(((_movementVector.normalized.x * _moveSpeed) * _acceleration) * speedMulti, -_gravityPower, ((_movementVector.normalized.z * _moveSpeed) * _acceleration) * speedMulti));        
+			GetComponent<Rigidbody>().AddForce(new Vector3(((_movementVector.normalized.x * _moveSpeed) * _acceleration) * speedMulti, -_gravityPower, ((_movementVector.normalized.z * _moveSpeed) * _acceleration) * speedMulti));          
             _movementVector = Vector3.zero;
 
 		}
+        
             
         HandleDash2();
     }
@@ -117,9 +124,25 @@ public class Player : MonoBehaviour
                 Vector3 lookVector = _lockables[_currentLockOnID].transform.position - transform.position;
                 lookVector.Normalize();
                 _lastMovementVector = lookVector;
-            }
-            
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);				                    
+            }         
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_lastMovementVector), _turnSpeed * Time.deltaTime);
+        
+    }
+
+    void HandleAimingOnVisceralAttack()
+    {
+        if (_inVisceralAttack)
+        {
+            Vector2 stick = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if (Mathf.Abs(stick.x) > 0 || Mathf.Abs(stick.y) > 0)
+                _aim.gameObject.SetActive(true);
+            else
+                _aim.gameObject.SetActive(false);
+
+            _aim.transform.right = stick;
+        }
+        else
+            _aim.gameObject.SetActive(false);
     }
 
     void HandleAttackInput()
@@ -139,7 +162,12 @@ public class Player : MonoBehaviour
             if (Input.GetButtonDown("BowButton"))
             {
                 transform.GetComponentInChildren<Bow>().DrawBow();
-            }				
+            }
+
+
+        
+
+
     }
  
     void HandleDash2()
