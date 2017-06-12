@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     [SerializeField] float _dashSpeed;
     [SerializeField] float _dashOffsetSpeed;
     float _dashingSpeed;
-
     [SerializeField] float _dashCoolDown;   
     [HideInInspector] public bool _isDashing = false;
 	float _dashingTimer = 0;
@@ -32,6 +31,7 @@ public class Player : MonoBehaviour
 	bool _inKnockBack = false;
 	Animator _dashAnimator;
     Vector3 _dashDir;
+    float _dashFraction = 0;
 
 	//settings for visceral attack
 	[SerializeField] float _timeWindowToAttack;
@@ -189,12 +189,20 @@ public class Player : MonoBehaviour
             _rightTriggerReleased = true;
 
         if (_dashingTimer > 0 && !_inVisceralAttack)
-        {                   
+        {
+            _dashFraction = Mathf.InverseLerp(_dashDuration, 0, _dashingTimer);
+            float v = Mathf.Sin(_dashFraction * 4);
+            v = (v + 1) / 2;
+
+
             _isDashing = true;
-            GetComponent<Rigidbody>().AddForce(_dashDir * _dashingSpeed);            
+            GetComponent<Rigidbody>().AddForce(_dashDir * (_dashingSpeed * v ));            
         }
-        else       
-        _isDashing = false;
+        else
+        {
+            _isDashing = false;
+        }       
+      
            
         
     }
