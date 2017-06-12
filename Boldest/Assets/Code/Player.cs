@@ -191,9 +191,7 @@ public class Player : MonoBehaviour
         if (_dashingTimer > 0 && !_inVisceralAttack)
         {
             _dashFraction = Mathf.InverseLerp(_dashDuration, 0, _dashingTimer);
-            float v = Mathf.Sin(_dashFraction * 4);
-            v = (v + 1) / 2;
-
+            float v = Mathf.Sin( _dashFraction * Mathf.PI );         
 
             _isDashing = true;
             GetComponent<Rigidbody>().AddForce(_dashDir * (_dashingSpeed * v ));            
