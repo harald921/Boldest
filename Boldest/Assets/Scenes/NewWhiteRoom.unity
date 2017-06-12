@@ -1548,17 +1548,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
-  _moveSpeed: 300
+  _moveSpeed: 270
   _turnSpeed: 25
   _useController: 1
   _gravityPower: 200
   _lastMovementVector: {x: 0, y: 0, z: 0}
   _accelerationSpeed: 5
-  _dashDuration: 0.2
+  _dashDuration: 0.23
   _dashOffsetDuration: 0.15
-  _dashSpeed: 1050
-  _dashOffsetSpeed: 1300
-  _dashCoolDown: 0.5
+  _dashSpeed: 1100
+  _dashOffsetSpeed: 1100
+  _dashCoolDown: 0.6
   _isDashing: 1
   _timeWindowToAttack: 0.08
   _timePreformingAttack: 1
