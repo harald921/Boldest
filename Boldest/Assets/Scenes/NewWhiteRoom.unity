@@ -1623,7 +1623,7 @@ MonoBehaviour:
   _lastMovementVector: {x: 0, y: 0, z: 0}
   _accelerationSpeed: 5
   _dashDuration: 0.23
-  _dashOffsetDuration: 0.15
+  _dashOffsetDuration: 0.12
   _dashSpeed: 1100
   _dashOffsetSpeed: 1100
   _dashCoolDown: 0.6
