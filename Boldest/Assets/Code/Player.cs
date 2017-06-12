@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
             if (_isBowing)
                 speedMulti = _speedMultiOnBowing;
 
-			GetComponent<Rigidbody>().AddForce(new Vector3(((_movementVector.normalized.x * _moveSpeed) * _acceleration) * speedMulti, -_gravityPower, ((_movementVector.normalized.z * _moveSpeed) * _acceleration) * speedMulti));        
+			GetComponent<Rigidbody>().AddForce(new Vector3(((_movementVector.normalized.x * _moveSpeed) * _acceleration) * speedMulti, -_gravityPower, ((_movementVector.normalized.z * _moveSpeed) * _acceleration) * speedMulti));          
             _movementVector = Vector3.zero;
 
 		}

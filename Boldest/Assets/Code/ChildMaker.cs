@@ -17,7 +17,7 @@ public class ChildMaker : MonoBehaviour
     {
         if (other.collider.tag == "Player")
         {
-            other.transform.parent = other.transform;
+            other.transform.parent = null;
         }
     }
 
