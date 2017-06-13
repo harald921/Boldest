@@ -216,8 +216,8 @@ MonoBehaviour:
   _fireDamage: 10
   _knockBackForce: 3000
   _useKnockback: 0
-  _drawTime: 3
-  _shootLength: 12
+  _drawTime: 1
+  _shootLength: 8
   _fireBolt: {fileID: 1659049867374440, guid: 0712fd970d8ed044093bdeb708a67704, type: 2}
 --- !u!136 &136235783087701812
 CapsuleCollider:

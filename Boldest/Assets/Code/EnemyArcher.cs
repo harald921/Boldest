@@ -25,8 +25,8 @@ public class EnemyArcher : EnemyBase
 		base.Update();
         Vector3 dirToPlayer = transform.position - _player.transform.position;
 
-        //if (_navMeshAgent.enabled)
-        //    _navMeshAgent.destination = _player.gameObject.transform.position;
+        if (_navMeshAgent.enabled)
+            _navMeshAgent.destination = _player.gameObject.transform.position;
 
         if (dirToPlayer.magnitude <= _shootLength)
             MagicAIStuff();
