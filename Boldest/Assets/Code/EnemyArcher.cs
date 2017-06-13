@@ -32,6 +32,7 @@ public class EnemyArcher : EnemyBase
             MagicAIStuff();
     }
 
+
     private void MagicAIStuff()
     {
         if (!_isFiringAtPlayer)
