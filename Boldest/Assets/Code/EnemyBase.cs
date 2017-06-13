@@ -25,8 +25,14 @@ public class EnemyBase : MonoBehaviour
 	{
 		_player = FindObjectOfType<Player>();
 		_navMeshAgent = GetComponent<NavMeshAgent>();
-		_defaultColor = GetComponent<MeshRenderer>().material.color;
-		_currentHealth = _health;
+
+        //uggly solution for now, samurai has skinnedmeshrenderer in child0
+        if(GetComponent<MeshRenderer>())
+		    _defaultColor = GetComponent<MeshRenderer>().material.color;
+        else
+            _defaultColor = transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color;
+
+        _currentHealth = _health;
 	}
 
 	protected virtual void Update()

@@ -1,0 +1,171 @@
+fileFormatVersion: 2
+guid: dcac7262f4824da41a182340266a479a
+timeCreated: 1497358386
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Back_Plate
+    100002: //RootNode
+    100004: Decapitation
+    100006: Front_Plate
+    100008: Head
+    100010: Head_Null
+    100012: L_Ankle
+    100014: L_Ball
+    100016: L_Clavicle
+    100018: L_Elbow
+    100020: L_Finger_End
+    100022: L_Finger_Mid
+    100024: L_Finger_Root
+    100026: L_Hip
+    100028: L_Hip_Plate
+    100030: L_Knee
+    100032: L_Shoulder
+    100034: L_Thumb_Mid
+    100036: L_Thumb_Root
+    100038: L_Wrist
+    100040: Neck
+    100042: R_Ankle
+    100044: R_Ball
+    100046: R_Clavicle
+    100048: R_Elbow
+    100050: R_Finger_End
+    100052: R_Finger_Mid
+    100054: R_Finger_Root
+    100056: R_Hip
+    100058: R_Hip_Plate
+    100060: R_Knee
+    100062: R_Shoulder
+    100064: R_Sword
+    100066: R_Thumb_Mid
+    100068: R_Thumb_Root
+    100070: R_Wrist
+    100072: Root
+    100074: Samurai_Mesh
+    100076: Shoulder_Plate
+    100078: Skeleton_Group
+    100080: Spine_1
+    100082: Spine_2
+    100084: Spine_3
+    100086: Spine_4
+    100088: Super_CTRL
+    400000: Back_Plate
+    400002: //RootNode
+    400004: Decapitation
+    400006: Front_Plate
+    400008: Head
+    400010: Head_Null
+    400012: L_Ankle
+    400014: L_Ball
+    400016: L_Clavicle
+    400018: L_Elbow
+    400020: L_Finger_End
+    400022: L_Finger_Mid
+    400024: L_Finger_Root
+    400026: L_Hip
+    400028: L_Hip_Plate
+    400030: L_Knee
+    400032: L_Shoulder
+    400034: L_Thumb_Mid
+    400036: L_Thumb_Root
+    400038: L_Wrist
+    400040: Neck
+    400042: R_Ankle
+    400044: R_Ball
+    400046: R_Clavicle
+    400048: R_Elbow
+    400050: R_Finger_End
+    400052: R_Finger_Mid
+    400054: R_Finger_Root
+    400056: R_Hip
+    400058: R_Hip_Plate
+    400060: R_Knee
+    400062: R_Shoulder
+    400064: R_Sword
+    400066: R_Thumb_Mid
+    400068: R_Thumb_Root
+    400070: R_Wrist
+    400072: Root
+    400074: Samurai_Mesh
+    400076: Shoulder_Plate
+    400078: Skeleton_Group
+    400080: Spine_1
+    400082: Spine_2
+    400084: Spine_3
+    400086: Spine_4
+    400088: Super_CTRL
+    4300000: Samurai_Mesh
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Samurai_Mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
