@@ -1076,7 +1076,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1609218062800694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.69, z: 32.67}
+  m_LocalPosition: {x: 0, y: 0, z: 33.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4449382911531764}
@@ -1446,7 +1446,10 @@ MonoBehaviour:
   _knockBackForce: 3000
   _useKnockback: 0
   _awakeDistance: 10
-  _findNewPointTime: 6
+  _findNewPointTime: 8
+  _walkSpeed: 4
+  _runSpeed: 8
+  _katana: {fileID: 1725278844852688}
 --- !u!114 &114549547887396370
 MonoBehaviour:
   m_ObjectHideFlags: 1

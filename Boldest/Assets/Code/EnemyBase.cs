@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -56,12 +57,17 @@ public class EnemyBase : MonoBehaviour
 		if (_currentHealth < 0)
 		{
 			_player.RemoveEnemyFromList(GetComponent<Collider>());
-			Destroy(gameObject);
+            OnDeath();
 		}
 
 		StartCoroutine(DamageFlash());
 	}
 
+    public virtual void OnDeath()
+    {
+
+        Destroy(gameObject);
+    }
 
 	IEnumerator KnockBack(Vector3 inVelocity)
 	{
@@ -120,4 +126,7 @@ public class EnemyBase : MonoBehaviour
 		}
 	}
 
+   
 }
+
+

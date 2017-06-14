@@ -56,4 +56,10 @@ public class EnemyArcher : EnemyBase
 
         yield return null;
     }
+
+    public override void OnDeath()
+    {
+        print("custom particle");
+        Destroy(gameObject);
+    }
 }

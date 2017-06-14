@@ -7,9 +7,12 @@ public class Ninja : EnemyBase
     bool _awake = false;
     bool _walking = true;
     float _playerDistance = 0;
-    [SerializeField] float _awakeDistance = 10.0f;
     float _findNewPointTimer = 0.0f;
+    [SerializeField] float _awakeDistance = 10.0f;
     [SerializeField] float _findNewPointTime = 8.0f;
+    [SerializeField] float _walkSpeed = 4.0f;
+    [SerializeField] float _runSpeed = 8.0f;
+
     Vector3 _randomClosePos;
     Vector3 _targetPos;
     Animator _animator;
@@ -93,6 +96,7 @@ public class Ninja : EnemyBase
 
 
         _animator.SetBool("isWalking", _walking);
+        _animator.SetBool("playerInZone", _awake);
 
     }
 }

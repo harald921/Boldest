@@ -121,7 +121,125 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Samurai_Mesh
+        weight: 1
+      - path: Skeleton_Group
+        weight: 1
+      - path: Skeleton_Group/Root
+        weight: 1
+      - path: Skeleton_Group/Root/Back_Plate
+        weight: 1
+      - path: Skeleton_Group/Root/Front_Plate
+        weight: 1
+      - path: Skeleton_Group/Root/L_Hip
+        weight: 1
+      - path: Skeleton_Group/Root/L_Hip/L_Hip_Plate
+        weight: 1
+      - path: Skeleton_Group/Root/L_Hip/L_Knee
+        weight: 1
+      - path: Skeleton_Group/Root/L_Hip/L_Knee/L_Ankle
+        weight: 1
+      - path: Skeleton_Group/Root/L_Hip/L_Knee/L_Ankle/L_Ball
+        weight: 1
+      - path: Skeleton_Group/Root/R_Hip
+        weight: 1
+      - path: Skeleton_Group/Root/R_Hip/R_Hip_Plate
+        weight: 1
+      - path: Skeleton_Group/Root/R_Hip/R_Knee
+        weight: 1
+      - path: Skeleton_Group/Root/R_Hip/R_Knee/R_Ankle
+        weight: 1
+      - path: Skeleton_Group/Root/R_Hip/R_Knee/R_Ankle/R_Ball
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/L_Clavicle
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/L_Clavicle/L_Shoulder
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/L_Clavicle/L_Shoulder/L_Elbow
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/L_Clavicle/L_Shoulder/L_Elbow/L_Wrist
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/L_Clavicle/L_Shoulder/L_Elbow/L_Wrist/L_Finger_Root
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/L_Clavicle/L_Shoulder/L_Elbow/L_Wrist/L_Finger_Root/L_Finger_Mid
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/L_Clavicle/L_Shoulder/L_Elbow/L_Wrist/L_Finger_Root/L_Finger_Mid/L_Finger_End
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/L_Clavicle/L_Shoulder/L_Elbow/L_Wrist/L_Thumb_Root
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/L_Clavicle/L_Shoulder/L_Elbow/L_Wrist/L_Thumb_Root/L_Thumb_Mid
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Decapitation
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Decapitation/Head
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Decapitation/Head/Head_Null
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle/R_Shoulder
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle/R_Shoulder/R_Elbow
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle/R_Shoulder/R_Elbow/R_Wrist
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle/R_Shoulder/R_Elbow/R_Wrist/R_Finger_Root
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle/R_Shoulder/R_Elbow/R_Wrist/R_Finger_Root/R_Finger_Mid
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle/R_Shoulder/R_Elbow/R_Wrist/R_Finger_Root/R_Finger_Mid/R_Finger_End
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle/R_Shoulder/R_Elbow/R_Wrist/R_Sword
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle/R_Shoulder/R_Elbow/R_Wrist/R_Thumb_Root
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle/R_Shoulder/R_Elbow/R_Wrist/R_Thumb_Root/R_Thumb_Mid
+        weight: 1
+      - path: Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_Plate
+        weight: 1
+      - path: Super_CTRL
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
