@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     //settings for player
     [SerializeField] float _health      = 100.0f;
+    float _maxHealth;
     [SerializeField] float _moveSpeed   = 16.0f;
     [SerializeField] float _turnSpeed   = 1.0f;
     [SerializeField] bool _useController = false;
@@ -69,6 +70,8 @@ public class Player : MonoBehaviour
 
     void Start()
 	{
+        _maxHealth = _health;
+
         _cameraShaker = Camera.main.GetComponent<CameraShake>();
 
         _defaultColor = GetComponent<MeshRenderer>().material.color;       
@@ -79,6 +82,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        GameObject.Find("Healthbar").transform.GetChild(0).GetComponent<Image>().fillAmount = Mathf.InverseLerp(0, _maxHealth, _health);
+
         _aim.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
 
         LockOnEnemy();
