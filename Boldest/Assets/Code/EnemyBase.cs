@@ -86,8 +86,13 @@ public class EnemyBase : MonoBehaviour
 		{
 			timer -= Time.deltaTime;
 			float flashLerpValue = Mathf.InverseLerp(0, flashDuration, timer);
-			GetComponent<MeshRenderer>().material.color = Color.Lerp(_defaultColor, Color.red, flashLerpValue);
-			yield return null;
+
+            if(GetComponent<MeshRenderer>())
+			    GetComponent<MeshRenderer>().material.color = Color.Lerp(_defaultColor, Color.red, flashLerpValue);
+            else
+                transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.Lerp(_defaultColor, Color.red, flashLerpValue);
+
+            yield return null;
 		}
 	}
 
