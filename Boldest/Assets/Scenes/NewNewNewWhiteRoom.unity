@@ -8941,10 +8941,10 @@ Transform:
   - {fileID: 739667449}
   - {fileID: 1900580896}
   - {fileID: 1838406453}
-  - {fileID: 1456476977}
   - {fileID: 1525768016}
-  - {fileID: 1927651900}
+  - {fileID: 1456476977}
   - {fileID: 734999872}
+  - {fileID: 1927651900}
   - {fileID: 1054318813}
   - {fileID: 39283951}
   - {fileID: 623658094}
@@ -9893,6 +9893,11 @@ Prefab:
     - target: {fileID: 4335530393287172, guid: 9fda2bc59b9a8dd45aaf636349ae6400, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 3.9586382
+      objectReference: {fileID: 0}
+    - target: {fileID: 23029622545715314, guid: 9fda2bc59b9a8dd45aaf636349ae6400,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9fda2bc59b9a8dd45aaf636349ae6400, type: 2}
