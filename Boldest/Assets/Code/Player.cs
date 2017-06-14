@@ -65,8 +65,12 @@ public class Player : MonoBehaviour
     public Image _aim;
     Vector2 _playerUiPos;
 
+    CameraShake _cameraShaker;
+
     void Start()
 	{
+        _cameraShaker = Camera.main.GetComponent<CameraShake>();
+
         _defaultColor = GetComponent<MeshRenderer>().material.color;       
         _dashDir = transform.forward;
         _bull.gameObject.SetActive(false);
@@ -75,7 +79,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        
         _aim.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
 
         LockOnEnemy();
@@ -313,11 +316,12 @@ public class Player : MonoBehaviour
 			_isDashing = true;
 			_dashParticle.Play();
 		}
-		_inVisceralAttack = false;				             
+		_inVisceralAttack = false;
 
-	}
+        _cameraShaker.DoAimPunch(5, 60.0f);
+    }
 
-	public IEnumerator KnockBack(Vector3 inDirection)
+    public IEnumerator KnockBack(Vector3 inDirection)
 	{
 		_inKnockBack = true;
 		GetComponent<Rigidbody>().AddForce(inDirection * _knockBackForce);
@@ -426,7 +430,10 @@ public class Player : MonoBehaviour
         }
       
         if (inHealthModifier < 0)
+        {
+            _cameraShaker.SetShakeDuration(0.1f, 0.2f);
             StartCoroutine(DamageFlash());
+        }
     }
    
     IEnumerator DamageFlash()
