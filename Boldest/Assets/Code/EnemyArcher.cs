@@ -45,8 +45,12 @@ public class EnemyArcher : EnemyBase
     {
         _isFiringAtPlayer = true;
         _navMeshAgent.enabled = false;
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+
 
         yield return new WaitForSeconds(_drawTime);
+
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
 
         _navMeshAgent.enabled = true;
         _isFiringAtPlayer = false;
