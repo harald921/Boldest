@@ -602,11 +602,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectile: {fileID: 1363879566625450, guid: 877ef391944b5ed4d913d75a6b0cbe14,
     type: 2}
+  _cooldownTime: 1
+  _minimumDraw: 1
   _maxDraw: 500
   _drawSpeed: 10
   _drawToVelocityMultiplier: 100
   _aimSpeed: 1
-  _camera2: 1
 --- !u!114 &114333494462632148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -629,14 +630,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea10d246ea92b74b9f40bd4459530d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 30
   _moveSpeed: 130
   _turnSpeed: 20
   _useController: 1
   _gravityPower: 100
   _lastMovementVector: {x: 0, y: 0, z: -0.004148539}
+  _accelerationSpeed: 5
   _dashDuration: 0.28
+  _dashOffsetDuration: 0
   _dashSpeed: 400
+  _dashOffsetSpeed: 0
   _dashCoolDown: 0.4
   _isDashing: 0
   _timeWindowToAttack: 0.4
@@ -645,13 +649,19 @@ MonoBehaviour:
     type: 2}
   _dashParticle: {fileID: 198045394042706002}
   _knockBackForce: 1000
+  _attackEffect: {fileID: 0}
   _attackMomentum: 800
   _attackCoolDown: 0.2
-  _accelerationSpeed: 5
-  _dash1: 0
-  _dash2: 1
-  _camera2: 1
+  _swordSwipe: {fileID: 0}
+  _swipeLenght: 0.2
   _isBowing: 0
+  _speedMultiOnBowing: 1
+  _lockables: []
+  _currentLockOnID: 0
+  _isLockedOn: 0
+  _changeTargetDelay: 0.3
+  _bull: {fileID: 0}
+  _aim: {fileID: 0}
 --- !u!136 &136702434078108446
 CapsuleCollider:
   m_ObjectHideFlags: 1
