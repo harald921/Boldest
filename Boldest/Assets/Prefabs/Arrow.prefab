@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 54248503476205792}
   - component: {fileID: 114757525971288706}
   - component: {fileID: 64773342610952296}
+  - component: {fileID: 136902599283099506}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Arrow
@@ -126,3 +127,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateSpeed: 10
+--- !u!136 &136902599283099506
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1363879566625450}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.609082
+  m_Height: 0.217138
+  m_Direction: 1
+  m_Center: {x: -0.0018055029, y: 0, z: 0.490862}
