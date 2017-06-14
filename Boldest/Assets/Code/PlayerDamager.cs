@@ -6,15 +6,12 @@ using UnityEngine;
 
 public class PlayerDamager : MonoBehaviour
 {
-    public float _damageToGive = 15;
-    public bool _destroyOnImpact = true;
-
-
-
+    [SerializeField] private float _damageToGive   = 15;
+    [SerializeField] private bool _destroyOnImpact = true;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             other.GetComponent<Player>().ModifyHealth(-_damageToGive);
             Vector3 dir = other.transform.position - transform.position;
@@ -24,10 +21,6 @@ public class PlayerDamager : MonoBehaviour
 
             if (_destroyOnImpact)
                 Destroy(gameObject);
-
         }
     }
-
-
-
 }

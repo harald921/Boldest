@@ -240,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isVunurable: 1
   _currentHealth: 0
-  _health: 100
+  _health: 20
   _invulnerableTime: 0.1
   _bowDamage: 10
   _swordDamage: 10
