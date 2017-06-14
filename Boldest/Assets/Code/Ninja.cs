@@ -79,7 +79,7 @@ public class Ninja : EnemyBase
         }
         else
         {
-            if(_findNewPointTimer > _findNewPointTime)
+            if(_findNewPointTimer > _findNewPointTime && _navMeshAgent.enabled)
             {
                 _randomClosePos = new Vector3(Random.Range(-10, 10), transform.position.y, Random.Range(-10, 10));
                 _navMeshAgent.destination = transform.position + _randomClosePos;
