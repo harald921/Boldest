@@ -14,6 +14,8 @@ public class Ninja : EnemyBase
     Vector3 _targetPos;
     Animator _animator;
 
+    public GameObject _katana;
+    Transform _joint;
     
 
     protected override void Start()
@@ -22,8 +24,9 @@ public class Ninja : EnemyBase
         _navMeshAgent.enabled = true;
         _animator = GetComponent<Animator>();
         _findNewPointTimer = _findNewPointTime;
-              
-       
+
+        _joint = transform.Find("Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle/R_Shoulder/R_Elbow/R_Wrist/Sword_Joint").transform;
+        _katana.transform.parent = _joint.transform;
         
     }
 
