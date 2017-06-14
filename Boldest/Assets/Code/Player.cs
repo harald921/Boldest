@@ -65,6 +65,11 @@ public class Player : MonoBehaviour
     public Image _aim;
     Vector2 _playerUiPos;
 
+
+    [HideInInspector] public bool _isVunurable = true;
+    [SerializeField] float _invulnerableTime = 0.1f;
+    float _invunarableTimer = 0.0f;
+
     void Start()
 	{
         _defaultColor = GetComponent<MeshRenderer>().material.color;       
@@ -88,6 +93,12 @@ public class Player : MonoBehaviour
         }
 
         HandleAimingOnVisceralAttack();
+
+        _invunarableTimer += Time.deltaTime;
+        if (_invunarableTimer > _invulnerableTime)
+            _isVunurable = true;
+        else
+            _isVunurable = false;
 
         _attackTimer += Time.deltaTime;
         _acceleration += Time.deltaTime * _accelerationSpeed;
@@ -287,8 +298,8 @@ public class Player : MonoBehaviour
 
     IEnumerator PreformVisceralAttack(Collider enemyCollider)
     {
-		
 
+        _invunarableTimer = 0 - _timePreformingAttack;
         yield return new WaitForSeconds(_timePreformingAttack); // wait to finish attack, will be timed on attack animation	
 
         RemoveEnemyFromList(enemyCollider);
@@ -418,6 +429,7 @@ public class Player : MonoBehaviour
     public void ModifyHealth(float inHealthModifier)
     {
         _health += inHealthModifier;
+        _invunarableTimer = 0;
 
         if (_health <= 0)
         {
