@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 54248503476205792}
   - component: {fileID: 114757525971288706}
   - component: {fileID: 64773342610952296}
-  - component: {fileID: 136902599283099506}
+  - component: {fileID: 65779368501184398}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Arrow
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1363879566625450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7104812, y: 0.32000002, z: 35.515594}
+  m_LocalPosition: {x: 0.39437366, y: 1.475, z: 3.4910536}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -115,6 +115,18 @@ MeshCollider:
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 85594f4eaefc6d74d8baa5d13a0288b9, type: 3}
+--- !u!65 &65779368501184398
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1363879566625450}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.21713701, y: 0.217138, z: 1.218164}
+  m_Center: {x: -0.0018055029, y: 0, z: 0.490862}
 --- !u!114 &114757525971288706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,16 +139,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotateSpeed: 10
---- !u!136 &136902599283099506
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1363879566625450}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.609082
-  m_Height: 0.217138
-  m_Direction: 1
-  m_Center: {x: -0.0018055029, y: 0, z: 0.490862}
+  _decayTime: 5

@@ -6,6 +6,8 @@ public class Arrow : MonoBehaviour
 {
     [SerializeField] float _rotateSpeed = 1.0f;
 
+    [SerializeField] float _decayTime = 5.0f;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<EnemyRusher>())
@@ -19,6 +21,15 @@ public class Arrow : MonoBehaviour
             enemyRusher.TryKnockBack(knockbackDirection.normalized * 300);
         }
 
+        StartCoroutine(DecayCooldown());
+    }
+
+    IEnumerator DecayCooldown()
+    {
+        Destroy(GetComponent<BoxCollider>());
+        GetComponent<Rigidbody>().isKinematic = true;
+
+        yield return new WaitForSeconds(_decayTime);
         Destroy(gameObject);
     }
 
