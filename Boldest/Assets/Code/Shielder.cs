@@ -84,6 +84,12 @@ public class Shielder : EnemyBase
         
     }
 
+    public override void OnGettingVisceraled()
+    {
+        GettingDashed();
+
+    }
+
 
    public void GettingDashed()
     {

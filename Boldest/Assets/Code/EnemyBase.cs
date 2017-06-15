@@ -8,7 +8,8 @@ using UnityEngine.AI;
 public class EnemyBase : MonoBehaviour
 {
 	[HideInInspector] public bool _isVunurable = true;
-	public float _currentHealth;
+    [HideInInspector] public float _currentHealth;
+    [HideInInspector] public bool _inWeakState = true;
 	protected Color _defaultColor;
 	protected NavMeshAgent _navMeshAgent;
 	protected Player _player;
@@ -67,6 +68,12 @@ public class EnemyBase : MonoBehaviour
     {
 
         Destroy(gameObject);
+    }
+
+    public virtual void OnGettingVisceraled()
+    {
+        int k = 0;
+        k += 2;
     }
 
 	IEnumerator KnockBack(Vector3 inVelocity)

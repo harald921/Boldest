@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114491515880027912}
   - component: {fileID: 54505748889018126}
   - component: {fileID: 195977364769904930}
-  - component: {fileID: 114300998815781378}
+  - component: {fileID: 114790481293480564}
   m_Layer: 8
   m_Name: body
   m_TagString: Bird
@@ -399,26 +399,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &114300998815781378
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1082944274154748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a78b47d47cb199d488f2f3e5c97945a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isVunurable: 1
-  _currentHealth: 0
-  _health: 100
-  _invulnerableTime: 0.1
-  _bowDamage: 10
-  _swordDamage: 10
-  _fireDamage: 10
-  _knockBackForce: 3000
-  _useKnockback: 0
 --- !u!114 &114320343858698042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -448,6 +428,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hardCollider: {fileID: 136420345509760048}
+--- !u!114 &114790481293480564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1082944274154748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90965d2b208e4a04696be0665c36f1fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isVunurable: 1
+  _currentHealth: 0
+  _inWeakState: 1
+  _health: 100
+  _invulnerableTime: 0.1
+  _bowDamage: 10
+  _swordDamage: 10
+  _fireDamage: 10
+  _knockBackForce: 3000
+  _useKnockback: 0
 --- !u!136 &136323074287793312
 CapsuleCollider:
   m_ObjectHideFlags: 1
