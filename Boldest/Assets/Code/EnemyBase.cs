@@ -70,6 +70,11 @@ public class EnemyBase : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public virtual void OnGettingVisceraled()
+    {
+        //overide this
+    }
+
 	IEnumerator KnockBack(Vector3 inVelocity)
 	{
 
