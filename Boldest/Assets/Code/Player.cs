@@ -253,7 +253,6 @@ public class Player : MonoBehaviour
                 transform.LookAt(enemyCollider.transform);
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                 StartCoroutine(PreformVisceralAttack(enemyCollider));
-                Time.timeScale = 1.0f;
                 StopCoroutine(_visceralCo);
             }
             yield return null;
@@ -295,6 +294,7 @@ public class Player : MonoBehaviour
 
         _inVisceralAttack = false;
         _cameraShaker.DoAimPunch(5, 60.0f);
+        Time.timeScale = 1.0f;
     }
 
     public IEnumerator KnockBack(Vector3 inDirection)
