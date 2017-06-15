@@ -15,6 +15,7 @@ public class Ninja : EnemyBase
     [SerializeField] float _walkSpeed = 4.0f;
     [SerializeField] float _runSpeed = 8.0f;
     [SerializeField] float _attackMomentum = 500.0f;
+    [SerializeField] float _weakOnHealth = 50.0f;
 
 
 
@@ -37,6 +38,7 @@ public class Ninja : EnemyBase
         _navMeshAgent.speed = _walkSpeed;
         _animator = GetComponent<Animator>();
         _findNewPointTimer = _findNewPointTime;
+        _inWeakState = false;
 
         _joint = transform.Find("Skeleton_Group/Root/Spine_1/Spine_2/Spine_3/Spine_4/R_Clavicle/R_Shoulder/R_Elbow/R_Wrist/Sword_Joint").transform;
         _damager = transform.Find("DamageArea").gameObject;
@@ -55,6 +57,11 @@ public class Ninja : EnemyBase
                    
         CheckAttack();
         SetAnimations();
+
+        if(_currentHealth <= _weakOnHealth)
+        {
+            _inWeakState = true;
+        }
         
     }
 

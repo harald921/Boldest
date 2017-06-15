@@ -1070,7 +1070,7 @@ public class Player : MonoBehaviour
 
 
 
-            if (Input.GetButtonDown("RightHandButton") && enemy._isVunurable)
+            if (Input.GetButtonDown("RightHandButton") && enemy._isVunurable && enemy._inWeakState)
 
 
 
