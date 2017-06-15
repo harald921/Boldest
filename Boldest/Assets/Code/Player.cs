@@ -295,6 +295,8 @@ public class Player : MonoBehaviour
             _dashParticle.Play();
         }
 
+        // fuck my life
+
         _inVisceralAttack = false;
         _cameraShaker.DoAimPunch(5, 60.0f);
     }
