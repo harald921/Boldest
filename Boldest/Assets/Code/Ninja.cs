@@ -16,8 +16,10 @@ public class Ninja : EnemyBase
     [SerializeField] float _runSpeed = 8.0f;
     [SerializeField] float _attackMomentum = 500.0f;
     [SerializeField] float _weakOnHealth = 50.0f;
+    [SerializeField] float _flashSpeed = 0.1f;
+    [SerializeField] Color _flashColor = Color.white;
 
-
+    bool _gettingVisceral = false;
 
 
     Vector3 _randomClosePos;
@@ -50,23 +52,34 @@ public class Ninja : EnemyBase
     protected override void Update()
     {
         base.Update();
-        GetPlayerDistance();
-
-        if (_awake)       
-            PlayerIsNear();
-                   
-        CheckAttack();
-        SetAnimations();
-
-        if(_currentHealth <= _weakOnHealth)
+        if (!_gettingVisceral)
         {
-            if (!_inWeakState)
+            GetPlayerDistance();
+
+            if (_awake)
+                PlayerIsNear();
+
+            CheckAttack();
+            SetAnimations();
+
+            if (_currentHealth <= _weakOnHealth)
             {
-                _inWeakState = true;
-                StartCoroutine(WeakFlashing());
+                if (!_inWeakState)
+                {
+                    _inWeakState = true;
+                    StartCoroutine(WeakFlashing());
+                }
+
             }
-            
         }
+        else
+        {
+
+            _navMeshAgent.enabled = false;
+            GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+        
         
     }
 
@@ -174,15 +187,23 @@ public class Ninja : EnemyBase
 
     }
 
+    public override void OnGettingVisceraled()
+    {
+        _gettingVisceral = true;
+        _animator.SetBool("isWalking", false);
+        _animator.SetBool("playerInZone", false);
+        _animator.SetBool("inAttack", false);
+    }
+
     IEnumerator WeakFlashing()
     {
 
         while (true)
-        {          
-            transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.white;
-            yield return new WaitForSeconds(0.1f);
+        {
+            transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = _flashColor;
+            yield return new WaitForSeconds(_flashSpeed);
             transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = _defaultColor;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(_flashSpeed);
         }
         
     }
