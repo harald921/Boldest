@@ -50,12 +50,10 @@ public class Ninja : EnemyBase
         base.Update();
         GetPlayerDistance();
 
-        if (_awake)
-        {
+        if (_awake)       
             PlayerIsNear();
-            CheckAttack();
-        }
-           
+                   
+        CheckAttack();
         SetAnimations();
         
     }
