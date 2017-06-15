@@ -242,13 +242,9 @@ public class Player : MonoBehaviour
         while (timeToAttack > 0)
         {
             timeToAttack -= Time.deltaTime;
-            if (Input.GetButtonDown("RightHandButton") && enemy._isVunurable)
+            if (Input.GetButtonDown("RightHandButton") && enemy._isVunurable && enemy._inWeakState)
             {
-                if (enemyCollider.tag == "Shielder")
-                    enemyCollider.GetComponent<Shielder>().GettingDashed();
-
-                if (enemyCollider.tag == "Bird")
-                    enemyCollider.GetComponentInParent<Bird>()._move = false;
+                enemy.OnGettingVisceraled();
 
                 GameObject effect = Instantiate(_attackEffect, enemyCollider.transform.position + new Vector3(0, 3, 0), Quaternion.identity);
                 Destroy(effect, _timePreformingAttack);
