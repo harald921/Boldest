@@ -190,9 +190,8 @@ public class Ninja : EnemyBase
     public override void OnGettingVisceraled()
     {
         _gettingVisceral = true;
-        _animator.SetBool("isWalking", false);
-        _animator.SetBool("playerInZone", false);
-        _animator.SetBool("inAttack", false);
+        
+        _animator.SetBool("Dead", true);
     }
 
     IEnumerator WeakFlashing()
