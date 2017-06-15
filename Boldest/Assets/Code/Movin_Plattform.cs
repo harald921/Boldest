@@ -13,16 +13,12 @@ public class Movin_Plattform : MonoBehaviour
     public float smooth;
     public float resetTime;
 
-
-
-    // Use this for initialization
     void Start()
     {
         ChangeTarget();
 
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         movingPlatform.position = Vector3.Lerp(movingPlatform.position, newPosition, smooth * Time.deltaTime);
@@ -45,6 +41,7 @@ public class Movin_Plattform : MonoBehaviour
             currentState = "Moving to Position 2";
             newPosition = position2.position;
         }
+
         Invoke("ChangeTarget", resetTime);
     }
 }
