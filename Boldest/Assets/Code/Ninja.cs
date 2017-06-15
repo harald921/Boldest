@@ -14,9 +14,10 @@ public class Ninja : EnemyBase
     [SerializeField] float _findNewPointTime = 8.0f;
     [SerializeField] float _walkSpeed = 4.0f;
     [SerializeField] float _runSpeed = 8.0f;
+    [SerializeField] float _attackMomentum = 500.0f;
 
-    float _swordHitBoxTimer = 0.0f;
-    
+
+
 
     Vector3 _randomClosePos;
     Vector3 _targetPos;
@@ -101,35 +102,31 @@ public class Ninja : EnemyBase
 
     void CheckAttack()
     {
-        _swordHitBoxTimer += Time.deltaTime;
+       
 
         if (_playerDistance < _attackDistance)
-        {
-            if(!_inAttack)
-               _swordHitBoxTimer = 0;
-
+        {           
             _inAttack = true;           
             _navMeshAgent.enabled = false;
 
             Player player = FindObjectOfType<Player>();
             Vector3 dir = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z) - transform.position;
             dir.Normalize();
-
             transform.forward = dir;
+            GetComponent<Rigidbody>().isKinematic = false;
            
-
         }
         else
         {
             _inAttack = false;
             _damager.SetActive(false);
             _navMeshAgent.enabled = true;
+            GetComponent<Rigidbody>().isKinematic = true;
         }
 
-        if(_inAttack && _swordHitBoxTimer > 0.12)
-        {
-            _damager.SetActive(true);
-        }
+        
+            
+        
            
 
     }
@@ -153,4 +150,23 @@ public class Ninja : EnemyBase
         _animator.SetBool("inAttack", _inAttack);
 
     }
+
+    void Onstartattack()
+    {
+        GetComponent<Rigidbody>().AddForce(transform.forward * _attackMomentum);
+
+    }
+
+    void OnAttack()
+    {
+        _damager.SetActive(true);
+
+    }
+
+    void OnAttackDone()
+    {
+
+
+    }
 }
+
