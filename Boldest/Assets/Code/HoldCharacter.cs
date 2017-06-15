@@ -5,15 +5,15 @@ using UnityEngine;
 public class HoldCharacter : MonoBehaviour
 {
 
-    void OnTriggerEnter(Collider col)
+    void OnCollisionEnter(Collision col)
     {
-        if (col.tag == "Player")
+        if (col.transform.tag == "Player")
             col.transform.parent = gameObject.transform;
     }
 
-    void OnTriggerExit(Collider col)
+    void OnCollisionExit(Collision col)
     {
-        if (col.tag == "Player")
+        if (col.transform.tag == "Player")
             col.transform.parent = null;
     }
 }
