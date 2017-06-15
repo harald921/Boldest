@@ -170,8 +170,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 0.82125866, b: 0.5808824, a: 1}
-  m_Intensity: 20
-  m_Range: 2
+  m_Intensity: 2
+  m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
