@@ -60,7 +60,12 @@ public class Ninja : EnemyBase
 
         if(_currentHealth <= _weakOnHealth)
         {
-            _inWeakState = true;
+            if (!_inWeakState)
+            {
+                _inWeakState = true;
+                StartCoroutine(WeakFlashing());
+            }
+            
         }
         
     }
@@ -128,12 +133,7 @@ public class Ninja : EnemyBase
             _navMeshAgent.enabled = true;
             GetComponent<Rigidbody>().isKinematic = true;
         }
-
-        
-            
-        
-           
-
+                                 
     }
 
 
@@ -172,6 +172,19 @@ public class Ninja : EnemyBase
     {
 
 
+    }
+
+    IEnumerator WeakFlashing()
+    {
+
+        while (true)
+        {          
+            transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = Color.white;
+            yield return new WaitForSeconds(0.1f);
+            transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().material.color = _defaultColor;
+            yield return new WaitForSeconds(0.1f);
+        }
+        
     }
 }
 
