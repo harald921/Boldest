@@ -66,4 +66,9 @@ public class EnemyArcher : EnemyBase
         print("custom particle");
         Destroy(gameObject);
     }
+
+    public override void OnGettingVisceraled()
+    {
+        base.OnGettingVisceraled();
+    }
 }
