@@ -72,7 +72,7 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void OnGettingVisceraled()
     {
-
+        //overide this
     }
 
 	IEnumerator KnockBack(Vector3 inVelocity)
