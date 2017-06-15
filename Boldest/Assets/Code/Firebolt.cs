@@ -5,6 +5,8 @@ using UnityEngine;
 public class Firebolt : MonoBehaviour
 {
     [SerializeField] float _knockbackForce = 400.0f;
+    public GameObject _hitParticle;
+
 
     private void OnTriggerEnter(Collider collision)
     {      
@@ -17,6 +19,9 @@ public class Firebolt : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        GameObject ob = Instantiate(_hitParticle, transform.position, Quaternion.identity);
+        Destroy(ob, 3);
+
         Destroy(gameObject);
     }
 }
