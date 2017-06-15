@@ -1538,6 +1538,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2424f9080ca4b164295882872e98bf1a, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &320882217 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4479583501601528, guid: 2424f9080ca4b164295882872e98bf1a,
+    type: 2}
+  m_PrefabInternal: {fileID: 320882216}
 --- !u!1 &328028954
 GameObject:
   m_ObjectHideFlags: 0
@@ -8486,7 +8491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1264269146
 Transform:
   m_ObjectHideFlags: 0
@@ -8510,11 +8515,7 @@ Transform:
   - {fileID: 1525768016}
   - {fileID: 1900580896}
   - {fileID: 734999872}
-  - {fileID: 1525768016}
-  - {fileID: 1900580896}
-  - {fileID: 734999872}
-  - {fileID: 1838406453}
-  - {fileID: 1456476977}
+  - {fileID: 320882217}
   - {fileID: 1927651900}
   - {fileID: 1359372378}
   - {fileID: 586143802}
