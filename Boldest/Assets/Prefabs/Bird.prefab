@@ -449,8 +449,6 @@ MonoBehaviour:
   _fireDamage: 10
   _knockBackForce: 3000
   _useKnockback: 0
-  _damageText: {fileID: 1545867489684724, guid: 390326446f2d5e34c83cb3b6d5f25c14,
-    type: 2}
 --- !u!136 &136323074287793312
 CapsuleCollider:
   m_ObjectHideFlags: 1
