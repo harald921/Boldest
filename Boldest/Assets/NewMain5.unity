@@ -571,6 +571,11 @@ Transform:
   m_Father: {fileID: 510389665}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -10.684001, y: 0, z: -0.28500003}
+--- !u!4 &145362262 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4286109681807200, guid: 25245b79e23d8834d9e236f150b6f2d2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1984819701}
 --- !u!1 &151411125
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &154893222
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1839,6 +1845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &373636123
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2389,6 +2396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &498565686
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2787,6 +2795,7 @@ MonoBehaviour:
   _aim: {fileID: 424010639}
   _isVunurable: 1
   _invulnerableTime: 0.1
+  _bowSlomoTimeScale: 0.05
 --- !u!23 &597042532
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2896,7 +2905,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 33.09233, y: 3.3629174, z: 47.6474}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 623827792}
   m_Father: {fileID: 510389665}
   m_RootOrder: 65
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3372,6 +3382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &696580288
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3565,6 +3576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &708168956
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4358,6 +4370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &829566391
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8721,6 +8734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &1044465865
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9210,6 +9224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &1156688659
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9691,6 +9706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &1254023718
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9872,9 +9888,10 @@ Transform:
   - {fileID: 1750741401}
   - {fileID: 261650045}
   - {fileID: 739667449}
+  - {fileID: 145362262}
   - {fileID: 1900580896}
-  - {fileID: 1543122311}
   - {fileID: 1927651900}
+  - {fileID: 1543122311}
   - {fileID: 1359372378}
   - {fileID: 586143802}
   - {fileID: 1153839799}
@@ -10255,6 +10272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &1313126677
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10681,6 +10699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &1394281564
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11004,6 +11023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &1419973585
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11461,6 +11481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &1481747762
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12942,6 +12963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &1743874768
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13140,6 +13162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBeforeCrumble: 2
+  _blinkInterval: 0.1
 --- !u!54 &1807304544
 Rigidbody:
   m_ObjectHideFlags: 0

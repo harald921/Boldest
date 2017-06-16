@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     bool _inVisceralAttack = false;
     Coroutine _visceralCo;
     public GameObject _attackEffect;
+    bool _inVisceralWindow = false;
+
     //sword attack stuff
     public float _attackMomentum;
     public float _attackCoolDown;
@@ -62,6 +64,9 @@ public class Player : MonoBehaviour
     [SerializeField] float _invulnerableTime = 0.1f;
     float _invunarableTimer = 0.0f;
 
+
+    [SerializeField] float _bowSlomoTimeScale = 0.1f;
+
     void Start()
     {
         _maxHealth = _health;
@@ -83,15 +88,43 @@ public class Player : MonoBehaviour
             HandleMovement();
             HandleAttackInput();
         }
+
         HandleAimingOnVisceralAttack();
         _invunarableTimer += Time.deltaTime;
+
         if (_invunarableTimer > _invulnerableTime)
             _isVunurable = true;
         else
             _isVunurable = false;
+
         _attackTimer += Time.deltaTime;
         _acceleration += Time.deltaTime * _accelerationSpeed;
         _acceleration = Mathf.Clamp(_acceleration, 0, 1);
+
+        HandleDashBow();
+
+    }
+
+    void HandleDashBow()
+    {
+
+        if (_isDashing && !_inVisceralAttack)
+        {
+            if (Input.GetButtonDown("BowButton"))
+                transform.GetComponentInChildren<Bow>().DrawBow();          
+        }
+
+        if (_isBowing && _isDashing)
+        {
+            Time.timeScale = _bowSlomoTimeScale;
+
+        }
+        else
+        {
+            if(!_inVisceralWindow && !_inVisceralAttack)
+                Time.timeScale = 1.0f;
+        }
+
     }
 
     private void FixedUpdate()
@@ -222,6 +255,7 @@ public class Player : MonoBehaviour
     public void VisceralAttackWindow(Collider enemyCollider)
     {
         Time.timeScale = 0.1f;
+        _inVisceralWindow = true;
         _visceralCo = StartCoroutine(HandleVisceralAttackWindow(enemyCollider));
     }
 
@@ -231,6 +265,7 @@ public class Player : MonoBehaviour
         Physics.IgnoreCollision(enemyCollider, GetComponent<Collider>(), false);
         //StartCoroutine(KnockBack(-transform.forward));
         _inVisceralAttack = false;
+        _inVisceralWindow = false;
     }
 
     IEnumerator HandleVisceralAttackWindow(Collider enemyCollider)
@@ -250,6 +285,7 @@ public class Player : MonoBehaviour
                 Destroy(effect, _timePreformingAttack);
                 failedAttack = false;
                 _inVisceralAttack = true;
+                _inVisceralWindow = false;
                 transform.LookAt(enemyCollider.transform);
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
                 StartCoroutine(PreformVisceralAttack(enemyCollider));
@@ -290,7 +326,7 @@ public class Player : MonoBehaviour
             _dashParticle.Play();
         }
 
-        // fuck my life
+        // fuck Haralds life
 
         _inVisceralAttack = false;
         _cameraShaker.DoAimPunch(5, 60.0f);
