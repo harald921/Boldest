@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyBase : MonoBehaviour
@@ -22,6 +23,8 @@ public class EnemyBase : MonoBehaviour
 	[SerializeField] protected float _fireDamage = 10.0f;
 	[SerializeField] protected float _knockBackForce = 3000.0f;
 	[SerializeField] protected bool _useKnockback = false;
+
+    [SerializeField] GameObject _damageText;
 
 	protected virtual void Start()
 	{
@@ -60,6 +63,8 @@ public class EnemyBase : MonoBehaviour
 			_player.RemoveEnemyFromList(GetComponent<Collider>());
             OnDeath();
 		}
+
+        SpawnDamageNumber(-inHealthModifier);
 
 		StartCoroutine(DamageFlash());
 	}
@@ -137,6 +142,33 @@ public class EnemyBase : MonoBehaviour
 			}			
 		}
 	}
+
+    void SpawnDamageNumber(float damage)
+    {
+
+        GameObject can = GameObject.Find("WorldCanvas");
+        Canvas canvas = can.GetComponent<Canvas>();
+
+        GameObject textObject = Instantiate(_damageText, Vector3.zero, Quaternion.identity);
+        Text text = textObject.GetComponent<Text>();
+
+        text.transform.parent = canvas.transform;
+
+        //text.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
+        text.transform.position = transform.position;
+        text.text = damage.ToString();
+
+        Destroy(textObject, 2);
+
+        
+
+
+
+
+
+
+
+    }
 
    
 }

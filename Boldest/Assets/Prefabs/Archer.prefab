@@ -248,6 +248,8 @@ MonoBehaviour:
   _fireDamage: 10
   _knockBackForce: 3000
   _useKnockback: 0
+  _damageText: {fileID: 1545867489684724, guid: 390326446f2d5e34c83cb3b6d5f25c14,
+    type: 2}
   _drawTime: 1
   _shootLength: 20
   _detectionLength: 25
