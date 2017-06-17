@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.29697776, g: 0.24607444, b: 0.23221657, a: 1}
+  m_IndirectSpecularColor: {r: 0.29686192, g: 0.24606448, b: 0.23193651, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1230,7 +1230,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4479583501601528, guid: 2424f9080ca4b164295882872e98bf1a, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1306048094141834, guid: 2424f9080ca4b164295882872e98bf1a, type: 2}
       propertyPath: m_Name
@@ -3287,7 +3287,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &685441037
 GameObject:
@@ -5072,7 +5072,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4728128481255924, guid: 276b0ebe00093b945af23bba1901af20, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4728128481255924, guid: 276b0ebe00093b945af23bba1901af20, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -8958,7 +8958,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1080317759
 Prefab:
@@ -9053,13 +9053,7 @@ Prefab:
       propertyPath: m_Name
       value: Platform Manager (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4537330341343792, guid: 28ab152d8d11b404e9f67a175e179345, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114947011335912048, guid: 28ab152d8d11b404e9f67a175e179345, type: 2}
-    - {fileID: 114905296616044960, guid: 28ab152d8d11b404e9f67a175e179345, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28ab152d8d11b404e9f67a175e179345, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1115122361 stripped
@@ -9594,8 +9588,8 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 114947011335912048, guid: 28ab152d8d11b404e9f67a175e179345, type: 2}
-    - {fileID: 114905296616044960, guid: 28ab152d8d11b404e9f67a175e179345, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 28ab152d8d11b404e9f67a175e179345, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1237967624
@@ -9936,11 +9930,11 @@ Transform:
   - {fileID: 1425296147}
   - {fileID: 1750741401}
   - {fileID: 261650045}
-  - {fileID: 739667449}
   - {fileID: 145362262}
+  - {fileID: 739667449}
   - {fileID: 1900580896}
-  - {fileID: 1927651900}
   - {fileID: 1543122311}
+  - {fileID: 1927651900}
   - {fileID: 1359372378}
   - {fileID: 586143802}
   - {fileID: 1153839799}
@@ -10610,9 +10604,7 @@ Prefab:
       propertyPath: m_Name
       value: Platform Manager (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114947011335912048, guid: 28ab152d8d11b404e9f67a175e179345, type: 2}
-    - {fileID: 114905296616044960, guid: 28ab152d8d11b404e9f67a175e179345, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28ab152d8d11b404e9f67a175e179345, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1383715480
@@ -11048,7 +11040,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4479583501601528, guid: 2424f9080ca4b164295882872e98bf1a, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 114320343858698042, guid: 2424f9080ca4b164295882872e98bf1a,
         type: 2}
@@ -14052,7 +14044,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4286109681807200, guid: 25245b79e23d8834d9e236f150b6f2d2, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1770867938981858, guid: 25245b79e23d8834d9e236f150b6f2d2, type: 2}
       propertyPath: m_IsActive
@@ -14519,7 +14511,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4558819797584172, guid: f7e95437e7b10b8419a3f4654236ac22, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1291697665190284, guid: f7e95437e7b10b8419a3f4654236ac22, type: 2}
       propertyPath: m_IsActive
