@@ -240,7 +240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c214be2c184fc434ea9c235da15074e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isVunurable: 1
   _currentHealth: 0
+  _inWeakState: 1
   _health: 100
   _invulnerableTime: 0.1
   _bowDamage: 10
@@ -248,6 +250,8 @@ MonoBehaviour:
   _fireDamage: 10
   _knockBackForce: 3000
   _useKnockback: 0
+  _damageText: {fileID: 114515190967992978, guid: 42aa2b040278a1b498321137da543553,
+    type: 2}
 --- !u!114 &114735079265255550
 MonoBehaviour:
   m_ObjectHideFlags: 1

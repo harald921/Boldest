@@ -452,7 +452,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee9ddda72364a143921dca3e8242675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isVunurable: 1
   _currentHealth: 0
+  _inWeakState: 1
   _health: 100
   _invulnerableTime: 0.1
   _bowDamage: 10
@@ -460,13 +462,15 @@ MonoBehaviour:
   _fireDamage: 10
   _knockBackForce: 3000
   _useKnockback: 0
+  _damageText: {fileID: 114515190967992978, guid: 42aa2b040278a1b498321137da543553,
+    type: 2}
   _awakeDistance: 15
   _attackDistance: 5
+  _attackForce: 100000
+  _recuperateTime: 1
   _isAttacking: 0
   _inSwordSwing: 0
   _recuperateTimer: 0
-  _recuperateTime: 1
-  _attackForce: 100000
   _death: {fileID: 1195523922549790, guid: c3cfdacaf70cc8d4e8b9b32165541c44, type: 2}
   _damager: {fileID: 1908475231024440}
 --- !u!136 &136074776676993732

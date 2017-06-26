@@ -29,7 +29,8 @@ public class EnemyArcher : EnemyBase
             MagicAIStuff();
 
         else if (dirToPlayer.magnitude <= _detectionLength)
-            _navMeshAgent.destination = _player.gameObject.transform.position;
+			if(_navMeshAgent.enabled)
+               _navMeshAgent.destination = _player.gameObject.transform.position;
 
         
 
@@ -47,7 +48,9 @@ public class EnemyArcher : EnemyBase
     IEnumerator FireAtPlayer()
     {
         _isFiringAtPlayer = true;
-        _navMeshAgent.destination = transform.position;
+		if(_navMeshAgent.enabled)
+		   _navMeshAgent.destination = transform.position;
+
         transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
 
 
@@ -55,7 +58,8 @@ public class EnemyArcher : EnemyBase
 
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
 
-        _navMeshAgent.destination = _player.transform.position;
+		if (_navMeshAgent.enabled)
+			_navMeshAgent.destination = _player.transform.position;
 
         GameObject fireBolt = Instantiate(_fireBolt, transform.GetChild(0).position, Quaternion.identity);
         fireBolt.GetComponent<Rigidbody>().AddForce(transform.forward * 1200);

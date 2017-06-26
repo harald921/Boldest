@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyBase : MonoBehaviour
@@ -23,10 +24,15 @@ public class EnemyBase : MonoBehaviour
 	[SerializeField] protected float _knockBackForce = 3000.0f;
 	[SerializeField] protected bool _useKnockback = false;
 
+	public Text _damageText;
+	Canvas _canvas;
+
 	protected virtual void Start()
 	{
 		_player = FindObjectOfType<Player>();
 		_navMeshAgent = GetComponent<NavMeshAgent>();
+
+		_canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
 
         //uggly solution for now, samurai has skinnedmeshrenderer in child0
         if(GetComponent<MeshRenderer>())
@@ -55,6 +61,7 @@ public class EnemyBase : MonoBehaviour
 	public void ModifyHealth(float inHealthModifier)
 	{
 		_currentHealth += inHealthModifier;
+		SpawnDamageText(inHealthModifier);
 		if (_currentHealth < 0)
 		{
 			_player.RemoveEnemyFromList(GetComponent<Collider>());
@@ -138,6 +145,14 @@ public class EnemyBase : MonoBehaviour
 		}
 	}
 
+
+	void SpawnDamageText(float damage)
+	{				
+		Text text = Instantiate(_damageText, Vector3.zero, Quaternion.identity);
+		text.GetComponent<DamageText>()._enemy = this;
+		text.text = damage.ToString();
+		text.transform.SetParent(_canvas.transform);		
+	}
    
 }
 
