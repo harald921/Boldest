@@ -41,9 +41,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 0}
-  _enemy: {fileID: 0}
+  _posInWorld: {x: 0, y: 0, z: 0}
+  _dmg: 0
   _offsetSpeed: 25
-  _destroyAfter: 1
+  _lifeTimeNotIncludingFades: 1
+  _fadeOutTime: 0.2
+  _fadeInTime: 0.2
   _randomTextOffsetRangeX: {x: -20, y: 20}
   _randomTextOffsetRangeY: {x: 0, y: 15}
 --- !u!114 &114515190967992978

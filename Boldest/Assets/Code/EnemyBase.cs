@@ -145,13 +145,15 @@ public class EnemyBase : MonoBehaviour
 		}
 	}
 
-
 	void SpawnDamageText(float damage)
 	{				
 		Text text = Instantiate(_damageText, Vector3.zero, Quaternion.identity);
-		text.GetComponent<DamageText>()._enemy = this;
-		text.text = damage.ToString();
-		text.transform.SetParent(_canvas.transform);		
+		text.transform.SetParent(_canvas.transform); // add text to canvas
+
+		//set values in damageText Component
+		DamageText dmgText = text.GetComponent<DamageText>();
+		dmgText._posInWorld = transform.position;
+		dmgText._dmg = -damage;				
 	}
    
 }

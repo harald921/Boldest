@@ -6,5 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/NewNewNewWhiteRoom.unity
-    guid: 78f445e41d7f3d84183e50011482457c
+    path: Assets/NewMain5.unity
+    guid: cd51eba69846c6a4aab8b47bde7cdf51

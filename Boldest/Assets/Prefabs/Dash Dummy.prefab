@@ -99,7 +99,7 @@ MonoBehaviour:
   _isVunurable: 1
   _currentHealth: 0
   _inWeakState: 1
-  _health: 100
+  _health: 200
   _invulnerableTime: 0.1
   _bowDamage: 10
   _swordDamage: 10
