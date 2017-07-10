@@ -22,6 +22,6 @@ public class FollowCamera : MonoBehaviour
     void Update()
     {
         Vector3 targetPosition = new Vector3((_playerGO.transform.position + _posOffset).x, transform.position.y, (_playerGO.transform.position + _posOffset).z);
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity, _interpolationSpeed);
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity, _interpolationSpeed * Time.deltaTime);
     }
 }

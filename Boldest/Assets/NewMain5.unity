@@ -2927,7 +2927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
-  _moveSpeed: 500
+  _moveSpeed: 250
   _turnSpeed: 25
   _useController: 1
   _gravityPower: 200
@@ -2940,7 +2940,7 @@ MonoBehaviour:
   _dashCoolDown: 0.6
   _isDashing: 1
   _timeWindowToAttack: 0.08
-  _timePreformingAttack: 0.04
+  _timePreformingAttack: 0.08
   _visceralAttackParticle: {fileID: 1759689883234460, guid: 05260cbf4b5f581429bdb26c8216b0f6,
     type: 2}
   _dashParticle: {fileID: 960698477}
@@ -2962,7 +2962,6 @@ MonoBehaviour:
   _aim: {fileID: 424010639}
   _isVunurable: 1
   _invulnerableTime: 0.1
-  _bowSlomoTimeScale: 0.05
 --- !u!23 &597042532
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10791,7 +10790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a4d8f934b548b46afd90bccdbc8718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interpolationSpeed: 0.2
+  _interpolationSpeed: 5
 --- !u!4 &1383715482
 Transform:
   m_ObjectHideFlags: 0

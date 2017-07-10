@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     float _invunarableTimer = 0.0f;
 
 
-    [SerializeField] float _bowSlomoTimeScale = 0.1f;
+   
 
     void Start()
     {
@@ -79,7 +79,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        GameObject.Find("Healthbar").transform.GetChild(0).GetComponent<Image>().fillAmount = Mathf.InverseLerp(0, _maxHealth, _health);
+		_dashingTimer -= Time.deltaTime;						
+
+		GameObject.Find("Healthbar").transform.GetChild(0).GetComponent<Image>().fillAmount = Mathf.InverseLerp(0, _maxHealth, _health);
         _aim.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
         LockOnEnemy();
         //can only controll player if not in dash or in the middle of chain attacks
@@ -100,33 +102,9 @@ public class Player : MonoBehaviour
         _attackTimer += Time.deltaTime;
         _acceleration += Time.deltaTime * _accelerationSpeed;
         _acceleration = Mathf.Clamp(_acceleration, 0, 1);
-
-        HandleDashBow();
-
+     
     }
-
-    void HandleDashBow()
-    {
-
-        if (_isDashing && !_inVisceralAttack)
-        {
-            if (Input.GetButtonDown("BowButton"))
-                transform.GetComponentInChildren<Bow>().DrawBow();          
-        }
-
-        if (_isBowing && _isDashing)
-        {
-            Time.timeScale = _bowSlomoTimeScale;
-
-        }
-        else
-        {
-            if(!_inVisceralWindow && !_inVisceralAttack)
-                Time.timeScale = 1.0f;
-        }
-
-    }
-
+  
     private void FixedUpdate()
     {
         if (!_isDashing && !_inVisceralAttack)
@@ -134,6 +112,7 @@ public class Player : MonoBehaviour
             float speedMulti = 1.0f;
             if (_isBowing)
                 speedMulti = _speedMultiOnBowing;
+
             GetComponent<Rigidbody>().AddForce(new Vector3(((_movementVector.normalized.x * _moveSpeed) * _acceleration) * speedMulti, -_gravityPower, ((_movementVector.normalized.z * _moveSpeed) * _acceleration) * speedMulti));
             _movementVector = Vector3.zero;
         }
@@ -194,7 +173,7 @@ public class Player : MonoBehaviour
 
     void HandleDash2()
     {
-        _dashingTimer -= Time.deltaTime;
+        
 
         if (Input.GetAxisRaw("RightHandTrigger") > 0 && _dashingTimer + _dashCoolDown < 0 && _rightTriggerReleased && !_inVisceralAttack)
         {
