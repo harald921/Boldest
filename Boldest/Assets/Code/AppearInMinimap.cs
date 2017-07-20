@@ -12,8 +12,11 @@ public class AppearInMinimap : MonoBehaviour
 	{
 		MinimapManager.AddIcon(gameObject,_icon);
 	}
-	
-	
+
+    void OnDestroy()
+    {
+        MinimapManager.RemoveIcon(gameObject);
+    }
 
 
 }

@@ -48,12 +48,12 @@
 			{
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv);
-				col = col * float4(0.5, 0.5, 0.5, 1.0);
+				
 
-				float4 colorr = float4(0.2, 0.2, 0.2, 1.0);
+				fixed4 colorr = float4(0.5, 0.5, 0.5, 1.0);
 				// apply fog
 				//UNITY_APPLY_FOG(i.fogCoord, col);
-				return colorr;
+				return colorr * col;
 			}
 			ENDCG
 		}

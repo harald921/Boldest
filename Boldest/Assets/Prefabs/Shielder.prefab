@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 54146441073323510}
   - component: {fileID: 114873037437035018}
   - component: {fileID: 195077080812990694}
+  - component: {fileID: 114892516229776544}
   m_Layer: 8
   m_Name: Shielder
   m_TagString: Shielder
@@ -473,6 +474,18 @@ MonoBehaviour:
   _recuperateTimer: 0
   _death: {fileID: 1195523922549790, guid: c3cfdacaf70cc8d4e8b9b32165541c44, type: 2}
   _damager: {fileID: 1908475231024440}
+--- !u!114 &114892516229776544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291697665190284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345a0451af61cb44080d2f5ceadcd4d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 114866011295745762, guid: fe3223e478c5c034997200f5a1ba41ff, type: 2}
 --- !u!136 &136074776676993732
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 136302862273613508}
   - component: {fileID: 114865805814827014}
   - component: {fileID: 195126184786668200}
+  - component: {fileID: 114546541690481664}
   m_Layer: 8
   m_Name: dummiefordashing
   m_TagString: Untagged
@@ -97,6 +98,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hardCollider: {fileID: 136662067345814958}
+--- !u!114 &114546541690481664
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1149914978153550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345a0451af61cb44080d2f5ceadcd4d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 114866011295745762, guid: fe3223e478c5c034997200f5a1ba41ff, type: 2}
 --- !u!114 &114865805814827014
 MonoBehaviour:
   m_ObjectHideFlags: 1

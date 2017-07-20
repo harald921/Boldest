@@ -17,11 +17,11 @@ public class MinimapCamera : MonoBehaviour
 	{
 		if(_useCustomShader)
 			GetComponent<Camera>().SetReplacementShader(_shader, "");
-	}
+    }
 	
 	
 	void Update ()
 	{
-		transform.position = _playerTransform.position + new Vector3(0, 10, 0);
+		transform.position = _playerTransform.position + new Vector3(0, 100, 0);
 	}
 }
