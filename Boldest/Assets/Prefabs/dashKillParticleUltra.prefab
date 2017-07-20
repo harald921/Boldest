@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4974124178308426}
   - component: {fileID: 198731478138908502}
   - component: {fileID: 199018904537549748}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: dashKillParticleUltra
   m_TagString: Untagged
   m_Icon: {fileID: 0}

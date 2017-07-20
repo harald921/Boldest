@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4909381276850848}
   - component: {fileID: 198805380803592894}
   - component: {fileID: 199307912111189492}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FireHitParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

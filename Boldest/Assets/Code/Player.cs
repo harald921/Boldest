@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
     [SerializeField] float _invulnerableTime = 0.1f;
     float _invunarableTimer = 0.0f;
 
-
+   
    
 
     void Start()
@@ -75,11 +75,15 @@ public class Player : MonoBehaviour
         _dashDir = transform.forward;
         _bull.gameObject.SetActive(false);
         _aim.gameObject.SetActive(false);
+
+		
     }
 
     private void Update()
     {
-		_dashingTimer -= Time.deltaTime;						
+		_dashingTimer -= Time.deltaTime;		
+		
+		
 
 		GameObject.Find("Healthbar").transform.GetChild(0).GetComponent<Image>().fillAmount = Mathf.InverseLerp(0, _maxHealth, _health);
         _aim.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
@@ -382,6 +386,7 @@ public class Player : MonoBehaviour
             return;
         }
 
+        
         // find if the exiting collider is before or after the target in the list(if before, decrement the current locked on id by 1 )
         for (int i = 0; i < _lockables.Count; i++)
             if (other == _lockables[i])

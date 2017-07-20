@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 95435706649539788}
   - component: {fileID: 114248445186746154}
   - component: {fileID: 64884930744378934}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Swipe
   m_TagString: Sword
   m_Icon: {fileID: 0}

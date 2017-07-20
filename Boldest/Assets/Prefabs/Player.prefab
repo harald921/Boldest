@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 23869669364781774}
   - component: {fileID: 114863167614742144}
   - component: {fileID: 54151537665365226}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -452,7 +452,6 @@ MonoBehaviour:
   _aim: {fileID: 0}
   _isVunurable: 1
   _invulnerableTime: 0.1
-  _bowSlomoTimeScale: 0.08
 --- !u!136 &136702434078108446
 CapsuleCollider:
   m_ObjectHideFlags: 1

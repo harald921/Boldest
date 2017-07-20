@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4162119810532562}
   - component: {fileID: 198396727082595286}
   - component: {fileID: 199527673129806566}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: dashKillParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
