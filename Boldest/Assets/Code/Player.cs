@@ -81,10 +81,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-		_dashingTimer -= Time.deltaTime;		
-		
-		
-
+								
 		GameObject.Find("Healthbar").transform.GetChild(0).GetComponent<Image>().fillAmount = Mathf.InverseLerp(0, _maxHealth, _health);
         _aim.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
         LockOnEnemy();
@@ -103,6 +100,7 @@ public class Player : MonoBehaviour
         else
             _isVunurable = false;
 
+        _dashingTimer -= Time.deltaTime;
         _attackTimer += Time.deltaTime;
         _acceleration += Time.deltaTime * _accelerationSpeed;
         _acceleration = Mathf.Clamp(_acceleration, 0, 1);
@@ -202,7 +200,6 @@ public class Player : MonoBehaviour
                     _dashingTimer = _dashOffsetDuration;
                     _dashingSpeed = _dashOffsetSpeed;
                 }
-
                 else
                 {
                     _dashDir = transform.forward;
@@ -210,7 +207,6 @@ public class Player : MonoBehaviour
                     _dashingSpeed = _dashSpeed;
                 }
             }
-
             else
             {
                 _dashDir = transform.forward;
@@ -224,12 +220,13 @@ public class Player : MonoBehaviour
 
         if (_dashingTimer > 0 && !_inVisceralAttack)
         {
-            _dashFraction = Mathf.InverseLerp(_dashDuration, 0, _dashingTimer);
+                           
+            _dashFraction = Mathf.InverseLerp(_dashDuration, 0, _dashingTimer);          
             float v = Mathf.Sin(_dashFraction * Mathf.PI);
             _isDashing = true;
             GetComponent<Rigidbody>().AddForce(_dashDir * (_dashingSpeed * v));
+           
         }
-
         else
         {
             _isDashing = false;

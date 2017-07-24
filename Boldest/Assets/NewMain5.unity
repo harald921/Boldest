@@ -1371,7 +1371,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -267.00052, y: 258}
-  m_SizeDelta: {x: 400, y: 400}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &226892368
 MonoBehaviour:
@@ -3212,7 +3212,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 597042529}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.96, y: 2.96, z: 17.95}
+  m_LocalPosition: {x: -0.96, y: 2.96, z: 2.17}
   m_LocalScale: {x: 1.1948602, y: 1.1948605, z: 1.1948605}
   m_Children:
   - {fileID: 960698479}
@@ -3513,6 +3513,7 @@ GameObject:
   - component: {fileID: 651537107}
   - component: {fileID: 651537106}
   - component: {fileID: 651537105}
+  - component: {fileID: 651537110}
   m_Layer: 0
   m_Name: ToggleTarget
   m_TagString: Untagged
@@ -3597,6 +3598,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &651537110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 651537104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345a0451af61cb44080d2f5ceadcd4d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 114627924066529970, guid: b99311237c07d2c40b48aad0b284b94c, type: 2}
 --- !u!1 &685441037
 GameObject:
   m_ObjectHideFlags: 0
@@ -12512,8 +12525,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -199.99977, y: 199.99998}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: -149.99976, y: 149.99998}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1601315839
 MonoBehaviour:
