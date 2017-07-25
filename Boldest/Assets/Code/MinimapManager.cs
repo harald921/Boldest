@@ -18,10 +18,11 @@ public class MinimapManager : MonoBehaviour
     RectTransform _rectTranform; // transform of minimaps rectangle
 
 	static List<ObjectInMap> _icons = new List<ObjectInMap>(); // list containing all active objects that should appear in map
-
-	private void Start()
+ 
+    private void Start()
 	{
         _rectTranform = GetComponent<RectTransform>();
+       
 	}
 
 	public static void AddIcon(GameObject obj, Image img)
@@ -43,7 +44,9 @@ public class MinimapManager : MonoBehaviour
         {
             if(_icons[i].worldObject == obj)
             {
-                Destroy(_icons[i].icon.gameObject);
+                if(_icons[i].icon) // check so icon is not alredy destroyed, can happen when changing scenes
+                   Destroy(_icons[i].icon.gameObject);
+
                 _icons.Remove(_icons[i]);
                 break;
             }
