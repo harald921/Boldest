@@ -169,13 +169,13 @@ public class Ninja : EnemyBase
 
     }
 
-    void Onstartattack()
+    void Onstartattack() // called from animation callback
     {
         GetComponent<Rigidbody>().AddForce(transform.forward * _attackMomentum);
 
     }
 
-    void OnAttack()
+    void OnAttack() // called from animation callback
     {
         _damager.SetActive(true);
 

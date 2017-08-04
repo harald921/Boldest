@@ -222,7 +222,7 @@ public class Player : MonoBehaviour
         {
                            
             _dashFraction = Mathf.InverseLerp(_dashDuration, 0, _dashingTimer);          
-            float v = Mathf.Sin(_dashFraction * Mathf.PI);
+            float v = Mathf.Sin(_dashFraction * Mathf.PI); // inputing value between 0-1 * pi into sine wave will return 0-1-0
             _isDashing = true;
             GetComponent<Rigidbody>().AddForce(_dashDir * (_dashingSpeed * v));
            
